@@ -52,7 +52,7 @@ const stations = [
     name: "会津豊川",
     kana: "あいづとよかわ",
     roman: "Aizu-Toyokawa",
-    lines: ["只見線"],
+    lines: ["磐越西線"],
     file: "stations/aizutoyokawa.html"
   },
    {
