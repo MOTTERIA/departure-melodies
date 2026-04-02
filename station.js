@@ -4,12 +4,12 @@ const stations = [
     kana: "あいづおおしお",
     roman: "Aizu-Oshio",
     lines: ["左沢線"],
-    file: "stations/aizuoshio.html"
+    file: "aizuoshio.html"
   },
   {
     name: "会津蒲生",
     kana: "あいづがもう",
     lines: ["左沢線"],
-    file: "stations/aizugamo.html"
+    file: "aizugamo.html"
   }
 ];
