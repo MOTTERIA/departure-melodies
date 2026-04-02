@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>発車メロディ全集</title>
+<title>発車メロディDB | 駅検索</title>
 
 <style>
 body {
@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1000px;
   margin: 30px auto;
   background: #fff;
   padding: 30px;
@@ -22,196 +22,153 @@ body {
 }
 
 h1 {
-  margin: 0 0 25px 0;
+  margin: 0 0 10px 0;
   font-size: 42px;
 }
 
-.search-box {
-  margin-bottom: 30px;
-}
-
-.search-box input {
-  width: 280px;
-  padding: 10px;
-  font-size: 16px;
-}
-
-.search-box button {
-  padding: 10px 18px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.station {
-  display: none;
-}
-
-.station.active {
-  display: block;
-}
-
-.station-title {
-  font-size: 42px;
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-
-.station-subtitle {
+.subtitle {
   font-size: 18px;
   color: #666;
-  margin-bottom: 20px;
-}
-
-.station-desc {
-  line-height: 1.9;
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 }
 
 .section-title {
   background: #2f2f32;
   color: #fff;
   padding: 14px 18px;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: bold;
   border-left: 8px solid #d48a17;
-  margin: 38px 0 16px;
+  margin: 0 0 24px 0;
 }
 
-.period {
-  font-size: 24px;
+.search-area {
+  margin-bottom: 24px;
+}
+
+.search-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 260px;
+  padding: 14px 16px;
+  font-size: 18px;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.search-button {
+  padding: 14px 22px;
+  font-size: 18px;
+  border: none;
+  background: #2f2f32;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  opacity: 0.92;
+}
+
+.search-note {
+  margin-top: 12px;
+  font-size: 14px;
   color: #666;
-  margin: 6px 0 14px;
-  font-weight: 500;
 }
 
-.table-wrap {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.data-table,
-.neighbor-table {
-  width: 100%;
-  min-width: 900px;
-  border-collapse: collapse;
-  table-layout: fixed;
-}
-
-.data-table th,
-.data-table td,
-.neighbor-table th,
-.neighbor-table td {
-  border: 1px solid #d8d8d8;
-}
-
-.data-table th,
-.neighbor-table th {
-  background: #efefef;
-  text-align: center;
-  padding: 12px 10px;
-  font-size: 24px;
+.result-info {
+  margin: 20px 0 14px 0;
+  font-size: 18px;
   font-weight: bold;
 }
 
-.data-table td {
-  padding: 18px 16px;
-  vertical-align: middle;
-  font-size: 16px;
+.no-result {
+  padding: 18px;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  color: #666;
+  border-radius: 6px;
 }
 
-/* 現在・過去とも同じ5列構造 */
-.status-table col.col-track-num {
-  width: 80px;
+.station-list {
+  display: grid;
+  gap: 14px;
 }
 
-.status-table col.col-linecolor {
-  width: 28px;
-}
-
-.status-table col.col-route {
-  width: 38%;
-}
-
-.status-table col.col-melody {
-  width: 30%;
-}
-
-.status-table col.col-note {
-  width: 18%;
-}
-
-.track-num-cell {
-  padding: 0 !important;
+.station-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #d8d8d8;
   background: #fff;
-  text-align: center;
-  vertical-align: middle;
+  padding: 18px 20px;
+  transition: 0.15s;
 }
 
-.track-num-cell .track-number {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 150px;
-  font-size: 40px;
-  font-weight: 800;
-  color: #000;
-  line-height: 1;
+.station-card:hover {
+  background: #fafafa;
+  border-color: #bdbdbd;
 }
 
-.linecolor-cell {
-  padding: 0 !important;
-  background: #0f8b8d;
+.station-name {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 6px;
 }
 
-.route-main {
+.station-kana {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.station-meta {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.7;
+}
+
+.quick-links {
+  margin-top: 36px;
+}
+
+.quick-links-title {
   font-size: 22px;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
-.route-sub {
-  font-size: 16px;
-  color: #666;
-  line-height: 1.6;
+.quick-links-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.melody-name {
-  font-size: 18px;
-  margin-bottom: 8px;
+.quick-link {
+  display: inline-block;
+  padding: 10px 14px;
+  background: #efefef;
+  color: #222;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 15px;
 }
 
-.note-red {
-  color: #b73333;
-  font-weight: bold;
-  font-size: 16px;
+.quick-link:hover {
+  background: #e3e3e3;
 }
 
-.note-small {
-  color: #666;
+.footer-note {
+  margin-top: 40px;
   font-size: 14px;
-  margin-top: 6px;
-  line-height: 1.5;
-}
-
-audio {
-  width: 100%;
-  max-width: 320px;
-  margin-top: 6px;
-}
-
-.neighbor-table th,
-.neighbor-table td {
-  text-align: center;
-  vertical-align: middle;
-  padding: 16px 12px;
-  font-size: 20px;
-}
-
-.neighbor-line {
-  background: #0f8b8d;
-  color: #fff;
-  font-weight: bold;
+  color: #666;
+  line-height: 1.7;
 }
 
 @media (max-width: 768px) {
@@ -222,14 +179,10 @@ audio {
   }
 
   h1 {
-    font-size: 28px;
+    font-size: 30px;
   }
 
-  .station-title {
-    font-size: 28px;
-  }
-
-  .station-subtitle {
+  .subtitle {
     font-size: 16px;
   }
 
@@ -238,51 +191,25 @@ audio {
     padding: 12px 14px;
   }
 
-  .period {
-    font-size: 20px;
-  }
-
-  .search-box input {
-    width: 180px;
+  .search-input {
     font-size: 16px;
   }
 
-  .data-table th,
-  .neighbor-table th {
-    font-size: 18px;
+  .search-button {
+    width: 100%;
+    font-size: 16px;
   }
 
-  .status-table col.col-track-num {
-    width: 72px;
+  .station-name {
+    font-size: 22px;
   }
 
-  .status-table col.col-linecolor {
-    width: 28px;
-  }
-
-  .track-num-cell .track-number {
-    min-height: 120px;
-    font-size: 38px;
-  }
-
-  .route-main {
-    font-size: 18px;
-  }
-
-  .route-sub,
-  .note-red,
-  .note-small,
-  .melody-name {
+  .station-kana,
+  .station-meta,
+  .result-info,
+  .no-result,
+  .footer-note {
     font-size: 14px;
-  }
-
-  audio {
-    max-width: 220px;
-  }
-
-  .neighbor-table th,
-  .neighbor-table td {
-    font-size: 16px;
   }
 }
 </style>
@@ -291,208 +218,138 @@ audio {
 <body>
 <div class="container">
   <h1>発車メロディDB</h1>
+  <div class="subtitle">JR東日本の駅ページを検索できます。</div>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="駅名を入力">
-    <button onclick="searchStation()">検索</button>
+  <div class="section-title">駅検索</div>
+
+  <div class="search-area">
+    <div class="search-row">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="駅名・ひらがな・路線名で検索"
+        autocomplete="off"
+      >
+      <button class="search-button" onclick="searchStations()">検索</button>
+    </div>
+    <div class="search-note">
+      例：中之条 / なかのじょう / 吾妻線
+    </div>
   </div>
 
-  <div id="中之条" class="station">
-    <div class="station-title">中之条駅（四万・沢渡温泉口）</div>
-    <div class="station-subtitle">なかのじょう / Nakanojō</div>
+  <div id="resultInfo" class="result-info">全駅一覧</div>
+  <div id="resultArea"></div>
 
-    <div class="station-desc">
-      中之条駅（なかのじょうえき）は、群馬県吾妻郡中之条町に所在するJR吾妻線の駅である。<br>
-    </div>
+  <div class="quick-links">
+    <div class="quick-links-title">よく見る駅</div>
+    <div class="quick-links-list" id="quickLinks"></div>
+  </div>
 
-    <div class="section-title">現在の使用状況</div>
-    <div class="period">2025/07/24～</div>
-
-    <div class="table-wrap">
-      <table class="data-table status-table">
-        <colgroup>
-          <col class="col-track-num">
-          <col class="col-linecolor">
-          <col class="col-route">
-          <col class="col-melody">
-          <col class="col-note">
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="2">番線</th>
-            <th>方面</th>
-            <th>発車メロディ</th>
-            <th>備考</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="track-num-cell"><div class="track-number">1</div></td>
-            <td class="linecolor-cell"></td>
-            <td>
-              <div class="route-main">吾妻線 上り</div>
-              <div class="route-sub">渋川・高崎・上野方面</div>
-            </td>
-            <td>
-              <div class="melody-name">JRE-IKST-038-01</div>
-              <audio controls>
-                <source src="audio/JRE-IKST-038-01.mp3" type="audio/mpeg">
-              </audio>
-            </td>
-            <td>
-              <div class="note-red">初採用</div>
-            </td>
-          </tr>
-          <tr>
-            <td class="track-num-cell"><div class="track-number">2</div></td>
-            <td class="linecolor-cell"></td>
-            <td>
-              <div class="route-main">吾妻線 下り</div>
-              <div class="route-sub">長野原草津口・大前方面</div>
-            </td>
-            <td>
-              <div class="melody-name">JRE-IKST-038-02</div>
-              <audio controls>
-                <source src="audio/JRE-IKST-038-02.mp3" type="audio/mpeg">
-              </audio>
-            </td>
-            <td>
-              <div class="note-red">初採用・当駅限定</div>
-            </td>
-          </tr>
-          <tr>
-            <td class="track-num-cell"><div class="track-number">3</div></td>
-            <td class="linecolor-cell"></td>
-            <td>
-              <div class="route-main">吾妻線 下り</div>
-              <div class="route-sub">長野原草津口・大前方面</div>
-            </td>
-            <td>
-              <div class="melody-name">JRE-IKST-038-02</div>
-              <audio controls>
-                <source src="audio/JRE-IKST-038-02.mp3" type="audio/mpeg">
-              </audio>
-            </td>
-            <td>
-              <div class="note-red">初採用・当駅限定</div>
-              <div class="note-small">使用列車は1日1本のみ</div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="section-title">過去の使用状況</div>
-    <div class="period">2009/11/24〜2025/07/23</div>
-
-    <div class="table-wrap">
-      <table class="data-table status-table">
-        <colgroup>
-          <col class="col-track-num">
-          <col class="col-linecolor">
-          <col class="col-route">
-          <col class="col-melody">
-          <col class="col-note">
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="2">番線</th>
-            <th>方面</th>
-            <th>発車メロディ</th>
-            <th>備考</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="track-num-cell"><div class="track-number">1</div></td>
-            <td class="linecolor-cell"></td>
-            <td>
-              <div class="route-main">吾妻線 上り</div>
-              <div class="route-sub">渋川・高崎・上野方面</div>
-            </td>
-            <td>
-              <div class="melody-name">ジュピターVerB</div>
-              <audio controls>
-                <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
-              </audio>
-            </td>
-            <td>
-              <div class="note-red">最後の使用駅</div>
-            </td>
-          </tr>
-          <tr>
-            <td class="track-num-cell"><div class="track-number">2</div></td>
-            <td class="linecolor-cell"></td>
-            <td>
-              <div class="route-main">吾妻線 下り</div>
-              <div class="route-sub">長野原草津口・大前方面</div>
-            </td>
-            <td>
-              <div class="melody-name">ジュピターVerB</div>
-              <audio controls>
-                <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
-              </audio>
-            </td>
-            <td>
-              <div class="note-red">最後の使用駅</div>
-            </td>
-          </tr>
-          <tr>
-            <td class="track-num-cell"><div class="track-number">3</div></td>
-            <td class="linecolor-cell"></td>
-            <td>
-              <div class="route-main">吾妻線 下り</div>
-              <div class="route-sub">長野原草津口・大前方面</div>
-            </td>
-            <td>
-              <div class="melody-name">ジュピターVerB</div>
-              <audio controls>
-                <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
-              </audio>
-            </td>
-            <td>
-              <div class="note-red">最後の使用駅</div>
-              <div class="note-small">使用列車は1日1本のみ</div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="section-title">隣の駅</div>
-    <div class="table-wrap">
-      <table class="neighbor-table">
-        <tr>
-          <th>上り（渋川方面）</th>
-          <th>路線</th>
-          <th>下り（大前方面）</th>
-        </tr>
-        <tr>
-          <td>市城</td>
-          <td class="neighbor-line">吾妻線</td>
-          <td>群馬原町</td>
-        </tr>
-      </table>
-    </div>
+  <div class="footer-note">
+    駅をクリックすると、各駅の詳細ページへ移動します。<br>
+    今後駅数が増えても、indexページは検索専用なので重くなりにくい構成です。
   </div>
 </div>
 
+<script src="stations.js"></script>
 <script>
-function searchStation() {
-  const input = document.getElementById("search").value.trim();
-  const stations = document.getElementsByClassName("station");
-
-  for (let i = 0; i < stations.length; i++) {
-    stations[i].classList.remove("active");
-  }
-
-  const target = document.getElementById(input);
-  if (target) {
-    target.classList.add("active");
-  } else {
-    alert("駅が見つかりません。");
-  }
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
+
+function normalizeText(text) {
+  return text
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[ー－―]/g, "ー");
+}
+
+function createStationCard(station) {
+  const linesText = station.lines && station.lines.length
+    ? station.lines.join(" / ")
+    : "路線情報なし";
+
+  return `
+    <a class="station-card" href="${station.file}">
+      <div class="station-name">${escapeHtml(station.name)}</div>
+      <div class="station-kana">${escapeHtml(station.kana)} / ${escapeHtml(station.roman)}</div>
+      <div class="station-meta">
+        路線：${escapeHtml(linesText)}
+      </div>
+    </a>
+  `;
+}
+
+function renderStations(list, labelText) {
+  const resultInfo = document.getElementById("resultInfo");
+  const resultArea = document.getElementById("resultArea");
+
+  resultInfo.textContent = labelText;
+
+  if (!list.length) {
+    resultArea.innerHTML = `
+      <div class="no-result">
+        一致する駅が見つかりませんでした。
+      </div>
+    `;
+    return;
+  }
+
+  resultArea.innerHTML = `
+    <div class="station-list">
+      ${list.map(createStationCard).join("")}
+    </div>
+  `;
+}
+
+function searchStations() {
+  const input = document.getElementById("searchInput").value.trim();
+  const normalizedInput = normalizeText(input);
+
+  if (!normalizedInput) {
+    renderStations(stations, `全駅一覧（${stations.length}件）`);
+    return;
+  }
+
+  const filtered = stations.filter(station => {
+    const targets = [
+      station.name,
+      station.kana,
+      station.roman,
+      ...(station.lines || [])
+    ];
+
+    return targets.some(target =>
+      normalizeText(target).includes(normalizedInput)
+    );
+  });
+
+  renderStations(filtered, `検索結果：${filtered.length}件`);
+}
+
+function renderQuickLinks() {
+  const quickLinks = document.getElementById("quickLinks");
+  const favorites = stations.slice(0, 8);
+
+  quickLinks.innerHTML = favorites.map(station => `
+    <a class="quick-link" href="${station.file}">${escapeHtml(station.name)}</a>
+  `).join("");
+}
+
+document.getElementById("searchInput").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    searchStations();
+  }
+});
+
+renderStations(stations, `全駅一覧（${stations.length}件）`);
+renderQuickLinks();
 </script>
 </body>
 </html>
