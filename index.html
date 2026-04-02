@@ -18,7 +18,7 @@ body {
   margin: 30px auto;
   background: #fff;
   padding: 30px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 h1 {
@@ -120,57 +120,35 @@ h1 {
   font-size: 16px;
 }
 
-/* ===== 現在の使用状況 ===== */
-.current-table col.col-track-num {
+/* 現在・過去とも同じ5列構造 */
+.status-table col.col-track-num {
   width: 80px;
 }
-.current-table col.col-linecolor {
+
+.status-table col.col-linecolor {
   width: 28px;
 }
-.current-table col.col-route {
+
+.status-table col.col-route {
   width: 38%;
 }
-.current-table col.col-melody {
+
+.status-table col.col-melody {
   width: 30%;
 }
-.current-table col.col-note {
+
+.status-table col.col-note {
   width: 18%;
 }
 
-/* ===== 過去の使用状況 ===== */
-.past-table col.col-track {
-  width: 120px;
-}
-.past-table col.col-route {
-  width: 42%;
-}
-.past-table col.col-melody {
-  width: 28%;
-}
-.past-table col.col-note {
-  width: 18%;
-}
-
-.track-num-cell,
-.track-cell {
+.track-num-cell {
   padding: 0 !important;
   background: #fff;
   text-align: center;
   vertical-align: middle;
 }
 
-.track-num-cell {
-  width: 80px;
-  min-width: 80px;
-}
-
-.track-cell {
-  width: 120px;
-  min-width: 120px;
-}
-
-.track-number,
-.past-track-number {
+.track-num-cell .track-number {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,7 +214,6 @@ audio {
   font-weight: bold;
 }
 
-/* スマホ・タブレット */
 @media (max-width: 768px) {
   .container {
     margin: 0;
@@ -275,18 +252,15 @@ audio {
     font-size: 18px;
   }
 
-  .track-num-cell {
+  .status-table col.col-track-num {
     width: 72px;
-    min-width: 72px;
   }
 
-  .track-cell {
-    width: 90px;
-    min-width: 90px;
+  .status-table col.col-linecolor {
+    width: 28px;
   }
 
-  .track-number,
-  .past-track-number {
+  .track-num-cell .track-number {
     min-height: 120px;
     font-size: 38px;
   }
@@ -335,7 +309,7 @@ audio {
     <div class="period">2025/07/24～</div>
 
     <div class="table-wrap">
-      <table class="data-table current-table">
+      <table class="data-table status-table">
         <colgroup>
           <col class="col-track-num">
           <col class="col-linecolor">
@@ -365,7 +339,9 @@ audio {
                 <source src="audio/JRE-IKST-038-01.mp3" type="audio/mpeg">
               </audio>
             </td>
-            <td><div class="note-red">初採用</div></td>
+            <td>
+              <div class="note-red">初採用</div>
+            </td>
           </tr>
           <tr>
             <td class="track-num-cell"><div class="track-number">2</div></td>
@@ -380,7 +356,9 @@ audio {
                 <source src="audio/JRE-IKST-038-02.mp3" type="audio/mpeg">
               </audio>
             </td>
-            <td><div class="note-red">初採用</div></td>
+            <td>
+              <div class="note-red">初採用</div>
+            </td>
           </tr>
           <tr>
             <td class="track-num-cell"><div class="track-number">3</div></td>
@@ -408,16 +386,17 @@ audio {
     <div class="period">2009/11/24〜2025/07/23</div>
 
     <div class="table-wrap">
-      <table class="data-table past-table">
+      <table class="data-table status-table">
         <colgroup>
-          <col class="col-track">
+          <col class="col-track-num">
+          <col class="col-linecolor">
           <col class="col-route">
           <col class="col-melody">
           <col class="col-note">
         </colgroup>
         <thead>
           <tr>
-            <th>番線</th>
+            <th colspan="2">番線</th>
             <th>方面</th>
             <th>発車メロディ</th>
             <th>備考</th>
@@ -425,7 +404,8 @@ audio {
         </thead>
         <tbody>
           <tr>
-            <td class="track-cell"><div class="past-track-number">1</div></td>
+            <td class="track-num-cell"><div class="track-number">1</div></td>
+            <td class="linecolor-cell"></td>
             <td>
               <div class="route-main">吾妻線 上り</div>
               <div class="route-sub">渋川・高崎・上野方面</div>
@@ -436,10 +416,13 @@ audio {
                 <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
               </audio>
             </td>
-            <td><div class="note-red">最後の使用駅</div></td>
+            <td>
+              <div class="note-red">最後の使用駅</div>
+            </td>
           </tr>
           <tr>
-            <td class="track-cell"><div class="past-track-number">2</div></td>
+            <td class="track-num-cell"><div class="track-number">2</div></td>
+            <td class="linecolor-cell"></td>
             <td>
               <div class="route-main">吾妻線 下り</div>
               <div class="route-sub">長野原草津口・大前方面</div>
@@ -450,10 +433,13 @@ audio {
                 <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
               </audio>
             </td>
-            <td><div class="note-red">最後の使用駅</div></td>
+            <td>
+              <div class="note-red">最後の使用駅</div>
+            </td>
           </tr>
           <tr>
-            <td class="track-cell"><div class="past-track-number">3</div></td>
+            <td class="track-num-cell"><div class="track-number">3</div></td>
+            <td class="linecolor-cell"></td>
             <td>
               <div class="route-main">吾妻線 下り</div>
               <div class="route-sub">長野原草津口・大前方面</div>
