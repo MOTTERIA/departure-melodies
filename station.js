@@ -97,6 +97,13 @@ const stations = [
     lines: ["只見線"],
     file: "stations/aizumizunuma.html"
   },
+   {
+    name: "会津宮下",
+    kana: "あいづみやした",
+    roman: "Aizu-Miyashita",
+    lines: ["只見線"],
+    file: "stations/aizumiyashita.html"
+  },
   {
     name: "会津柳津",
     kana: "あいづやないづ",
