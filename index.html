@@ -1,1 +1,513 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>発車メロディDB</title>
 
+<style>
+body {
+  font-family: "Yu Gothic", "Hiragino Sans", sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+  color: #222;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  margin: 0 0 25px 0;
+  font-size: 42px;
+}
+
+.search-box {
+  margin-bottom: 30px;
+}
+
+.search-box input {
+  width: 280px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.search-box button {
+  padding: 10px 18px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.station {
+  display: none;
+}
+
+.station.active {
+  display: block;
+}
+
+.station-title {
+  font-size: 42px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.station-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.station-desc {
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+
+.section-title {
+  background: #2f2f32;
+  color: #fff;
+  padding: 14px 18px;
+  font-size: 30px;
+  font-weight: bold;
+  border-left: 8px solid #d48a17;
+  margin: 38px 0 16px;
+}
+
+.period {
+  font-size: 24px;
+  color: #666;
+  margin: 6px 0 14px;
+  font-weight: 500;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 共通テーブル */
+.data-table,
+.neighbor-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.data-table th,
+.data-table td,
+.neighbor-table th,
+.neighbor-table td {
+  border: 1px solid #d8d8d8;
+}
+
+.data-table th,
+.neighbor-table th {
+  background: #efefef;
+  text-align: center;
+  padding: 12px 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.data-table td {
+  padding: 18px 16px;
+  vertical-align: middle;
+  font-size: 16px;
+}
+
+/* 現在の使用状況 */
+.current-table col.col-track-num {
+  width: 80px;
+}
+
+.current-table col.col-linecolor {
+  width: 28px;
+}
+
+.current-table col.col-route {
+  width: 36%;
+}
+
+.current-table col.col-melody {
+  width: 32%;
+}
+
+.current-table col.col-note {
+  width: 18%;
+}
+
+/* 過去の使用状況 */
+.past-table col.col-track {
+  width: 110px;
+}
+
+.past-table col.col-route {
+  width: 40%;
+}
+
+.past-table col.col-melody {
+  width: 30%;
+}
+
+.past-table col.col-note {
+  width: 20%;
+}
+
+.track-num-cell,
+.track-cell {
+  padding: 0 !important;
+  background: #fff;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.track-num-cell {
+  width: 80px;
+  min-width: 80px;
+}
+
+.track-cell {
+  width: 110px;
+  min-width: 110px;
+}
+
+.track-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  font-size: 40px;
+  font-weight: 800;
+  color: #000;
+}
+
+.linecolor-cell {
+  padding: 0 !important;
+  background: #0f8b8d;
+}
+
+.route-main {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.route-sub {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.melody-name {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.note-red {
+  color: #b73333;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.note-small {
+  color: #666;
+  font-size: 14px;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+audio {
+  width: 100%;
+  max-width: 320px;
+  margin-top: 6px;
+}
+
+.neighbor-table th,
+.neighbor-table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 16px 12px;
+  font-size: 20px;
+}
+
+.neighbor-line {
+  background: #0f8b8d;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* スマホ・タブレット */
+@media (max-width: 768px) {
+  .container {
+    margin: 0;
+    padding: 18px;
+    box-shadow: none;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .station-title {
+    font-size: 28px;
+  }
+
+  .station-subtitle {
+    font-size: 16px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    padding: 12px 14px;
+  }
+
+  .period {
+    font-size: 20px;
+  }
+
+  .search-box input {
+    width: 180px;
+    font-size: 16px;
+  }
+
+  .data-table th,
+  .neighbor-table th {
+    font-size: 18px;
+  }
+
+  .track-num-cell {
+    width: 72px;
+    min-width: 72px;
+  }
+
+  .track-cell {
+    width: 80px;
+    min-width: 80px;
+  }
+
+  .track-number {
+    min-height: 120px;
+    font-size: 34px;
+  }
+
+  .route-main {
+    font-size: 18px;
+  }
+
+  .route-sub,
+  .note-red,
+  .note-small,
+  .melody-name {
+    font-size: 14px;
+  }
+
+  audio {
+    max-width: 220px;
+  }
+
+  .neighbor-table th,
+  .neighbor-table td {
+    font-size: 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h1>発車メロディDB</h1>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="駅名を入力">
+    <button onclick="searchStation()">検索</button>
+  </div>
+
+  <div id="中之条" class="station active">
+    <div class="station-title">中之条駅（四万・沢渡温泉口）</div>
+    <div class="station-subtitle">なかのじょう / Nakanojō</div>
+
+    <div class="station-desc">
+      中之条駅（なかのじょうえき）は、群馬県吾妻郡中之条町に所在するJR吾妻線の駅である。<br>
+    </div>
+
+    <div class="section-title">現在の使用状況</div>
+    <div class="period">2025/07/24～</div>
+
+    <div class="table-wrap">
+      <table class="data-table current-table">
+        <colgroup>
+          <col class="col-track-num">
+          <col class="col-linecolor">
+          <col class="col-route">
+          <col class="col-melody">
+          <col class="col-note">
+        </colgroup>
+        <tr>
+          <th colspan="2">番線</th>
+          <th>方面</th>
+          <th>発車メロディ</th>
+          <th>備考</th>
+        </tr>
+        <tr>
+          <td class="track-num-cell"><span class="track-number">1</span></td>
+          <td class="linecolor-cell"></td>
+          <td>
+            <div class="route-main">吾妻線 上り</div>
+            <div class="route-sub">渋川・高崎・上野方面</div>
+          </td>
+          <td>
+            <div class="melody-name">JRE-IKST-038-01</div>
+            <audio controls>
+              <source src="audio/JRE-IKST-038-01.mp3" type="audio/mpeg">
+            </audio>
+          </td>
+          <td><div class="note-red">初採用</div></td>
+        </tr>
+        <tr>
+          <td class="track-num-cell"><span class="track-number">2</span></td>
+          <td class="linecolor-cell"></td>
+          <td>
+            <div class="route-main">吾妻線 下り</div>
+            <div class="route-sub">長野原草津口・大前方面</div>
+          </td>
+          <td>
+            <div class="melody-name">JRE-IKST-038-02</div>
+            <audio controls>
+              <source src="audio/JRE-IKST-038-02.mp3" type="audio/mpeg">
+            </audio>
+          </td>
+          <td><div class="note-red">初採用</div></td>
+        </tr>
+        <tr>
+          <td class="track-num-cell"><span class="track-number">3</span></td>
+          <td class="linecolor-cell"></td>
+          <td>
+            <div class="route-main">吾妻線 下り</div>
+            <div class="route-sub">長野原草津口・大前方面</div>
+          </td>
+          <td>
+            <div class="melody-name">JRE-IKST-038-02</div>
+            <audio controls>
+              <source src="audio/JRE-IKST-038-02.mp3" type="audio/mpeg">
+            </audio>
+          </td>
+          <td>
+            <div class="note-red">初採用</div>
+            <div class="note-small">使用列車は1日1本のみ</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+   <div class="section-title">過去の使用状況</div>
+<div class="period">2009/11/24〜2025/07/23</div>
+
+<div class="table-wrap">
+  <table class="data-table past-table">
+    <colgroup>
+      <col class="col-track">
+      <col class="col-route">
+      <col class="col-melody">
+      <col class="col-note">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>番線</th>
+        <th>方面</th>
+        <th>発車メロディ</th>
+        <th>備考</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="track-cell"><span class="track-number">1</span></td>
+        <td>
+          <div class="route-main">吾妻線 上り</div>
+          <div class="route-sub">渋川・高崎・上野方面</div>
+        </td>
+        <td>
+          <div class="melody-name">ジュピターVerB</div>
+          <audio controls>
+            <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
+          </audio>
+        </td>
+        <td><div class="note-red">最後の使用駅</div></td>
+      </tr>
+      <tr>
+        <td class="track-cell"><span class="track-number">2</span></td>
+        <td>
+          <div class="route-main">吾妻線 下り</div>
+          <div class="route-sub">長野原草津口・大前方面</div>
+        </td>
+        <td>
+          <div class="melody-name">ジュピターVerB</div>
+          <audio controls>
+            <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
+          </audio>
+        </td>
+        <td><div class="note-red">最後の使用駅</div></td>
+      </tr>
+      <tr>
+        <td class="track-cell"><span class="track-number">3</span></td>
+        <td>
+          <div class="route-main">吾妻線 下り</div>
+          <div class="route-sub">長野原草津口・大前方面</div>
+        </td>
+        <td>
+          <div class="melody-name">ジュピターVerB</div>
+          <audio controls>
+            <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
+          </audio>
+        </td>
+        <td>
+          <div class="note-red">最後の使用駅</div>
+          <div class="note-small">使用列車は1日1本のみ</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+    <div class="section-title">隣の駅</div>
+    <div class="table-wrap">
+      <table class="neighbor-table">
+        <tr>
+          <th>上り（渋川方面）</th>
+          <th>路線</th>
+          <th>下り（大前方面）</th>
+        </tr>
+        <tr>
+          <td>市城</td>
+          <td class="neighbor-line">吾妻線</td>
+          <td>群馬原町</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+function searchStation() {
+  const input = document.getElementById("search").value.trim();
+  const stations = document.getElementsByClassName("station");
+
+  for (let i = 0; i < stations.length; i++) {
+    stations[i].classList.remove("active");
+  }
+
+  const target = document.getElementById(input);
+  if (target) {
+    target.classList.add("active");
+  } else {
+    alert("駅が見つかりません。");
+  }
+}
+</script>
+</body>
+</html>
