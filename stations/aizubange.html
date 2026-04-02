@@ -118,11 +118,24 @@ h1 {
   width: 20%;
 }
 
-.no-track-cell {
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
+.track-num-cell {
+  width: 80px;
+  min-width: 80px;
+  padding: 0 !important;
   background: #fff;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.track-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  font-size: 40px;
+  font-weight: 800;
+  color: #000;
+  line-height: 1;
 }
 
 .route-main {
@@ -251,7 +264,9 @@ h1 {
       </thead>
       <tbody>
         <tr>
-          <td class="no-track-cell">1</td>
+          <td class="track-num-cell">
+           <div class="track-number">1</div>
+          </td>
           <td class="linecolor-tadami"></td>
           <td>
             <div class="route-main">只見線 上り</div>
@@ -265,7 +280,9 @@ h1 {
           </td>
         </tr>
         <tr>
-          <td class="no-track-cell">2</td>
+         <td class="track-num-cell">
+           <div class="track-number">2</div>
+         </td>
           <td class="linecolor-tadami"></td>
           <td>
             <div class="route-main">只見線 上下</div>
