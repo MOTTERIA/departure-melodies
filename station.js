@@ -67,7 +67,7 @@ const stations = [
     kana: "あいづにしかた",
     roman: "Aizu-Nishikata",
     lines: ["只見線"],
-    file: "stations/aizuNishikata.html"
+    file: "stations/aizunishikata.html"
   },
   {
     name: "会津坂下",
