@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>発車メロディ調査委 | 駅検索</title>
-
+<title>発車メロディ全集 | 駅検索</title>
 <style>
 body {
   font-family: "Yu Gothic", "Hiragino Sans", sans-serif;
@@ -12,26 +11,22 @@ body {
   background: #f5f5f5;
   color: #222;
 }
-
 .container {
   max-width: 1000px;
   margin: 30px auto;
   background: #fff;
   padding: 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
-
 h1 {
   margin: 0 0 10px 0;
   font-size: 42px;
 }
-
 .subtitle {
   font-size: 18px;
   color: #666;
   margin-bottom: 30px;
 }
-
 .section-title {
   background: #2f2f32;
   color: #fff;
@@ -41,17 +36,14 @@ h1 {
   border-left: 8px solid #d48a17;
   margin: 0 0 24px 0;
 }
-
 .search-area {
   margin-bottom: 24px;
 }
-
 .search-row {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
-
 .search-input {
   flex: 1;
   min-width: 260px;
@@ -61,7 +53,6 @@ h1 {
   border-radius: 6px;
   box-sizing: border-box;
 }
-
 .search-button {
   padding: 14px 22px;
   font-size: 18px;
@@ -71,23 +62,16 @@ h1 {
   border-radius: 6px;
   cursor: pointer;
 }
-
-.search-button:hover {
-  opacity: 0.92;
-}
-
 .search-note {
   margin-top: 12px;
   font-size: 14px;
   color: #666;
 }
-
 .result-info {
   margin: 20px 0 14px 0;
   font-size: 18px;
   font-weight: bold;
 }
-
 .no-result {
   padding: 18px;
   background: #fafafa;
@@ -95,12 +79,10 @@ h1 {
   color: #666;
   border-radius: 6px;
 }
-
 .station-list {
   display: grid;
   gap: 14px;
 }
-
 .station-card {
   display: block;
   text-decoration: none;
@@ -108,48 +90,38 @@ h1 {
   border: 1px solid #d8d8d8;
   background: #fff;
   padding: 18px 20px;
-  transition: 0.15s;
 }
-
 .station-card:hover {
   background: #fafafa;
-  border-color: #bdbdbd;
 }
-
 .station-name {
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 6px;
 }
-
 .station-kana {
   font-size: 16px;
   color: #666;
   margin-bottom: 10px;
 }
-
 .station-meta {
   font-size: 15px;
   color: #444;
   line-height: 1.7;
 }
-
 .quick-links {
   margin-top: 36px;
 }
-
 .quick-links-title {
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 12px;
 }
-
 .quick-links-list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
-
 .quick-link {
   display: inline-block;
   padding: 10px 14px;
@@ -159,65 +131,44 @@ h1 {
   border-radius: 999px;
   font-size: 15px;
 }
-
-.quick-link:hover {
-  background: #e3e3e3;
-}
-
 .footer-note {
   margin-top: 40px;
   font-size: 14px;
   color: #666;
   line-height: 1.7;
 }
-
 @media (max-width: 768px) {
   .container {
     margin: 0;
     padding: 18px;
     box-shadow: none;
   }
-
   h1 {
     font-size: 30px;
   }
-
   .subtitle {
     font-size: 16px;
   }
-
   .section-title {
     font-size: 22px;
     padding: 12px 14px;
   }
-
-  .search-input {
+  .search-input,
+  .search-button {
     font-size: 16px;
   }
-
   .search-button {
     width: 100%;
-    font-size: 16px;
   }
-
   .station-name {
     font-size: 22px;
-  }
-
-  .station-kana,
-  .station-meta,
-  .result-info,
-  .no-result,
-  .footer-note {
-    font-size: 14px;
   }
 }
 </style>
 </head>
-
 <body>
 <div class="container">
-  <h1>発車メロディDB</h1>
+  <h1>発車メロディ調査委</h1>
   <div class="subtitle">JR東日本の駅ページを検索できます。</div>
 
   <div class="section-title">駅検索</div>
@@ -231,14 +182,12 @@ h1 {
         placeholder="駅名・ひらがな・路線名で検索"
         autocomplete="off"
       >
-      <button class="search-button" onclick="searchStations()">検索</button>
+      <button type="button" id="searchButton" class="search-button">検索</button>
     </div>
-    <div class="search-note">
-      例：海浜幕張 / かいひんまくはり / 京葉線
-    </div>
+    <div class="search-note">例：海浜幕張 / かいひんまくはり / 京葉線</div>
   </div>
 
-  <div id="resultInfo" class="result-info">全駅一覧</div>
+  <div id="resultInfo" class="result-info"></div>
   <div id="resultArea"></div>
 
   <div class="quick-links">
@@ -247,14 +196,14 @@ h1 {
   </div>
 
   <div class="footer-note">
-    駅をクリックすると、各駅の詳細ページへ移動します。<br>
+    駅をクリックすると、各駅の詳細ページへ移動します。
   </div>
 </div>
 
 <script src="station.js"></script>
 <script>
 function escapeHtml(text) {
-  return text
+  return String(text)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -263,7 +212,7 @@ function escapeHtml(text) {
 }
 
 function normalizeText(text) {
-  return text
+  return String(text)
     .toLowerCase()
     .replace(/\s+/g, "")
     .replace(/[ー－―]/g, "ー");
@@ -278,29 +227,21 @@ function createStationCard(station) {
     <a class="station-card" href="${station.file}">
       <div class="station-name">${escapeHtml(station.name)}</div>
       <div class="station-kana">${escapeHtml(station.kana)} / ${escapeHtml(station.roman)}</div>
-      <div class="station-meta">
-        路線：${escapeHtml(linesText)}
-      </div>
+      <div class="station-meta">路線：${escapeHtml(linesText)}</div>
     </a>
   `;
 }
 
 function renderStations(list, labelText) {
-  const resultInfo = document.getElementById("resultInfo");
-  const resultArea = document.getElementById("resultArea");
-
-  resultInfo.textContent = labelText;
+  document.getElementById("resultInfo").textContent = labelText;
 
   if (!list.length) {
-    resultArea.innerHTML = `
-      <div class="no-result">
-        一致する駅が見つかりませんでした。
-      </div>
-    `;
+    document.getElementById("resultArea").innerHTML =
+      '<div class="no-result">一致する駅が見つかりませんでした。</div>';
     return;
   }
 
-  resultArea.innerHTML = `
+  document.getElementById("resultArea").innerHTML = `
     <div class="station-list">
       ${list.map(createStationCard).join("")}
     </div>
@@ -316,15 +257,14 @@ function searchStations() {
     return;
   }
 
-  const filtered = stations.filter(station => {
+  const filtered = stations.filter((station) => {
     const targets = [
       station.name,
       station.kana,
       station.roman,
       ...(station.lines || [])
     ];
-
-    return targets.some(target =>
+    return targets.some((target) =>
       normalizeText(target).includes(normalizedInput)
     );
   });
@@ -333,22 +273,23 @@ function searchStations() {
 }
 
 function renderQuickLinks() {
-  const quickLinks = document.getElementById("quickLinks");
   const favorites = stations.slice(0, 8);
-
-  quickLinks.innerHTML = favorites.map(station => `
+  document.getElementById("quickLinks").innerHTML = favorites.map((station) => `
     <a class="quick-link" href="${station.file}">${escapeHtml(station.name)}</a>
   `).join("");
 }
 
-document.getElementById("searchInput").addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
-    searchStations();
-  }
-});
+window.addEventListener("DOMContentLoaded", function () {
+  renderStations(stations, `全駅一覧（${stations.length}件）`);
+  renderQuickLinks();
 
-renderStations(stations, `全駅一覧（${stations.length}件）`);
-renderQuickLinks();
+  document.getElementById("searchButton").addEventListener("click", searchStations);
+  document.getElementById("searchInput").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      searchStations();
+    }
+  });
+});
 </script>
 </body>
 </html>
