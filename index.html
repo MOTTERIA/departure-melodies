@@ -120,29 +120,41 @@ h1 {
   font-size: 16px;
 }
 
-.track-cell {
-  width: 110px;
-  min-width: 110px;
-  background: #0f8b8d;
-  padding: 0;
+.track-num-cell {
+  width: 90px;
+  min-width: 90px;
+  background: #ffffff;
   text-align: center;
   vertical-align: middle;
+  padding: 0;
 }
 
 .track-number {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  min-height: 150px;
   font-size: 40px;
-  font-weight: 900;
-  color: #ffffff;
+  font-weight: 800;
+  color: #000;
   line-height: 1;
-  font-family: Arial, "Helvetica Neue", sans-serif;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.18);
+}
+  .linecolor-cell {
+    width: 40px;
+    min-width: 40px;
+    padding: 0;
+    vertical-align: middle;
 }
 
+  .linecolor-single {
+    width: 100%;
+    min-height: 150px;
+}
+
+  .agatsuma {
+    background: #0f8b8d;
+}
+  
 .route-main {
   font-size: 22px;
   font-weight: bold;
@@ -194,6 +206,27 @@ audio {
 }
 
 @media (max-width: 768px) {
+  .track-num-cell {
+    width: 72px;
+    min-width: 72px;
+  }
+
+  .track-number {
+    min-height: 120px;
+    font-size: 34px;
+  }
+
+  .linecolor-cell {
+    width: 28px;
+    min-width: 28px;
+  }
+  
+  .linecolor-single,
+  .linecolor-stack {
+    min-height: 120px;
+  }
+}
+  
   .container {
     margin: 0;
     padding: 18px;
@@ -287,13 +320,16 @@ audio {
     <div class="table-wrap">
       <table class="data-table">
         <tr>
-          <th style="width:110px;">番線</th>
+          <th colspan="2" style="width:180px;">番線</th>
           <th>方面</th>
           <th>発車メロディ</th>
           <th>備考</th>
         </tr>
         <tr>
-          <td class="track-cell"><span class="track-number">1</span></td>
+          <td class="track-num-cell"><span class="track-number">1</span></td>
+          <td class="linecolor-cell">
+            <div class="linecolor-single agatsuma"></div>
+          </td>
           <td>
             <div class="route-main">吾妻線 上り</div>
             <div class="route-sub">渋川・高崎・上野方面</div>
@@ -307,7 +343,10 @@ audio {
           <td><div class="note-red">初採用</div></td>
         </tr>
         <tr>
-          <td class="track-cell"><span class="track-number">2</span></td>
+          <td class="track-num-cell"><span class="track-number">1</span></td>
+          <td class="linecolor-cell">
+            <div class="linecolor-single agatsuma"></div>
+          </td>
           <td>
             <div class="route-main">吾妻線 下り</div>
             <div class="route-sub">長野原草津口・大前方面</div>
@@ -321,7 +360,10 @@ audio {
           <td><div class="note-red">初採用</div></td>
         </tr>
         <tr>
-          <td class="track-cell"><span class="track-number">3</span></td>
+          <td class="track-num-cell"><span class="track-number">1</span></td>
+          <td class="linecolor-cell">
+            <div class="linecolor-single agatsuma"></div>
+          </td>
           <td>
             <div class="route-main">吾妻線 下り</div>
             <div class="route-sub">長野原草津口・大前方面</div>
