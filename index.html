@@ -84,9 +84,16 @@ h1 {
   font-weight: 500;
 }
 
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .data-table,
 .neighbor-table {
   width: 100%;
+  min-width: 900px;
   border-collapse: collapse;
   table-layout: fixed;
 }
@@ -115,7 +122,7 @@ h1 {
 
 .track-cell {
   width: 110px;
-  background: #0f8b8d; /* 路線色。あとで変えられる */
+  background: #0f8b8d;
   color: #fff;
   font-size: 52px;
   font-weight: bold;
@@ -174,7 +181,6 @@ audio {
   font-weight: bold;
 }
 
-/* スマホでも多少崩れにくく */
 @media (max-width: 768px) {
   .container {
     margin: 0;
@@ -182,53 +188,6 @@ audio {
     box-shadow: none;
   }
 
-  h1 {
-    font-size: 32px;
-  }
-
-  .station-title {
-    font-size: 32px;
-  }
-
-  .section-title {
-    font-size: 24px;
-  }
-
-  .period {
-    font-size: 20px;
-  }
-
-  .data-table th,
-  .neighbor-table th {
-    font-size: 18px;
-  }
-
-  .track-cell {
-    width: 80px;
-    font-size: 38px;
-  }
-
-  .route-main {
-    font-size: 18px;
-  }
-
-  .neighbor-table th,
-  .neighbor-table td {
-    font-size: 16px;
-  }
-
-.table-wrap {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.data-table,
-.neighbor-table {
-  min-width: 900px;
-}
-
-@media (max-width: 768px) {
   h1 {
     font-size: 28px;
   }
@@ -255,7 +214,13 @@ audio {
     font-size: 16px;
   }
 
+  .data-table th,
+  .neighbor-table th {
+    font-size: 18px;
+  }
+
   .track-cell {
+    width: 80px;
     font-size: 34px;
   }
 
@@ -272,6 +237,11 @@ audio {
 
   audio {
     max-width: 220px;
+  }
+
+  .neighbor-table th,
+  .neighbor-table td {
+    font-size: 16px;
   }
 }
 </style>
@@ -296,144 +266,150 @@ audio {
     </div>
 
     <div class="section-title">現在の使用状況</div>
-    <table class="data-table">
-      <tr>
-        <th style="width:110px;">番線</th>
-        <th>方面</th>
-        <th>発車メロディ</th>
-        <th>備考</th>
-      </tr>
+    <div class="table-wrap">
+      <table class="data-table">
+        <tr>
+          <th style="width:110px;">番線</th>
+          <th>方面</th>
+          <th>発車メロディ</th>
+          <th>備考</th>
+        </tr>
 
-      <tr>
-        <td class="track-cell">1</td>
-        <td>
-          <div class="route-main">吾妻線 上り</div>
-          <div class="route-sub">渋川・高崎・上野方面</div>
-        </td>
-        <td>
-          <div class="melody-name">JRE-IKST-038-01</div>
-          <audio controls>
-            <source src="audio/JRE-IKST-038-01.mp3" type="audio/mpeg">
-          </audio>
-        </td>
-        <td>
-          <div class="note-red">初採用</div>
-        </td>
-      </tr>
+        <tr>
+          <td class="track-cell">1</td>
+          <td>
+            <div class="route-main">吾妻線 上り</div>
+            <div class="route-sub">渋川・高崎・上野方面</div>
+          </td>
+          <td>
+            <div class="melody-name">JRE-IKST-038-01</div>
+            <audio controls>
+              <source src="audio/JRE-IKST-038-01.mp3" type="audio/mpeg">
+            </audio>
+          </td>
+          <td>
+            <div class="note-red">初採用</div>
+          </td>
+        </tr>
 
-      <tr>
-        <td class="track-cell">2</td>
-        <td>
-          <div class="route-main">吾妻線 下り</div>
-          <div class="route-sub">長野原草津口・大前方面</div>
-        </td>
-        <td>
-          <div class="melody-name">JRE-IKST-038-02</div>
-          <audio controls>
-            <source src="audio/JRE-IKST-038-02.mp3" type="audio/mpeg">
-          </audio>
-        </td>
-        <td>
-          <div class="note-red">初採用</div>
-        </td>
-      </tr>
+        <tr>
+          <td class="track-cell">2</td>
+          <td>
+            <div class="route-main">吾妻線 下り</div>
+            <div class="route-sub">長野原草津口・大前方面</div>
+          </td>
+          <td>
+            <div class="melody-name">JRE-IKST-038-02</div>
+            <audio controls>
+              <source src="audio/JRE-IKST-038-02.mp3" type="audio/mpeg">
+            </audio>
+          </td>
+          <td>
+            <div class="note-red">初採用</div>
+          </td>
+        </tr>
 
-      <tr>
-        <td class="track-cell">3</td>
-        <td>
-          <div class="route-main">吾妻線 下り</div>
-          <div class="route-sub">長野原草津口・大前方面</div>
-        </td>
-        <td>
-          <div class="melody-name">JRE-IKST-038-02</div>
-          <audio controls>
-            <source src="audio/JRE-IKST-038-02.mp3" type="audio/mpeg">
-          </audio>
-        </td>
-        <td>
-          <div class="note-red">初採用</div>
-          <div class="note-small">使用列車は1日1本のみ</div>
-        </td>
-      </tr>
-    </table>
+        <tr>
+          <td class="track-cell">3</td>
+          <td>
+            <div class="route-main">吾妻線 下り</div>
+            <div class="route-sub">長野原草津口・大前方面</div>
+          </td>
+          <td>
+            <div class="melody-name">JRE-IKST-038-02</div>
+            <audio controls>
+              <source src="audio/JRE-IKST-038-02.mp3" type="audio/mpeg">
+            </audio>
+          </td>
+          <td>
+            <div class="note-red">初採用</div>
+            <div class="note-small">使用列車は1日1本のみ</div>
+          </td>
+        </tr>
+      </table>
+    </div>
 
     <div class="section-title">過去の使用状況</div>
     <div class="period">2009/11/24〜2025/07/23</div>
 
-    <table class="data-table">
-      <tr>
-        <th style="width:110px;">番線</th>
-        <th>方面</th>
-        <th>発車メロディ</th>
-        <th>備考</th>
-      </tr>
+    <div class="table-wrap">
+      <table class="data-table">
+        <tr>
+          <th style="width:110px;">番線</th>
+          <th>方面</th>
+          <th>発車メロディ</th>
+          <th>備考</th>
+        </tr>
 
-      <tr>
-        <td class="track-cell">1</td>
-        <td>
-          <div class="route-main">吾妻線 上り</div>
-          <div class="route-sub">渋川・高崎・上野方面</div>
-        </td>
-        <td>
-          <div class="melody-name">ジュピターVerB</div>
-          <audio controls>
-            <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
-          </audio>
-        </td>
-        <td>
-          <div class="note-red">最後の使用駅</div>
-        </td>
-      </tr>
+        <tr>
+          <td class="track-cell">1</td>
+          <td>
+            <div class="route-main">吾妻線 上り</div>
+            <div class="route-sub">渋川・高崎・上野方面</div>
+          </td>
+          <td>
+            <div class="melody-name">ジュピターVerB</div>
+            <audio controls>
+              <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
+            </audio>
+          </td>
+          <td>
+            <div class="note-red">最後の使用駅</div>
+          </td>
+        </tr>
 
-      <tr>
-        <td class="track-cell">2</td>
-        <td>
-          <div class="route-main">吾妻線 下り</div>
-          <div class="route-sub">長野原草津口・大前方面</div>
-        </td>
-        <td>
-          <div class="melody-name">ジュピターVerB</div>
-          <audio controls>
-            <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
-          </audio>
-        </td>
-        <td>
-          <div class="note-red">最後の使用駅</div>
-        </td>
-      </tr>
+        <tr>
+          <td class="track-cell">2</td>
+          <td>
+            <div class="route-main">吾妻線 下り</div>
+            <div class="route-sub">長野原草津口・大前方面</div>
+          </td>
+          <td>
+            <div class="melody-name">ジュピターVerB</div>
+            <audio controls>
+              <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
+            </audio>
+          </td>
+          <td>
+            <div class="note-red">最後の使用駅</div>
+          </td>
+        </tr>
 
-      <tr>
-        <td class="track-cell">3</td>
-        <td>
-          <div class="route-main">吾妻線 下り</div>
-          <div class="route-sub">長野原草津口・大前方面</div>
-        </td>
-        <td>
-          <div class="melody-name">ジュピターVerB</div>
-          <audio controls>
-            <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
-          </audio>
-        </td>
-        <td>
-          <div class="note-red">最後の使用駅</div>
-          <div class="note-small">1日1本のみ</div>
-        </td>
-      </tr>
-    </table>
+        <tr>
+          <td class="track-cell">3</td>
+          <td>
+            <div class="route-main">吾妻線 下り</div>
+            <div class="route-sub">長野原草津口・大前方面</div>
+          </td>
+          <td>
+            <div class="melody-name">ジュピターVerB</div>
+            <audio controls>
+              <source src="audio/Jupiter_VerB.mp3" type="audio/mpeg">
+            </audio>
+          </td>
+          <td>
+            <div class="note-red">最後の使用駅</div>
+            <div class="note-small">1日1本のみ</div>
+          </td>
+        </tr>
+      </table>
+    </div>
 
     <div class="section-title">隣の駅</div>
-    <table class="neighbor-table">
-      <tr>
-        <th>上り（渋川方面）</th>
-        <th>路線</th>
-        <th>下り（大前方面）</th>
-      </tr>
-      <tr>
-        <td>市城</td>
-        <td class="neighbor-line">吾妻線</td>
-        <td>群馬原町</td>
-      </tr>
-    </table>
+    <div class="table-wrap">
+      <table class="neighbor-table">
+        <tr>
+          <th>上り（渋川方面）</th>
+          <th>路線</th>
+          <th>下り（大前方面）</th>
+        </tr>
+        <tr>
+          <td>市城</td>
+          <td class="neighbor-line">吾妻線</td>
+          <td>群馬原町</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
 
