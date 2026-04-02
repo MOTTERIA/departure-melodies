@@ -2,6 +2,7 @@ const stations = [
   {
     name: "会津大塩",
     kana: "あいづおおしお",
+    roman: "Aizu-Oshio",
     lines: ["左沢線"],
     file: "stations/aizuoshio.html"
   },
