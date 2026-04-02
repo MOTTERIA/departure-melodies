@@ -20,42 +20,42 @@ const stations = [
     lines: ["只見線"],
     file: "stations/aizukawaguchi.html"
   },
-   {
+  {
     name: "会津越川",
     kana: "あいづこすがわ",
     roman: "Aizu-Kosugawa",
     lines: ["只見線"],
     file: "stations/aizukosugawa.html"
   },
-   {
+  {
     name: "会津坂本",
     kana: "あいづさかもと",
     roman: "Aizu-Sakamoto",
     lines: ["只見線"],
     file: "stations/aizusakamoto.html"
   },
-   {
+  {
     name: "会津塩沢",
     kana: "あいづしおざわ",
     roman: "Aizu-Shiozawa",
     lines: ["只見線"],
     file: "stations/aizushiozawa.html"
   },
-   {
+  {
     name: "会津高田",
     kana: "あいづたかだ",
     roman: "Aizu-Takada",
     lines: ["只見線"],
     file: "stations/aizutakada.html"
   },
-   {
+  {
     name: "会津豊川",
     kana: "あいづとよかわ",
     roman: "Aizu-Toyokawa",
     lines: ["磐越西線"],
     file: "stations/aizutoyokawa.html"
   },
-   {
+  {
     name: "会津中川",
     kana: "あいづなかがわ",
     roman: "Aizu-Nakagawa",
