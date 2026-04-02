@@ -168,17 +168,20 @@ h1 {
   font-weight: bold;
 }
 
-.quick-links {
+.quick-links,
+.line-links {
   margin-top: 36px;
 }
 
-.quick-links-title {
+.quick-links-title,
+.line-links-title {
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 12px;
 }
 
-.quick-links-list {
+.quick-links-list,
+.line-links-list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -196,6 +199,30 @@ h1 {
 
 .quick-link:hover {
   background: #e3e3e3;
+}
+
+.line-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid #d8d8d8;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #222;
+  background: #fff;
+  font-size: 15px;
+}
+
+.line-link:hover {
+  background: #fafafa;
+}
+
+.line-color-chip {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  flex: 0 0 auto;
 }
 
 .footer-note {
@@ -244,7 +271,9 @@ h1 {
   .no-result,
   .footer-note,
   .page-button,
-  .page-info {
+  .page-info,
+  .quick-link,
+  .line-link {
     font-size: 14px;
   }
 }
@@ -264,13 +293,13 @@ h1 {
         type="text"
         id="searchInput"
         class="search-input"
-        placeholder="駅名・ひらがな・路線名で検索"
+        placeholder="駅名・ひらがな・路線名・ローマ字で検索"
         autocomplete="off"
       >
       <button type="button" id="searchButton" class="search-button">検索</button>
     </div>
     <div class="search-note">
-      例：海浜幕張 / かいひんまくはり / 京葉線
+      例：海浜幕張 / 海浜幕張 / 京葉線 / kaihimmakuhari
     </div>
   </div>
 
@@ -283,12 +312,19 @@ h1 {
     <div class="quick-links-list" id="quickLinks"></div>
   </div>
 
+  <div class="line-links">
+    <div class="line-links-title">路線から探す</div>
+    <div class="line-links-list" id="lineLinks"></div>
+  </div>
+
   <div class="footer-note">
     駅をクリックすると、各駅の詳細ページへ移動します。<br>
+    一覧は10件ごとにページ分けされています。
   </div>
 </div>
 
-<script src="station.js"></script>
+<script src="stations.js"></script>
+<script src="lines.js"></script>
 <script>
 const ITEMS_PER_PAGE = 10;
 
@@ -440,9 +476,26 @@ function renderQuickLinks() {
   `).join("");
 }
 
+function renderLineLinks() {
+  const lineLinks = document.getElementById("lineLinks");
+
+  if (!Array.isArray(lines) || !lines.length) {
+    lineLinks.innerHTML = `<div class="no-result">路線データがありません。</div>`;
+    return;
+  }
+
+  lineLinks.innerHTML = lines.map(line => `
+    <a class="line-link" href="${line.file}">
+      <span class="line-color-chip" style="background:${escapeHtml(line.color)};"></span>
+      <span>${escapeHtml(line.name)}</span>
+    </a>
+  `).join("");
+}
+
 window.addEventListener("DOMContentLoaded", function() {
   setResults(stations, "全駅一覧");
   renderQuickLinks();
+  renderLineLinks();
 
   document.getElementById("searchButton").addEventListener("click", searchStations);
 
