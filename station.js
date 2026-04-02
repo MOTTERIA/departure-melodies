@@ -13,7 +13,7 @@ const stations = [
     lines: ["只見線"],
     file: "stations/aizugamo.html"
   },
-   {
+  {
     name: "会津川口",
     kana: "あいづかわぐち",
     roman: "Aizu-Kawaguchi",
