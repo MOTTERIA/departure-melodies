@@ -380,6 +380,7 @@ function createLineCard(line) {
       <span class="line-color-bar" style="background:${escapeHtml(line.color)};"></span>
       <div>
         <div class="line-name">${escapeHtml(line.name)}</div>
+        <div class="line-meta">${escapeHtml(line.kana || "")} / ${escapeHtml(line.roman || "")}</div>
         <div class="line-meta">登録駅数：${stationCount}駅</div>
       </div>
     </a>
@@ -584,8 +585,16 @@ function searchLines() {
   }
 
   const filtered = lines.filter(line => {
-    return normalizeText(line.name).includes(normalizedInput);
-  });
+    const targets = [
+      line.name,
+      line.kana,
+      line.roman
+  ];
+    
+    return targets.some(target =>
+      normalizeText(target || "").includes(normalizedInput
+  );
+});
 
   setLineResults(filtered, "路線検索結果");
 }
