@@ -126,6 +126,13 @@ const stations = [
     file: "stations/aizuwakamatsu.html"
   },
   {
+    name: "市城",
+    kana: "いちしろ",
+    roman: "Ichishiro",
+    lines: ["吾妻線"],
+    file: "stations/ichishiro.html"
+  },
+  {
     name: "入広瀬",
     kana: "いりひろせ",
     roman: "Irihirose",
@@ -159,6 +166,13 @@ const stations = [
     roman: "Ōshirakawa",
     lines: ["只見線"],
     file: "stations/oshirakawa.html"
+  },
+  {
+    name: "小野上温泉",
+    kana: "おのがみおんせん",
+    roman: "Onogami-Onsen",
+    lines: ["吾妻線"],
+    file: "stations/onogamionsen.html"
   },
   {
     name: "上条",
