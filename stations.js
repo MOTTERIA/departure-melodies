@@ -125,4 +125,137 @@ const stations = [
     lines: ["只見線","磐越西線"],
     file: "stations/aizuwakamatsu.html"
   },
+  {
+    name: "入広瀬",
+    kana: "いりひろせ",
+    roman: "Irihirose",
+    lines: ["只見線"],
+    file: "stations/irihirose.html"
+  },
+  {
+    name: "魚沼田中",
+    kana: "うおぬまたなか",
+    roman: "Uonuma-Tanaka",
+    lines: ["只見線"],
+    file: "stations/uonumatanaka.html"
+  },
+  {
+    name: "越後須原",
+    kana: "えちごすはら",
+    roman: "Echigo-Suhara",
+    lines: ["只見線"],
+    file: "stations/echigosuhara.html"
+  },
+  {
+    name: "越後広瀬",
+    kana: "えちごひろせ",
+    roman: "Echigo-Hirose",
+    lines: ["只見線"],
+    file: "stations/echigohirose.html"
+  },
+  {
+    name: "大白川",
+    kana: "おおしらかわ",
+    roman: "Ōshirakawa",
+    lines: ["只見線"],
+    file: "stations/oshirakawa.html"
+  },
+  {
+    name: "上条",
+    kana: "かみじょう",
+    roman: "Kamijō",
+    lines: ["只見線"],
+    file: "stations/kamijo.html"
+  },
+  {
+    name: "小出",
+    kana: "こいで",
+    roman: "Koide",
+    lines: ["只見線","上越線"],
+    file: "stations/koide.html"
+  },
+  {
+    name: "郷戸",
+    kana: "ごうど",
+    roman: "Gōdo",
+    lines: ["只見線"],
+    file: "stations/godo.html"
+  },
+  {
+    name: "滝谷",
+    kana: "たきや",
+    roman: "Takiya",
+    lines: ["只見線"],
+    file: "stations/takiya.html"
+  },
+  {
+    name: "只見",
+    kana: "ただみ",
+    roman: "Tadami",
+    lines: ["只見線"],
+    file: "stations/tadami.html"
+  },
+  {
+    name: "塔寺",
+    kana: "とうでら",
+    roman: "Tōdera",
+    lines: ["只見線"],
+    file: "stations/todera.html"
+  },
+  {
+    name: "七日町",
+    kana: "なぬかまち",
+    roman: "Aizu-Gamō",
+    lines: ["只見線"],
+    file: "stations/nanukamachi.html"
+  },
+  {
+    name: "新鶴",
+    kana: "にいつる",
+    roman: "Niitsuru",
+    lines: ["只見線"],
+    file: "stations/nitsuru.html"
+  },
+  {
+    name: "西若松",
+    kana: "にしわかまつ",
+    roman: "Nishi-Wakamatsu",
+    lines: ["只見線","会津鉄道会津線"],
+    file: "stations/nishiwakamatsu.html"
+  },
+  {
+    name: "根岸（福島県）",
+    kana: "ねぎし",
+    roman: "Negishi",
+    lines: ["只見線"],
+    file: "stations/negishifukushima.html"
+  },
+  {
+    name: "早戸",
+    kana: "はやと",
+    roman: "Hayato",
+    lines: ["只見線"],
+    file: "stations/hayato.html"
+  },
+  {
+    name: "本名",
+    kana: "ほんな",
+    roman: "Honna",
+    lines: ["只見線"],
+    file: "stations/honna.html"
+  },
+  {
+    name: "藪神",
+    kana: "やぶかみ",
+    roman: "Yabukami",
+    lines: ["只見線"],
+    file: "stations/yabukami.html"
+  },
+  {
+    name: "若宮",
+    kana: "わかみや",
+    roman: "Wakamiya",
+    lines: ["只見線"],
+    file: "stations/wakamiya.html"
+  },
 ];
