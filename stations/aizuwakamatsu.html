@@ -96,6 +96,7 @@ h1 {
   padding: 18px 16px;
   vertical-align: middle;
   font-size: 16px;
+  overflow-wrap: break-word;
 }
 
 .status-table col.col-track-num {
@@ -107,15 +108,15 @@ h1 {
 }
 
 .status-table col.col-route {
-  width: 38%;
+  width: 34%;
 }
 
 .status-table col.col-melody {
-  width: 26%;
+  width: 30%;
 }
 
 .status-table col.col-note {
-  width: 20%;
+  width: 18%;
 }
 
 .track-num-cell {
@@ -149,17 +150,26 @@ h1 {
   color: #666;
   line-height: 1.6;
 }
-  
+
 .melody-name {
   font-size: 18px;
   font-weight: bold;
   color: #444;
+  margin-bottom: 8px;
+  line-height: 1.4;
 }
 
 .note-small {
   color: #666;
   font-size: 14px;
   line-height: 1.6;
+}
+
+audio {
+  width: 100%;
+  max-width: 250px;
+  display: block;
+  margin-top: 6px;
 }
 
 .neighbor-table th,
@@ -182,6 +192,13 @@ h1 {
   font-weight: bold;
 }
 
+.linecolor-cell {
+  width: 28px;
+  min-width: 28px;
+  padding: 0 !important;
+  background-clip: padding-box;
+}
+
 .linecolor-tadami {
   background: #0081B8;
 }
@@ -193,32 +210,30 @@ h1 {
 .linecolor-aizu {
   background: #ffffff;
 }
-  
-.linecolor-cell {
-    width: 28px;
-    min-width: 28px;
-    padding: 0 !important;
-}
 
-.linecolor-single {
-    width: 100%;
-    min-height: 150px;
-    height: 100%;
-}
-
-  .linecolor-split {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 150px;
-    height: 100%;
+.linecolor-split {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 150px;
+  height: 100%;
 }
 
 .linecolor-half {
-    flex: 1;
-    width: 100%;
+  flex: 1;
+  width: 100%;
 }
-  
+
+.neighbor-table a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.neighbor-table a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .container {
     margin: 0;
@@ -258,8 +273,8 @@ h1 {
     font-size: 14px;
   }
 
-  .no-track-cell {
-    font-size: 18px;
+  audio {
+    max-width: 220px;
   }
 
   .neighbor-table th,
@@ -270,55 +285,21 @@ h1 {
 </style>
 </head>
 
-<body>
-<div class="container">
-  <a href="../index.html" class="back-link">← 検索ページに戻る</a>
-
-  <h1>会津若松駅</h1>
-  <div class="station-subtitle">あいづわかまつ / Aizu-Wakamatsu</div>
-
-  <div class="station-desc">
-    会津若松駅（あいづわかまつえき）は、福島県会津若松市駅前通りに所在するJR磐越西線、JR只見線の駅である。1899年7月15日開業。
-    ※1899/07/15~1917/05/21までは"若松駅"という名称だった。<br>
-  </div>
-
-  <div class="section-title">現在の使用状況</div>
-  <div class="period">2002/10/11～</div>
-
-  <div class="table-wrap">
-    <table class="data-table status-table">
-      <colgroup>
-        <col class="col-track-num">
-        <col class="col-linecolor">
-        <col class="col-route">
-        <col class="col-melody">
-        <col class="col-note">
-      </colgroup>
-      <thead>
-        <tr>
-          <th colspan="2">番線</th>
-          <th>方面</th>
-          <th>発車メロディ</th>
-          <th>備考</th>
-        </tr>
-      </thead>
-      <tbody>
+<tbody>
   <tr>
     <td class="track-num-cell">
       <div class="track-number">1</div>
     </td>
-    <td class="linecolor-cell">
-      <div class="linecolor-single linecolor-banetsusai"></div>
-    </td>
+    <td class="linecolor-cell linecolor-banetsusai"></td>
     <td>
       <div class="route-main">磐越西線 上り</div>
       <div class="route-sub">郡山方面</div>
     </td>
     <td>
-    　<div class="melody-name">AIZUその名の情熱</div>
+      <div class="melody-name">AIZUその名の情熱</div>
       <audio controls>
-    　　<source src="audio/AIZU_NewVer.mp3" type="audio/mpeg">
-    　</audio>
+        <source src="audio/AIZU_NewVer.mp3" type="audio/mpeg">
+      </audio>
     </td>
     <td>
       <div class="note-small"></div>
@@ -329,18 +310,16 @@ h1 {
     <td class="track-num-cell">
       <div class="track-number">2</div>
     </td>
-    <td class="linecolor-cell">
-      <div class="linecolor-single linecolor-banetsusai"></div>
-    </td>
+    <td class="linecolor-cell linecolor-banetsusai"></td>
     <td>
       <div class="route-main">磐越西線 下り</div>
       <div class="route-sub">喜多方方面</div>
     </td>
     <td>
-    　<div class="melody-name">AIZUその名の情熱</div>
+      <div class="melody-name">AIZUその名の情熱</div>
       <audio controls>
-    　　<source src="audio/AIZU_NewVer.mp3" type="audio/mpeg">
-    　</audio>
+        <source src="audio/AIZU_NewVer.mp3" type="audio/mpeg">
+      </audio>
     </td>
     <td>
       <div class="note-small">一部の只見線・磐越西線上り列車も使用</div>
@@ -364,8 +343,8 @@ h1 {
     <td>
       <div class="melody-name">AIZUその名の情熱</div>
       <audio controls>
-    　　<source src="audio/AIZU_NewVer.mp3" type="audio/mpeg">
-    　</audio>
+        <source src="audio/AIZU_NewVer.mp3" type="audio/mpeg">
+      </audio>
     </td>
     <td>
       <div class="note-small">一部の磐越西線上り列車も使用</div>
@@ -389,29 +368,27 @@ h1 {
     <td>
       <div class="melody-name">AIZUその名の情熱</div>
       <audio controls>
-    　 <source src="audio/AIZU_NewVer.mp3" type="audio/mpeg">
-    　</audio>
+        <source src="audio/AIZU_NewVer.mp3" type="audio/mpeg">
+      </audio>
     </td>
     <td>
       <div class="note-small"></div>
     </td>
   </tr>
-        
+
   <tr>
     <td class="track-num-cell">
       <div class="track-number">5</div>
     </td>
-    <td class="linecolor-cell">
-      <div class="linecolor-single linecolor-aizu"></div>
-    </td>
+    <td class="linecolor-cell linecolor-aizu"></td>
     <td>
       <div class="route-main">会津鉄道 下り</div>
       <div class="route-sub">会津田島・会津高原尾瀬口方面</div>
     </td>
     <td>
-     <div class="melody-name">AIZUその名の情熱</div>
+      <div class="melody-name">AIZUその名の情熱</div>
       <audio controls>
-    　 <source src="audio/AIZU_NewVer.mp3" type="audio/mpeg">
+        <source src="audio/AIZU_NewVer.mp3" type="audio/mpeg">
       </audio>
     </td>
     <td>
