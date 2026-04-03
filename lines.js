@@ -26,6 +26,27 @@ const lines = [
       "stations/omae.html"
     ]
    },
+   {
+    name: "左沢線",
+    kana: "あてらざわせん",
+    roman: "Aterazawa-Line",
+    color: "#0072BA",
+    file: "lines/aterazawa-line.html",
+    stationOrder: [
+      "stations/yamagata.html",
+      "stations/kitayamagata.html",
+      "stations/higashikanai.html",
+      "stations/uzenyamabe.html",
+      "stations/uzenkanezawa.html",
+      "stations/uzennagasaki.html",
+      "stations/minamisagae.html",
+      "stations/sagae.html",
+      "stations/nishisagae.html",
+      "stations/uzentakamatsu.html",
+      "stations/shibahashi.html",
+      "stations/aterazawa.html"
+   ]
+  },
   {
     name: "只見線",
     kana: "ただみせん",
