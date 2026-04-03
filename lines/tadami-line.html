@@ -97,7 +97,7 @@ h1 {
 
   <div id="stationList" class="station-list"></div>
 </div>
-
+  
 <script src="../stations.js"></script>
 <script src="../lines.js"></script>
 <script>
@@ -114,7 +114,6 @@ function renderTadamiStations() {
   const stationList = document.getElementById("stationList");
 
   if (!stationList) {
-    console.error("stationList が見つかりません");
     return;
   }
 
@@ -136,15 +135,13 @@ function renderTadamiStations() {
   }
 
   const order = Array.isArray(lineData.stationOrder) ? lineData.stationOrder : [];
+
   const stationMap = new Map(
-    stations.map(station => {
-      const filename = station.file.split("/").pop();
-      return [filename, station];
-    })
-);
-  
+    stations.map(station => [station.file, station])
+  );
+
   const orderedStations = order
-    .map(filename => stationMap.get(filename))
+    .map(filePath => stationMap.get(filePath))
     .filter(Boolean);
 
   if (!orderedStations.length) {
@@ -162,5 +159,3 @@ function renderTadamiStations() {
 
 window.addEventListener("DOMContentLoaded", renderTadamiStations);
 </script>
-</body>
-</html>
