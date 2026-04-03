@@ -257,5 +257,5 @@ const stations = [
     roman: "Wakamiya",
     lines: ["只見線"],
     file: "stations/wakamiya.html"
-  },
+  }
 ];
