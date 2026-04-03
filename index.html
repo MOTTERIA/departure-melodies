@@ -323,7 +323,7 @@ h1 {
 
   <div class="footer-note">
     駅をクリックすると各駅の詳細ページへ、路線をクリックすると各路線の一覧ページへ移動します。<br>
-    駅一覧は5件ごと、路線一覧は10件ごとにページ分けされています。
+    駅一覧は5件ごと、路線一覧は5件ごとにページ分けされています。
   </div>
 </div>
 
@@ -331,7 +331,7 @@ h1 {
 <script src="lines.js"></script>
 <script>
 const STATION_ITEMS_PER_PAGE = 5;
-const LINE_ITEMS_PER_PAGE = 10;
+const LINE_ITEMS_PER_PAGE = 5;
 
 let currentResults = [];
 let currentPage = 1;
@@ -395,12 +395,6 @@ function clearStationResults() {
   document.getElementById("resultInfo").textContent = "";
   document.getElementById("resultArea").innerHTML = "";
   document.getElementById("paginationArea").innerHTML = "";
-}
-
-function clearLineResults() {
-  document.getElementById("lineResultInfo").textContent = "";
-  document.getElementById("lineResultArea").innerHTML = "";
-  document.getElementById("linePaginationArea").innerHTML = "";
 }
 
 function renderStationPagination(totalItems) {
@@ -586,7 +580,7 @@ function searchLines() {
   const normalizedInput = normalizeText(input);
 
   if (!normalizedInput) {
-    clearLineResults();
+    setLineResults(lines, "全路線一覧");
     return;
   }
 
@@ -599,7 +593,7 @@ function searchLines() {
 
 window.addEventListener("DOMContentLoaded", function() {
   clearStationResults();
-  clearLineResults();
+  setLineResults(lines, "全路線一覧");
 
   document.getElementById("searchButton").addEventListener("click", searchStations);
   document.getElementById("lineSearchButton").addEventListener("click", searchLines);
