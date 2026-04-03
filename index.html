@@ -272,7 +272,7 @@ h1 {
 
 <body>
 <div class="container">
-  <h1>発車メロディ調査委</h1>
+  <h1>発車メロディ全集</h1>
   <div class="subtitle">JR東日本の駅ページ・路線ページを検索できます。</div>
 
   <div class="section-title">駅検索</div>
@@ -307,13 +307,13 @@ h1 {
         type="text"
         id="lineSearchInput"
         class="search-input"
-        placeholder="路線名・ローマ字で検索"
+        placeholder="路線名・ひらがな・ローマ字で検索"
         autocomplete="off"
       >
       <button type="button" id="lineSearchButton" class="search-button">検索</button>
     </div>
     <div class="search-note">
-      例：京葉線 / とうかいどうせん / yamanote
+      例：京葉線 / けいようせん / keiyo / 只見線 / ただみせん / tadami
     </div>
   </div>
 
@@ -323,6 +323,7 @@ h1 {
 
   <div class="footer-note">
     駅をクリックすると各駅の詳細ページへ、路線をクリックすると各路線の一覧ページへ移動します。<br>
+    駅一覧は5件ごと、路線一覧は5件ごとにページ分けされています。
   </div>
 </div>
 
@@ -563,7 +564,7 @@ function searchStations() {
     ];
 
     return targets.some(target =>
-      normalizeText(target).includes(normalizedInput)
+      normalizeText(target || "").includes(normalizedInput)
     );
   });
 
@@ -589,19 +590,19 @@ function searchLines() {
       line.name,
       line.kana,
       line.roman
-  ];
-    
+    ];
+
     return targets.some(target =>
-      normalizeText(target || "").includes(normalizedInput
-  );
-});
+      normalizeText(target || "").includes(normalizedInput)
+    );
+  });
 
   setLineResults(filtered, "路線検索結果");
 }
 
 window.addEventListener("DOMContentLoaded", function() {
   clearStationResults();
-  setLineResults(lines, "全路線一覧");
+  setLineResults(Array.isArray(lines) ? lines : [], "全路線一覧");
 
   document.getElementById("searchButton").addEventListener("click", searchStations);
   document.getElementById("lineSearchButton").addEventListener("click", searchLines);
