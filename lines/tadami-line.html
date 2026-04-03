@@ -136,10 +136,15 @@ function renderTadamiStations() {
   }
 
   const order = Array.isArray(lineData.stationOrder) ? lineData.stationOrder : [];
-  const stationMap = new Map(stations.map(station => [station.name, station]));
-
+  const stationMap = new Map(
+    stations.map(station => {
+      const filename = station.file.split("/").pop();
+      return [filename, station];
+    })
+);
+  
   const orderedStations = order
-    .map(name => stationMap.get(name))
+    .map(filename => stationMap.get(filename))
     .filter(Boolean);
 
   if (!orderedStations.length) {
