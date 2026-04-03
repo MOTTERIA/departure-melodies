@@ -71,7 +71,7 @@ const lines = [
       "stations/kamikuwanagawa.html",
       "stations/kuwanagawa.html",
       "stations/nishiotaki.html",
-      "stations/shinanoshiratori.html"
+      "stations/shinanoshiratori.html",
       "stations/hirataki.html",
       "stations/yokokura.html",
       "stations/morimiyanohara.html",
@@ -87,7 +87,7 @@ const lines = [
       "stations/gejo.html",
       "stations/echigoiwasawa.html",
       "stations/uchigamaki.html",
-      "stations/echigokawaguchi.html",
+      "stations/echigokawaguchi.html"
     ]
    },
    {
