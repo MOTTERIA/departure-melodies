@@ -204,6 +204,10 @@ h1 {
   font-weight: bold;
 }
 
+.section-gap {
+  margin-top: 42px;
+}
+
 .footer-note {
   margin-top: 40px;
   font-size: 14px;
@@ -293,6 +297,8 @@ h1 {
   <div id="resultArea"></div>
   <div id="paginationArea"></div>
 
+  <div class="section-gap"></div>
+
   <div class="section-title">路線検索</div>
 
   <div class="search-area">
@@ -313,21 +319,27 @@ h1 {
 
   <div id="lineResultInfo" class="result-info"></div>
   <div id="lineResultArea"></div>
+  <div id="linePaginationArea"></div>
 
   <div class="footer-note">
     駅をクリックすると各駅の詳細ページへ、路線をクリックすると各路線の一覧ページへ移動します。<br>
-    駅一覧は10件ごとにページ分けされています。
+    駅一覧は5件ごと、路線一覧は10件ごとにページ分けされています。
   </div>
 </div>
 
 <script src="stations.js"></script>
 <script src="lines.js"></script>
 <script>
-const ITEMS_PER_PAGE = 10;
+const STATION_ITEMS_PER_PAGE = 5;
+const LINE_ITEMS_PER_PAGE = 10;
 
 let currentResults = [];
 let currentPage = 1;
-let currentLabelBase = "全駅一覧";
+let currentLabelBase = "";
+
+let currentLineResults = [];
+let currentLinePage = 1;
+let currentLineLabelBase = "";
 
 function escapeHtml(text) {
   return String(text)
@@ -375,13 +387,25 @@ function createLineCard(line) {
   `;
 }
 
-function getTotalPages(listLength) {
-  return Math.max(1, Math.ceil(listLength / ITEMS_PER_PAGE));
+function getTotalPages(listLength, itemsPerPage) {
+  return Math.max(1, Math.ceil(listLength / itemsPerPage));
 }
 
-function renderPagination(totalItems) {
+function clearStationResults() {
+  document.getElementById("resultInfo").textContent = "";
+  document.getElementById("resultArea").innerHTML = "";
+  document.getElementById("paginationArea").innerHTML = "";
+}
+
+function clearLineResults() {
+  document.getElementById("lineResultInfo").textContent = "";
+  document.getElementById("lineResultArea").innerHTML = "";
+  document.getElementById("linePaginationArea").innerHTML = "";
+}
+
+function renderStationPagination(totalItems) {
   const paginationArea = document.getElementById("paginationArea");
-  const totalPages = getTotalPages(totalItems);
+  const totalPages = getTotalPages(totalItems, STATION_ITEMS_PER_PAGE);
 
   if (totalItems === 0 || totalPages === 1) {
     paginationArea.innerHTML = "";
@@ -399,19 +423,51 @@ function renderPagination(totalItems) {
   document.getElementById("prevPageButton").addEventListener("click", function() {
     if (currentPage > 1) {
       currentPage--;
-      renderCurrentPage();
+      renderCurrentStationPage();
     }
   });
 
   document.getElementById("nextPageButton").addEventListener("click", function() {
     if (currentPage < totalPages) {
       currentPage++;
-      renderCurrentPage();
+      renderCurrentStationPage();
     }
   });
 }
 
-function renderCurrentPage() {
+function renderLinePagination(totalItems) {
+  const paginationArea = document.getElementById("linePaginationArea");
+  const totalPages = getTotalPages(totalItems, LINE_ITEMS_PER_PAGE);
+
+  if (totalItems === 0 || totalPages === 1) {
+    paginationArea.innerHTML = "";
+    return;
+  }
+
+  paginationArea.innerHTML = `
+    <div class="pagination">
+      <button class="page-button" id="prevLinePageButton" ${currentLinePage === 1 ? "disabled" : ""}>前へ</button>
+      <div class="page-info">${currentLinePage} / ${totalPages}ページ</div>
+      <button class="page-button" id="nextLinePageButton" ${currentLinePage === totalPages ? "disabled" : ""}>次へ</button>
+    </div>
+  `;
+
+  document.getElementById("prevLinePageButton").addEventListener("click", function() {
+    if (currentLinePage > 1) {
+      currentLinePage--;
+      renderCurrentLinePage();
+    }
+  });
+
+  document.getElementById("nextLinePageButton").addEventListener("click", function() {
+    if (currentLinePage < totalPages) {
+      currentLinePage++;
+      renderCurrentLinePage();
+    }
+  });
+}
+
+function renderCurrentStationPage() {
   const resultInfo = document.getElementById("resultInfo");
   const resultArea = document.getElementById("resultArea");
 
@@ -422,17 +478,17 @@ function renderCurrentPage() {
         一致する駅が見つかりませんでした。
       </div>
     `;
-    renderPagination(0);
+    renderStationPagination(0);
     return;
   }
 
-  const totalPages = getTotalPages(currentResults.length);
+  const totalPages = getTotalPages(currentResults.length, STATION_ITEMS_PER_PAGE);
   if (currentPage > totalPages) {
     currentPage = totalPages;
   }
 
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const startIndex = (currentPage - 1) * STATION_ITEMS_PER_PAGE;
+  const endIndex = startIndex + STATION_ITEMS_PER_PAGE;
   const pageItems = currentResults.slice(startIndex, endIndex);
 
   resultInfo.textContent = `${currentLabelBase}（${currentResults.length}件）`;
@@ -443,14 +499,56 @@ function renderCurrentPage() {
     </div>
   `;
 
-  renderPagination(currentResults.length);
+  renderStationPagination(currentResults.length);
 }
 
-function setResults(list, labelBase) {
+function renderCurrentLinePage() {
+  const lineResultInfo = document.getElementById("lineResultInfo");
+  const lineResultArea = document.getElementById("lineResultArea");
+
+  if (!currentLineResults.length) {
+    lineResultInfo.textContent = `${currentLineLabelBase}：0件`;
+    lineResultArea.innerHTML = `
+      <div class="no-result">
+        一致する路線が見つかりませんでした。
+      </div>
+    `;
+    renderLinePagination(0);
+    return;
+  }
+
+  const totalPages = getTotalPages(currentLineResults.length, LINE_ITEMS_PER_PAGE);
+  if (currentLinePage > totalPages) {
+    currentLinePage = totalPages;
+  }
+
+  const startIndex = (currentLinePage - 1) * LINE_ITEMS_PER_PAGE;
+  const endIndex = startIndex + LINE_ITEMS_PER_PAGE;
+  const pageItems = currentLineResults.slice(startIndex, endIndex);
+
+  lineResultInfo.textContent = `${currentLineLabelBase}（${currentLineResults.length}件）`;
+
+  lineResultArea.innerHTML = `
+    <div class="line-list">
+      ${pageItems.map(createLineCard).join("")}
+    </div>
+  `;
+
+  renderLinePagination(currentLineResults.length);
+}
+
+function setStationResults(list, labelBase) {
   currentResults = list;
   currentLabelBase = labelBase;
   currentPage = 1;
-  renderCurrentPage();
+  renderCurrentStationPage();
+}
+
+function setLineResults(list, labelBase) {
+  currentLineResults = list;
+  currentLineLabelBase = labelBase;
+  currentLinePage = 1;
+  renderCurrentLinePage();
 }
 
 function searchStations() {
@@ -458,7 +556,7 @@ function searchStations() {
   const normalizedInput = normalizeText(input);
 
   if (!normalizedInput) {
-    setResults(stations, "全駅一覧");
+    clearStationResults();
     return;
   }
 
@@ -475,34 +573,12 @@ function searchStations() {
     );
   });
 
-  setResults(filtered, "検索結果");
-}
-
-function renderLineResults(list, labelBase) {
-  const lineResultInfo = document.getElementById("lineResultInfo");
-  const lineResultArea = document.getElementById("lineResultArea");
-
-  if (!list.length) {
-    lineResultInfo.textContent = `${labelBase}：0件`;
-    lineResultArea.innerHTML = `
-      <div class="no-result">
-        一致する路線が見つかりませんでした。
-      </div>
-    `;
-    return;
-  }
-
-  lineResultInfo.textContent = `${labelBase}（${list.length}件）`;
-  lineResultArea.innerHTML = `
-    <div class="line-list">
-      ${list.map(createLineCard).join("")}
-    </div>
-  `;
+  setStationResults(filtered, "駅検索結果");
 }
 
 function searchLines() {
   if (!Array.isArray(lines)) {
-    renderLineResults([], "路線検索結果");
+    setLineResults([], "路線検索結果");
     return;
   }
 
@@ -510,7 +586,7 @@ function searchLines() {
   const normalizedInput = normalizeText(input);
 
   if (!normalizedInput) {
-    renderLineResults(lines, "全路線一覧");
+    clearLineResults();
     return;
   }
 
@@ -518,12 +594,12 @@ function searchLines() {
     return normalizeText(line.name).includes(normalizedInput);
   });
 
-  renderLineResults(filtered, "路線検索結果");
+  setLineResults(filtered, "路線検索結果");
 }
 
 window.addEventListener("DOMContentLoaded", function() {
-  setResults(stations, "全駅一覧");
-  renderLineResults(lines, "全路線一覧");
+  clearStationResults();
+  clearLineResults();
 
   document.getElementById("searchButton").addEventListener("click", searchStations);
   document.getElementById("lineSearchButton").addEventListener("click", searchLines);
