@@ -45,9 +45,9 @@ const lines = [
       "stations/uzentakamatsu.html",
       "stations/shibahashi.html",
       "stations/aterazawa.html"
-   ]
-  },
-  {
+    ]
+   },
+   {
     name: "飯山線",
     kana: "いいやません",
     roman: "Iiyama-Line",
