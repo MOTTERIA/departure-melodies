@@ -12,6 +12,8 @@ const lines = [
       "stations/negishifukushima.html",
       "stations/nitsuru.html",
       "stations/wakamiya.html",
+      "stations/aizubange.html",
+      "stations/todera.html",
       "stations/aizusakamoto.html",
       "stations/aizuyanaizu.html",
       "stations/godo.html",
