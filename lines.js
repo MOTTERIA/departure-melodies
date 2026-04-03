@@ -1,4 +1,29 @@
 const lines = [
+   {
+    name: "吾妻線",
+    color: "#008689",
+    file: "lines/agatsuma-line.html",
+    stationOrder: [
+      "stations/shibukawa.html",
+      "stations/kanashima.html",
+      "stations/ubashima.html",
+      "stations/onogami.html",
+      "stations/onogamionsen.html",
+      "stations/ichishiro.html",
+      "stations/nakanojo.html",
+      "stations/gummaharamachi.html",
+      "stations/gobara.html",
+      "stations/yagura.html",
+      "stations/iwashima.html",
+      "stations/kawarayuonsen.html",
+      "stations/naganoharakusatsuguchi.html",
+      "stations/gummaotsu.html",
+      "stations/haneo.html",
+      "stations/fukurogura.html",
+      "stations/manzakazawaguchi.html",
+      "stations/omae.html"
+    ]
+  }
   {
     name: "只見線",
     color: "#0081B8",
