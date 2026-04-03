@@ -90,7 +90,7 @@ const lines = [
       "stations/echigokawaguchi.html",
     ]
    },
-  {
+   {
     name: "只見線",
     kana: "ただみせん",
     roman: "Tadami-Line",
