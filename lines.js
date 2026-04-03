@@ -23,7 +23,7 @@ const lines = [
       "stations/manzakazawaguchi.html",
       "stations/omae.html"
     ]
-  }
+   },
   {
     name: "只見線",
     color: "#0081B8",
