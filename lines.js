@@ -1,6 +1,8 @@
 const lines = [
    {
     name: "吾妻線",
+    kana: "あがつません",
+    roman: "Agatsuma-Line",
     color: "#008689",
     file: "lines/agatsuma-line.html",
     stationOrder: [
@@ -26,6 +28,8 @@ const lines = [
    },
   {
     name: "只見線",
+    kana: "ただみせん",
+    roman: "Tadami-Line",
     color: "#0081B8",
     file: "lines/tadami-line.html",
     stationOrder: [
