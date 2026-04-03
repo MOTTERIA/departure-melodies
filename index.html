@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>発車メロディ全集 | 駅検索</title>
+<title>発車メロディ全集 | 検索</title>
 
 <style>
 body {
@@ -43,7 +43,7 @@ h1 {
 }
 
 .search-area {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .search-row {
@@ -96,7 +96,8 @@ h1 {
   border-radius: 6px;
 }
 
-.station-list {
+.station-list,
+.line-list {
   display: grid;
   gap: 14px;
 }
@@ -134,6 +135,41 @@ h1 {
   line-height: 1.7;
 }
 
+.line-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #d8d8d8;
+  background: #fff;
+  padding: 18px 20px;
+  transition: 0.15s;
+}
+
+.line-card:hover {
+  background: #fafafa;
+  border-color: #bdbdbd;
+}
+
+.line-color-bar {
+  width: 18px;
+  height: 48px;
+  border-radius: 4px;
+  flex: 0 0 auto;
+}
+
+.line-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.line-meta {
+  font-size: 14px;
+  color: #666;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -166,63 +202,6 @@ h1 {
   font-size: 15px;
   color: #555;
   font-weight: bold;
-}
-
-.quick-links,
-.line-links {
-  margin-top: 36px;
-}
-
-.quick-links-title,
-.line-links-title {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-.quick-links-list,
-.line-links-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.quick-link {
-  display: inline-block;
-  padding: 10px 14px;
-  background: #efefef;
-  color: #222;
-  text-decoration: none;
-  border-radius: 999px;
-  font-size: 15px;
-}
-
-.quick-link:hover {
-  background: #e3e3e3;
-}
-
-.line-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border: 1px solid #d8d8d8;
-  border-radius: 999px;
-  text-decoration: none;
-  color: #222;
-  background: #fff;
-  font-size: 15px;
-}
-
-.line-link:hover {
-  background: #fafafa;
-}
-
-.line-color-chip {
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  flex: 0 0 auto;
 }
 
 .footer-note {
@@ -265,16 +244,23 @@ h1 {
     font-size: 22px;
   }
 
+  .line-name {
+    font-size: 20px;
+  }
+
   .station-kana,
   .station-meta,
+  .line-meta,
   .result-info,
   .no-result,
   .footer-note,
   .page-button,
-  .page-info,
-  .quick-link,
-  .line-link {
+  .page-info {
     font-size: 14px;
+  }
+
+  .line-color-bar {
+    height: 42px;
   }
 }
 </style>
@@ -283,7 +269,7 @@ h1 {
 <body>
 <div class="container">
   <h1>発車メロディ調査委</h1>
-  <div class="subtitle">JR東日本の駅ページを検索できます。</div>
+  <div class="subtitle">JR東日本の駅ページ・路線ページを検索できます。</div>
 
   <div class="section-title">駅検索</div>
 
@@ -299,7 +285,7 @@ h1 {
       <button type="button" id="searchButton" class="search-button">検索</button>
     </div>
     <div class="search-note">
-      例：海浜幕張 / 海浜幕張 / 京葉線 / kaihimmakuhari
+      例：海浜幕張 / かいひんまくはり / 京葉線 / kaihinmakuhari
     </div>
   </div>
 
@@ -307,19 +293,30 @@ h1 {
   <div id="resultArea"></div>
   <div id="paginationArea"></div>
 
-  <div class="quick-links">
-    <div class="quick-links-title">よく見る駅</div>
-    <div class="quick-links-list" id="quickLinks"></div>
+  <div class="section-title">路線検索</div>
+
+  <div class="search-area">
+    <div class="search-row">
+      <input
+        type="text"
+        id="lineSearchInput"
+        class="search-input"
+        placeholder="路線名・ローマ字で検索"
+        autocomplete="off"
+      >
+      <button type="button" id="lineSearchButton" class="search-button">検索</button>
+    </div>
+    <div class="search-note">
+      例：只見線 / 吾妻線 / 磐越西線
+    </div>
   </div>
 
-  <div class="line-links">
-    <div class="line-links-title">路線から探す</div>
-    <div class="line-links-list" id="lineLinks"></div>
-  </div>
+  <div id="lineResultInfo" class="result-info"></div>
+  <div id="lineResultArea"></div>
 
   <div class="footer-note">
-    駅をクリックすると、各駅の詳細ページへ移動します。<br>
-    一覧は10件ごとにページ分けされています。
+    駅をクリックすると各駅の詳細ページへ、路線をクリックすると各路線の一覧ページへ移動します。<br>
+    駅一覧は10件ごとにページ分けされています。
   </div>
 </div>
 
@@ -359,6 +356,20 @@ function createStationCard(station) {
       <div class="station-kana">${escapeHtml(station.kana)} / ${escapeHtml(station.roman)}</div>
       <div class="station-meta">
         路線：${escapeHtml(linesText)}
+      </div>
+    </a>
+  `;
+}
+
+function createLineCard(line) {
+  const stationCount = Array.isArray(line.stationOrder) ? line.stationOrder.length : 0;
+
+  return `
+    <a class="line-card" href="${line.file}">
+      <span class="line-color-bar" style="background:${escapeHtml(line.color)};"></span>
+      <div>
+        <div class="line-name">${escapeHtml(line.name)}</div>
+        <div class="line-meta">登録駅数：${stationCount}駅</div>
       </div>
     </a>
   `;
@@ -467,41 +478,65 @@ function searchStations() {
   setResults(filtered, "検索結果");
 }
 
-function renderQuickLinks() {
-  const quickLinks = document.getElementById("quickLinks");
-  const favorites = stations.slice(0, 8);
+function renderLineResults(list, labelBase) {
+  const lineResultInfo = document.getElementById("lineResultInfo");
+  const lineResultArea = document.getElementById("lineResultArea");
 
-  quickLinks.innerHTML = favorites.map(station => `
-    <a class="quick-link" href="${station.file}">${escapeHtml(station.name)}</a>
-  `).join("");
-}
-
-function renderLineLinks() {
-  const lineLinks = document.getElementById("lineLinks");
-
-  if (!Array.isArray(lines) || !lines.length) {
-    lineLinks.innerHTML = `<div class="no-result">路線データがありません。</div>`;
+  if (!list.length) {
+    lineResultInfo.textContent = `${labelBase}：0件`;
+    lineResultArea.innerHTML = `
+      <div class="no-result">
+        一致する路線が見つかりませんでした。
+      </div>
+    `;
     return;
   }
 
-  lineLinks.innerHTML = lines.map(line => `
-    <a class="line-link" href="${line.file}">
-      <span class="line-color-chip" style="background:${escapeHtml(line.color)};"></span>
-      <span>${escapeHtml(line.name)}</span>
-    </a>
-  `).join("");
+  lineResultInfo.textContent = `${labelBase}（${list.length}件）`;
+  lineResultArea.innerHTML = `
+    <div class="line-list">
+      ${list.map(createLineCard).join("")}
+    </div>
+  `;
+}
+
+function searchLines() {
+  if (!Array.isArray(lines)) {
+    renderLineResults([], "路線検索結果");
+    return;
+  }
+
+  const input = document.getElementById("lineSearchInput").value.trim();
+  const normalizedInput = normalizeText(input);
+
+  if (!normalizedInput) {
+    renderLineResults(lines, "全路線一覧");
+    return;
+  }
+
+  const filtered = lines.filter(line => {
+    return normalizeText(line.name).includes(normalizedInput);
+  });
+
+  renderLineResults(filtered, "路線検索結果");
 }
 
 window.addEventListener("DOMContentLoaded", function() {
   setResults(stations, "全駅一覧");
-  renderQuickLinks();
-  renderLineLinks();
+  renderLineResults(lines, "全路線一覧");
 
   document.getElementById("searchButton").addEventListener("click", searchStations);
+  document.getElementById("lineSearchButton").addEventListener("click", searchLines);
 
   document.getElementById("searchInput").addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
       searchStations();
+    }
+  });
+
+  document.getElementById("lineSearchInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      searchLines();
     }
   });
 });
