@@ -260,7 +260,7 @@ const stations = [
   },
   {
     name: "渋川（伊香保温泉・榛名湖口）",
-    kana: "しぶかわ（いかほおんせん・はるなこぐち）",
+    kana: "しぶかわ",
     roman: "Shibukawa",
     lines: ["上越線","吾妻線"],
     file: "stations/shibukawa.html"
@@ -288,7 +288,7 @@ const stations = [
   },
   {
     name: "中之条（四万・沢渡温泉口）",
-    kana: "なかのじょう（しま・さわたりおんせんぐち）",
+    kana: "なかのじょう",
     roman: "Nakanojō",
     lines: ["吾妻線"],
     file: "stations/nakanojo.html"
