@@ -91,6 +91,60 @@ const lines = [
     ]
    },
    {
+    name: "石巻線",
+    kana: "いしのまきせん",
+    roman: "Ishinomaki-Line",
+    color: "#F76F99",
+    file: "lines/ishinomaki-line.html",
+    stationOrder: [
+      "stations/kogota.html",
+      "stations/kamiwakuya.html",
+      "stations/wakuya.html",
+      "stations/maeyachi.html",
+      "stations/kakeyama.html",
+      "stations/kanomata.html",
+      "stations/sobanokami.html",
+      "stations/ishinomaki.html",
+      "stations/rikuzeninai.html",
+      "stations/watanoha.html",
+      "stations/mangokuura.html",
+      "stations/sawada.html",
+      "stations/urashuku.html",
+      "stations/onagawa.html"
+    ]
+   },
+   {
+    name: "五日市線",
+    kana: "いつかいちせん",
+    roman: "Itsukaichi-Line",
+    color: "#EB5C01",
+    file: "lines/itsukaichi-line.html",
+    stationOrder: [
+      "stations/haijima.html",
+      "stations/kumagawa.html",
+      "stations/higashiakiru.html",
+      "stations/akigawa.html",
+      "stations/musashihikida.html",
+      "stations/musashimasuko.html",
+      "stations/musashiitsukaichi.html"
+    ]
+   },
+   {
+    name: "伊東線",
+    kana: "いとうせん",
+    roman: "Itō-Line",
+    color: "#378640",
+    file: "lines/ito-line.html",
+    stationOrder: [
+      "stations/atami.html",
+      "stations/kinomiya.html",
+      "stations/izutaga.html",
+      "stations/ajiro.html",
+      "stations/usami.html",
+      "stations/ito.html"
+    ]
+   },
+   {
     name: "只見線",
     kana: "ただみせん",
     roman: "Tadami-Line",
