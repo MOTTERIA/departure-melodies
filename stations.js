@@ -140,11 +140,25 @@ const stations = [
     file: "stations/irihirose.html"
   },
   {
+      name: "岩島",
+    kana: "いわしま",
+    roman: "Iwashima",
+    lines: ["吾妻線"],
+    file: "stations/iwashima.html"
+  },
+  {
     name: "魚沼田中",
     kana: "うおぬまたなか",
     roman: "Uonuma-Tanaka",
     lines: ["只見線"],
     file: "stations/uonumatanaka.html"
+  },
+  {
+    name: "祖母島",
+    kana: "うばしま",
+    roman: "Ubashima",
+    lines: ["吾妻線"],
+    file: "stations/ubashima.html"
   },
   {
     name: "越後須原",
@@ -168,6 +182,20 @@ const stations = [
     file: "stations/oshirakawa.html"
   },
   {
+    name: "大前",
+    kana: "おおまえ",
+    roman: "Ōmae",
+    lines: ["吾妻線"],
+    file: "stations/omae.html"
+  },
+  {
+    name: "小野上",
+    kana: "おのがみ",
+    roman: "Onogami",
+    lines: ["吾妻線"],
+    file: "stations/onogami.html"
+  },
+  {
     name: "小野上温泉",
     kana: "おのがみおんせん",
     roman: "Onogami-Onsen",
@@ -175,11 +203,39 @@ const stations = [
     file: "stations/onogamionsen.html"
   },
   {
+    name: "金島",
+    kana: "かなしま",
+    roman: "Kanashima",
+    lines: ["吾妻線"],
+    file: "stations/kanashima.html"
+  },
+  {
     name: "上条",
     kana: "かみじょう",
     roman: "Kamijō",
     lines: ["只見線"],
     file: "stations/kamijo.html"
+  },
+  {
+    name: "川原湯温泉",
+    kana: "かわらゆおんせん",
+    roman: "Kawarayu-Onsen",
+    lines: ["吾妻線"],
+    file: "stations/kawarayuonsen.html"
+  },
+  {
+    name: "群馬大津",
+    kana: "ぐんまおおつ",
+    roman: "Gumma-Ōtsu",
+    lines: ["吾妻線"],
+    file: "stations/gummaotsu.html"
+  },
+  {
+    name: "群馬原町",
+    kana: "ぐんまはらまち",
+    roman: "Gumma-Haramachi",
+    lines: ["吾妻線"],
+    file: "stations/gummaharamachi.html"
   },
   {
     name: "小出",
@@ -194,6 +250,20 @@ const stations = [
     roman: "Gōdo",
     lines: ["只見線"],
     file: "stations/godo.html"
+  },
+  {
+    name: "郷原",
+    kana: "ごうばら",
+    roman: "Gōbara",
+    lines: ["吾妻線"],
+    file: "stations/gobara.html"
+  },
+  {
+    name: "渋川（伊香保温泉・榛名湖口）",
+    kana: "しぶかわ（いかほおんせん・はるなこぐち）",
+    roman: "Shibukawa",
+    lines: ["上越線","吾妻線"],
+    file: "stations/shibukawa.html"
   },
   {
     name: "滝谷",
@@ -215,6 +285,20 @@ const stations = [
     roman: "Tōdera",
     lines: ["只見線"],
     file: "stations/todera.html"
+  },
+  {
+    name: "中之条（四万・沢渡温泉口）",
+    kana: "なかのじょう（しま・さわたりおんせんぐち）",
+    roman: "Nakanojō",
+    lines: ["吾妻線"],
+    file: "stations/nakanojo.html"
+  },
+  {
+    name: "長野原草津口",
+    kana: "ながのはらくさつぐち",
+    roman: "Naganoharakusatsuguchi",
+    lines: ["吾妻線"],
+    file: "stations/naganoharakusatsuguchi.html"
   },
   {
     name: "七日町",
@@ -245,6 +329,13 @@ const stations = [
     file: "stations/negishifukushima.html"
   },
   {
+    name: "羽根尾",
+    kana: "はねお",
+    roman: "Haneo",
+    lines: ["吾妻線"],
+    file: "stations/haneo.html"
+  },
+  {
     name: "早戸",
     kana: "はやと",
     roman: "Hayato",
@@ -252,11 +343,32 @@ const stations = [
     file: "stations/hayato.html"
   },
   {
+    name: "袋倉",
+    kana: "ふくろぐら",
+    roman: "Fukurogura",
+    lines: ["吾妻線"],
+    file: "stations/fukurogura.html"
+  },
+  {
     name: "本名",
     kana: "ほんな",
     roman: "Honna",
     lines: ["只見線"],
     file: "stations/honna.html"
+  },
+  {
+    name: "万座・鹿沢口",
+    kana: "まんざかざわぐち",
+    roman: "Manza-Kazawaguchi",
+    lines: ["吾妻線"],
+    file: "stations/manzakazawaguchi.html"
+  },
+  {
+    name: "矢倉",
+    kana: "やぐら",
+    roman: "Yagura",
+    lines: ["吾妻線"],
+    file: "stations/yagura.html"
   },
   {
     name: "藪神",
