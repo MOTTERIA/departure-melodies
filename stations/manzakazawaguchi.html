@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>万座・鹿沢口駅 | 発車メロディ全集</title>
+
+<style>
+body {
+  font-family: "Yu Gothic", "Hiragino Sans", sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+  color: #222;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+h1 {
+  margin: 0 0 6px 0;
+  font-size: 42px;
+}
+
+.station-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.station-desc {
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+
+.section-title {
+  background: #2f2f32;
+  color: #fff;
+  padding: 14px 18px;
+  font-size: 30px;
+  font-weight: bold;
+  border-left: 8px solid #d48a17;
+  margin: 38px 0 16px;
+}
+
+.period {
+  font-size: 24px;
+  color: #666;
+  margin: 6px 0 14px;
+  font-weight: 500;
+}
+
+.table-wrap {
+  margin-bottom: 35px;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.data-table,
+.neighbor-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.data-table th,
+.data-table td,
+.neighbor-table th,
+.neighbor-table td {
+  border: 1px solid #d8d8d8;
+}
+
+.data-table th,
+.neighbor-table th {
+  background: #efefef;
+  text-align: center;
+  padding: 12px 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.data-table td {
+  padding: 18px 16px;
+  vertical-align: middle;
+  font-size: 16px;
+}
+
+.status-table col.col-track-num { width: 23px; }
+.status-table col.col-linecolor { width: 10px; }
+.status-table col.col-route { width: 38%; }
+.status-table col.col-melody { width: 35%; }
+.status-table col.col-note { width: 20%; }
+
+.track-num-cell {
+  width: 30px;
+  min-width: 30px;
+  padding: 0 !important;
+  background: #616364;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.track-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.linecolor-cell {
+  padding: 0 !important
+}
+
+.linecolor-single {
+  width: 100%;
+  height: 100%;
+  min-height: 105px;
+  display: block
+}
+
+.linecolor-split {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 110px;
+  height: 100%;
+}
+
+.linecolor-half {
+  flex: 1;
+  width: 100%
+}
+
+.route-main {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.route-sub {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.route-sub:hover {
+  overflow: visible;
+  white-space: normal;
+  background: #fff;
+  position: relative;
+  z-index: 10;
+}
+
+.melody-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #444;
+}
+
+.melody-link {
+  color: #000;
+  text-decoration: underline;
+}
+
+.melody-cell_special {
+  background: #AAAAAA;
+}
+
+.note-small {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.neighbor-table th,
+.neighbor-table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 16px 12px;
+  font-size: 20px;
+}
+
+.neighbor-line {
+  color: #fff;
+  font-weight: bold;
+}
+
+.neighbor-link {
+  color: #a58cff;
+  font-weight: bold;
+}
+
+audio {
+  width: 100%;
+  max-width: 230px;
+  height: 25px;
+  display: block;
+  margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 0;
+    padding: 18px;
+    box-shadow: none;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .station-subtitle {
+    font-size: 16px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    padding: 12px 14px;
+  }
+
+  .period {
+    font-size: 20px;
+  }
+
+  .data-table th,
+  .neighbor-table th {
+    font-size: 18px;
+  }
+
+  .route-main {
+    font-size: 18px;
+  }
+
+  .route-sub,
+  .note-small,
+  .melody-name { 
+    font-size: 16px;
+  }
+
+  .route-sub,
+  .note-small {
+    font-weight: normal;
+  }
+
+  .melody-name {
+    font-weight: 600;
+  }
+
+  .neighbor-table th,
+  .neighbor-table td {
+    font-size: 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <a href="../index.html" class="back-link">← 検索ページに戻る</a>
+
+  <h1>万座・鹿沢口駅</h1>
+  <div class="station-subtitle">まんざかざわぐち / Manza-Kazawaguchi</div>
+
+  <div class="station-desc">
+    万座・鹿沢口駅（まんざかざわぐちえき）は、群馬県吾妻郡嬬恋村大字鎌原に所在するJR吾妻線の駅である。1971年3月7日開業。
+  </div>
+
+    
+    <div class="section-title">現在の使用状況</div>
+    <div class="period">????/??/??~</div>
+
+    <div class="table-wrap">
+      <table class="data-table status-table">
+        <colgroup>
+          <col class="col-track-num">
+          <col class="col-linecolor">
+          <col class="col-route">
+          <col class="col-melody">
+          <col class="col-note">
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="3">番線</th>
+            <th>発車メロディ</th>
+            <th>備考</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">-</div>
+          </td>
+          <td class="linecolor-cell">
+            
+    <div class="linecolor-single" style="background:#008689;"></div>
+    
+          </td>
+          <td>
+            <div class="route-main">吾妻線 上下</div>
+            <div class="route-sub">渋川方面/大前方面</div>
+          </td>
+          <td class="melody-cell_special">
+            
+        <div class="melody-name"><a href="../melodies/denshi_CK.html" class="melody-link">電子電鈴（超高音）</a></div>
+        <audio controls>
+          <source src="../audio/denshi_CK.mp3" type="audio/mpeg">
+        </audio>
+        
+          </td>
+          <td>
+            <div class="note-small">臨時列車等のみ使用</div>
+          </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+
+  <div class="section-title">隣の駅</div>
+  <div class="table-wrap">
+    <table class="neighbor-table">
+      <tr>
+        <th>上り（渋川方面）</th>
+        <th>路線</th>
+        <th>下り（大前方面）</th>
+      </tr>
+      
+        <tr>
+          <td><a class="neighbor-link" href="fukurogura.html">袋倉</a></td>
+          <td class="neighbor-line" style="background:#008689; color:#fff; font-weight:bold;">
+            吾妻線
+          </td>
+          <td><a class="neighbor-link" href="omae.html">大前</a></td>
+        </tr>
+        
+    </table>
+  </div>
+</div>
+</body>
+</html>
