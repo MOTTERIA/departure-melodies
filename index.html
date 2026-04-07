@@ -414,7 +414,7 @@ h1 {
 
 <script src="stations.js"></script>
 <script src="lines.js"></script>
-<script>
+<script src="melodies.js"></script>
 const STATION_ITEMS_PER_PAGE = 5;
 const LINE_ITEMS_PER_PAGE = 5;
 
@@ -497,6 +497,18 @@ function createLineCard(line) {
         <div class="line-name">${escapeHtml(line.name)}</div>
         <div class="line-meta">${escapeHtml(line.kana || "")} / ${escapeHtml(line.roman || "")}</div>
         <div class="line-meta">登録駅数：${stationCount}駅</div>
+      </div>
+    </a>
+  `;
+}
+
+function createMelodyCard(melody) {
+  return `
+    <a class="station-card" href="${melody.file}">
+      <div class="station-name">${escapeHtml(melody.name)}</div>
+      <div class="station-kana">${escapeHtml(melody.kana || "")} / ${escapeHtml(melody.roman || "")}</div>
+      <div class="station-meta">
+        区分：${escapeHtml(melody.category || "未分類")}
       </div>
     </a>
   `;
@@ -665,38 +677,6 @@ function setLineResults(list, labelBase) {
   renderCurrentLinePage();
 }
 
-function collectMelodyTexts(station) {
-  const results = new Set();
-
-  if (Array.isArray(station.melodies)) {
-    station.melodies.forEach(item => {
-      if (typeof item === "string") {
-        if (item.trim()) results.add(item.trim());
-      } else if (item && typeof item === "object") {
-        if (item.name && String(item.name).trim()) {
-          results.add(String(item.name).trim());
-        }
-      }
-    });
-  }
-
-  if (Array.isArray(station.melodyKeywords)) {
-    station.melodyKeywords.forEach(item => {
-      if (item && String(item).trim()) {
-        results.add(String(item).trim());
-      }
-    });
-  }
-
-  if (typeof station.allMelodiesText === "string" && station.allMelodiesText.trim()) {
-    station.allMelodiesText.split(/[/、,\n]/).forEach(item => {
-      if (item.trim()) results.add(item.trim());
-    });
-  }
-
-  return [...results];
-}
-
 function searchStations() {
   const input = document.getElementById("searchInput").value.trim();
   const normalizedInput = normalizeText(input);
@@ -733,30 +713,45 @@ function searchMelodies() {
     return;
   }
 
-  const matchedStations = stations.map(station => {
-    const melodies = collectMelodyTexts(station);
-    const matchedMelodies = melodies.filter(name =>
-      normalizeText(name).includes(normalizedInput)
-    );
-
-    return matchedMelodies.length ? { station, matchedMelodies } : null;
-  }).filter(Boolean);
-
-  if (!matchedStations.length) {
+  if (!Array.isArray(melodies)) {
     resultInfo.textContent = "メロディ検索結果：0件";
     resultArea.innerHTML = `
       <div class="no-result">
-        一致するメロディ名が見つかりませんでした。
+        melodies.js が読み込まれていません。
       </div>
     `;
     return;
   }
 
-  resultInfo.textContent = `メロディ検索結果（${matchedStations.length}駅）`;
+  const filtered = melodies.filter(melody => {
+    const targets = [
+      melody.name,
+      melody.kana,
+      melody.roman,
+      melody.category,
+      ...(melody.keywords || [])
+    ];
+
+    return targets.some(target =>
+      normalizeText(target || "").includes(normalizedInput)
+    );
+  });
+
+  if (!filtered.length) {
+    resultInfo.textContent = "メロディ検索結果：0件";
+    resultArea.innerHTML = `
+      <div class="no-result">
+        一致するメロディが見つかりませんでした。
+      </div>
+    `;
+    return;
+  }
+
+  resultInfo.textContent = `メロディ検索結果（${filtered.length}件）`;
 
   resultArea.innerHTML = `
     <div class="melody-list">
-      ${matchedStations.map(item => createStationCard(item.station, item.matchedMelodies)).join("")}
+      ${filtered.map(createMelodyCard).join("")}
     </div>
   `;
 }
