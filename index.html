@@ -1,624 +1,496 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>発車メロディ全集 | 検索</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>発車メロディDB | 検索</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
-body {
-  font-family: "Yu Gothic", "Hiragino Sans", sans-serif;
-  margin: 0;
-  background: #f5f5f5;
-  color: #222;
-}
+    body {
+      margin: 0;
+      font-family: "Yu Gothic", "Hiragino Sans", sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      line-height: 1.6;
+    }
 
-.container {
-  max-width: 1000px;
-  margin: 30px auto;
-  background: #fff;
-  padding: 30px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
+    header {
+      background: #1f2937;
+      color: #fff;
+      padding: 28px 20px;
+    }
 
-h1 {
-  margin: 0 0 10px 0;
-  font-size: 42px;
-}
+    header .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-.subtitle {
-  font-size: 18px;
-  color: #666;
-  margin-bottom: 30px;
-}
+    header h1 {
+      margin: 0 0 8px 0;
+      font-size: 2rem;
+    }
 
-.section-title {
-  background: #2f2f32;
-  color: #fff;
-  padding: 14px 18px;
-  font-size: 28px;
-  font-weight: bold;
-  border-left: 8px solid #d48a17;
-  margin: 0 0 24px 0;
-}
+    header p {
+      margin: 0;
+      color: #d1d5db;
+    }
 
-.search-area {
-  margin-bottom: 32px;
-}
+    .container {
+      max-width: 1100px;
+      margin: 24px auto 60px;
+      padding: 0 16px;
+    }
 
-.search-row {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+    .search-box {
+      background: #fff;
+      border: 1px solid #d1d5db;
+      padding: 20px;
+      margin-bottom: 28px;
+    }
 
-.search-input {
-  flex: 1;
-  min-width: 260px;
-  padding: 14px 16px;
-  font-size: 18px;
-  border: 1px solid #cfcfcf;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
+    .search-box h2 {
+      margin: 0 0 10px 0;
+      font-size: 1.25rem;
+    }
 
-.search-button {
-  padding: 14px 22px;
-  font-size: 18px;
-  border: none;
-  background: #2f2f32;
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-}
+    .search-box p {
+      margin: 0 0 14px 0;
+      color: #666;
+      font-size: 0.95rem;
+    }
 
-.search-button:hover {
-  opacity: 0.92;
-}
+    .search-input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 1rem;
+      border: 1px solid #bbb;
+      outline: none;
+    }
 
-.search-note {
-  margin-top: 12px;
-  font-size: 14px;
-  color: #666;
-}
+    .search-input:focus {
+      border-color: #2563eb;
+    }
 
-.result-info {
-  margin: 20px 0 14px 0;
-  font-size: 18px;
-  font-weight: bold;
-}
+    .section {
+      margin-bottom: 40px;
+    }
 
-.no-result {
-  padding: 18px;
-  background: #fafafa;
-  border: 1px solid #e0e0e0;
-  color: #666;
-  border-radius: 6px;
-}
+    .section-title {
+      margin: 0 0 14px 0;
+      padding-left: 12px;
+      border-left: 6px solid #2563eb;
+      font-size: 1.45rem;
+    }
 
-.station-list,
-.line-list {
-  display: grid;
-  gap: 14px;
-}
+    .result-info {
+      margin: 0 0 14px 0;
+      color: #666;
+      font-size: 0.95rem;
+    }
 
-.station-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  border: 1px solid #d8d8d8;
-  background: #fff;
-  padding: 18px 20px;
-  transition: 0.15s;
-}
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
 
-.station-card:hover {
-  background: #fafafa;
-  border-color: #bdbdbd;
-}
+    .basic-card {
+      background: #fff;
+      border: 1px solid #cfcfcf;
+      padding: 18px 20px;
+    }
 
-.station-name {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 6px;
-}
+    .basic-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.2rem;
+      line-height: 1.4;
+    }
 
-.station-kana {
-  font-size: 16px;
-  color: #666;
-  margin-bottom: 10px;
-}
+    .basic-card h3 a {
+      color: #111;
+      text-decoration: none;
+    }
 
-.station-meta {
-  font-size: 15px;
-  color: #444;
-  line-height: 1.7;
-}
+    .basic-card h3 a:hover {
+      text-decoration: underline;
+    }
 
-.line-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  text-decoration: none;
-  color: inherit;
-  border: 1px solid #d8d8d8;
-  background: #fff;
-  padding: 18px 20px;
-  transition: 0.15s;
-}
+    .subtext {
+      color: #444;
+      font-size: 0.98rem;
+    }
 
-.line-card:hover {
-  background: #fafafa;
-  border-color: #bdbdbd;
-}
+    .meta-line {
+      margin-top: 8px;
+      color: #555;
+      font-size: 0.95rem;
+    }
 
-.line-color-bar {
-  width: 18px;
-  height: 48px;
-  border-radius: 4px;
-  flex: 0 0 auto;
-}
+    /* 路線カード */
+    .line-card {
+      display: flex;
+      align-items: stretch;
+      background: #fff;
+      border: 1px solid #b9b9b9;
+      min-height: 190px;
+    }
 
-.line-name {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 4px;
-}
+    .line-color-bar {
+      width: 52px;
+      flex-shrink: 0;
+      background: #999;
+    }
 
-.line-meta {
-  font-size: 14px;
-  color: #666;
-}
+    .line-card-body {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      padding: 28px 34px;
+      width: 100%;
+    }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 24px;
-  flex-wrap: wrap;
-}
+    .jr-icon-box {
+      width: 132px;
+      height: 132px;
+      border: 12px solid #118c8f;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #fff;
+    }
 
-.page-button {
-  padding: 10px 16px;
-  border: 1px solid #cfcfcf;
-  background: #fff;
-  color: #222;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 15px;
-}
+    .jr-icon-text {
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1;
+      color: #000;
+      letter-spacing: -2px;
+    }
 
-.page-button:hover:not(:disabled) {
-  background: #f3f3f3;
-}
+    .line-info {
+      min-width: 0;
+    }
 
-.page-button:disabled {
-  opacity: 0.45;
-  cursor: default;
-}
+    .line-info h3 {
+      margin: 0 0 20px 0;
+      font-size: 3rem;
+      line-height: 1.15;
+      font-weight: 700;
+    }
 
-.page-info {
-  font-size: 15px;
-  color: #555;
-  font-weight: bold;
-}
+    .line-info h3 a {
+      color: #000;
+      text-decoration: none;
+    }
 
-.section-gap {
-  margin-top: 42px;
-}
+    .line-info h3 a:hover {
+      text-decoration: underline;
+    }
 
-.footer-note {
-  margin-top: 40px;
-  font-size: 14px;
-  color: #666;
-  line-height: 1.7;
-}
+    .line-reading {
+      font-size: 2rem;
+      color: #111;
+      line-height: 1.35;
+      word-break: break-word;
+    }
 
-@media (max-width: 768px) {
-  .container {
-    margin: 0;
-    padding: 18px;
-    box-shadow: none;
-  }
+    .empty {
+      background: #fff;
+      border: 1px dashed #bbb;
+      padding: 18px 20px;
+      color: #666;
+    }
 
-  h1 {
-    font-size: 30px;
-  }
+    footer {
+      text-align: center;
+      color: #777;
+      font-size: 0.9rem;
+      padding: 24px 16px 40px;
+    }
 
-  .subtitle {
-    font-size: 16px;
-  }
+    @media (max-width: 900px) {
+      .line-card {
+        min-height: auto;
+      }
 
-  .section-title {
-    font-size: 22px;
-    padding: 12px 14px;
-  }
+      .line-card-body {
+        gap: 20px;
+        padding: 20px;
+      }
 
-  .search-input {
-    font-size: 16px;
-  }
+      .jr-icon-box {
+        width: 96px;
+        height: 96px;
+        border-width: 9px;
+      }
 
-  .search-button {
-    width: 100%;
-    font-size: 16px;
-  }
+      .jr-icon-text {
+        font-size: 46px;
+      }
 
-  .station-name {
-    font-size: 22px;
-  }
+      .line-info h3 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
 
-  .line-name {
-    font-size: 20px;
-  }
+      .line-reading {
+        font-size: 1.35rem;
+      }
+    }
 
-  .station-kana,
-  .station-meta,
-  .line-meta,
-  .result-info,
-  .no-result,
-  .footer-note,
-  .page-button,
-  .page-info {
-    font-size: 14px;
-  }
+    @media (max-width: 640px) {
+      .line-card-body {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-  .line-color-bar {
-    height: 42px;
-  }
-}
-</style>
+      .line-color-bar {
+        width: 18px;
+      }
+
+      .line-info h3 {
+        font-size: 1.6rem;
+      }
+
+      .line-reading {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-<div class="container">
-  <h1>発車メロディ全集</h1>
-  <div class="subtitle">JR東日本の駅ページ・路線ページを検索できます。</div>
+  <header>
+    <div class="inner">
+      <h1>発車メロディDB</h1>
+      <p>駅・路線・メロディを検索できます。</p>
+    </div>
+  </header>
 
-  <div class="section-title">駅検索</div>
-
-  <div class="search-area">
-    <div class="search-row">
+  <main class="container">
+    <section class="search-box">
+      <h2>検索</h2>
+      <p>駅名・路線名・メロディ名で検索できます。</p>
       <input
         type="text"
         id="searchInput"
         class="search-input"
-        placeholder="駅名・ひらがな・路線名・ローマ字で検索"
-        autocomplete="off"
+        placeholder="例：会津若松 / 吾妻線 / 小川のせせらぎ"
       >
-      <button type="button" id="searchButton" class="search-button">検索</button>
-    </div>
-    <div class="search-note">
-      例：海浜幕張 / かいひんまくはり / 京葉線 / kaihinmakuhari
-    </div>
-  </div>
+    </section>
 
-  <div id="resultInfo" class="result-info"></div>
-  <div id="resultArea"></div>
-  <div id="paginationArea"></div>
+    <section class="section">
+      <h2 class="section-title">駅検索</h2>
+      <p class="result-info" id="stationResultInfo">0件</p>
+      <div id="stationResults" class="card-grid"></div>
+    </section>
 
-  <div class="section-gap"></div>
+    <section class="section">
+      <h2 class="section-title">路線検索</h2>
+      <p class="result-info" id="lineResultInfo">0件</p>
+      <div id="lineResults" class="card-grid"></div>
+    </section>
 
-  <div class="section-title">路線検索</div>
+    <section class="section">
+      <h2 class="section-title">メロディ検索</h2>
+      <p class="result-info" id="melodyResultInfo">0件</p>
+      <div id="melodyResults" class="card-grid"></div>
+    </section>
+  </main>
 
-  <div class="search-area">
-    <div class="search-row">
-      <input
-        type="text"
-        id="lineSearchInput"
-        class="search-input"
-        placeholder="路線名・ひらがな・ローマ字で検索"
-        autocomplete="off"
-      >
-      <button type="button" id="lineSearchButton" class="search-button">検索</button>
-    </div>
-    <div class="search-note">
-      例：京葉線 / けいようせん / keiyo / 只見線 / ただみせん / tadami
-    </div>
-  </div>
+  <footer>
+    発車メロディDB
+  </footer>
 
-  <div id="lineResultInfo" class="result-info"></div>
-  <div id="lineResultArea"></div>
-  <div id="linePaginationArea"></div>
+  <script src="stations.js"></script>
+  <script src="lines.js"></script>
+  <script src="melodies.js"></script>
 
-  <div class="footer-note">
-    駅をクリックすると各駅の詳細ページへ、路線をクリックすると各路線の一覧ページへ移動します。<br>
-    駅一覧は5件ごと、路線一覧は5件ごとにページ分けされています。
-  </div>
-</div>
+  <script>
+    const searchInput = document.getElementById("searchInput");
 
-<script src="stations.js"></script>
-<script src="lines.js"></script>
-<script>
-const STATION_ITEMS_PER_PAGE = 5;
-const LINE_ITEMS_PER_PAGE = 5;
+    const stationResultsEl = document.getElementById("stationResults");
+    const lineResultsEl = document.getElementById("lineResults");
+    const melodyResultsEl = document.getElementById("melodyResults");
 
-let currentResults = [];
-let currentPage = 1;
-let currentLabelBase = "";
+    const stationResultInfoEl = document.getElementById("stationResultInfo");
+    const lineResultInfoEl = document.getElementById("lineResultInfo");
+    const melodyResultInfoEl = document.getElementById("melodyResultInfo");
 
-let currentLineResults = [];
-let currentLinePage = 1;
-let currentLineLabelBase = "";
-
-function escapeHtml(text) {
-  return String(text)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function normalizeText(text) {
-  return String(text)
-    .toLowerCase()
-    .replace(/\s+/g, "")
-    .replace(/[ー－―]/g, "ー");
-}
-
-function createStationCard(station) {
-  const linesText = station.lines && station.lines.length
-    ? station.lines.join(" / ")
-    : "路線情報なし";
-
-  return `
-    <a class="station-card" href="${station.file}">
-      <div class="station-name">${escapeHtml(station.name)}</div>
-      <div class="station-kana">${escapeHtml(station.kana)} / ${escapeHtml(station.roman)}</div>
-      <div class="station-meta">
-        路線：${escapeHtml(linesText)}
-      </div>
-    </a>
-  `;
-}
-
-function createLineCard(line) {
-  const stationCount = Array.isArray(line.stationOrder) ? line.stationOrder.length : 0;
-
-  return `
-    <a class="line-card" href="${line.file}">
-      <span class="line-color-bar" style="background:${escapeHtml(line.color)};"></span>
-      <div>
-        <div class="line-name">${escapeHtml(line.name)}</div>
-        <div class="line-meta">${escapeHtml(line.kana || "")} / ${escapeHtml(line.roman || "")}</div>
-        <div class="line-meta">登録駅数：${stationCount}駅</div>
-      </div>
-    </a>
-  `;
-}
-
-function getTotalPages(listLength, itemsPerPage) {
-  return Math.max(1, Math.ceil(listLength / itemsPerPage));
-}
-
-function clearStationResults() {
-  document.getElementById("resultInfo").textContent = "";
-  document.getElementById("resultArea").innerHTML = "";
-  document.getElementById("paginationArea").innerHTML = "";
-}
-
-function renderStationPagination(totalItems) {
-  const paginationArea = document.getElementById("paginationArea");
-  const totalPages = getTotalPages(totalItems, STATION_ITEMS_PER_PAGE);
-
-  if (totalItems === 0 || totalPages === 1) {
-    paginationArea.innerHTML = "";
-    return;
-  }
-
-  paginationArea.innerHTML = `
-    <div class="pagination">
-      <button class="page-button" id="prevPageButton" ${currentPage === 1 ? "disabled" : ""}>前へ</button>
-      <div class="page-info">${currentPage} / ${totalPages}ページ</div>
-      <button class="page-button" id="nextPageButton" ${currentPage === totalPages ? "disabled" : ""}>次へ</button>
-    </div>
-  `;
-
-  document.getElementById("prevPageButton").addEventListener("click", function() {
-    if (currentPage > 1) {
-      currentPage--;
-      renderCurrentStationPage();
+    function normalizeText(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .trim();
     }
-  });
 
-  document.getElementById("nextPageButton").addEventListener("click", function() {
-    if (currentPage < totalPages) {
-      currentPage++;
-      renderCurrentStationPage();
+    function safeArray(value) {
+      return Array.isArray(value) ? value : [];
     }
-  });
-}
 
-function renderLinePagination(totalItems) {
-  const paginationArea = document.getElementById("linePaginationArea");
-  const totalPages = getTotalPages(totalItems, LINE_ITEMS_PER_PAGE);
-
-  if (totalItems === 0 || totalPages === 1) {
-    paginationArea.innerHTML = "";
-    return;
-  }
-
-  paginationArea.innerHTML = `
-    <div class="pagination">
-      <button class="page-button" id="prevLinePageButton" ${currentLinePage === 1 ? "disabled" : ""}>前へ</button>
-      <div class="page-info">${currentLinePage} / ${totalPages}ページ</div>
-      <button class="page-button" id="nextLinePageButton" ${currentLinePage === totalPages ? "disabled" : ""}>次へ</button>
-    </div>
-  `;
-
-  document.getElementById("prevLinePageButton").addEventListener("click", function() {
-    if (currentLinePage > 1) {
-      currentLinePage--;
-      renderCurrentLinePage();
+    function escapeHtml(text) {
+      return String(text || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
     }
-  });
 
-  document.getElementById("nextLinePageButton").addEventListener("click", function() {
-    if (currentLinePage < totalPages) {
-      currentLinePage++;
-      renderCurrentLinePage();
+    function joinLines(lines) {
+      const arr = safeArray(lines).filter(Boolean);
+      return arr.length ? arr.join(" / ") : "情報なし";
     }
-  });
-}
 
-function renderCurrentStationPage() {
-  const resultInfo = document.getElementById("resultInfo");
-  const resultArea = document.getElementById("resultArea");
-
-  if (!currentResults.length) {
-    resultInfo.textContent = `${currentLabelBase}：0件`;
-    resultArea.innerHTML = `
-      <div class="no-result">
-        一致する駅が見つかりませんでした。
-      </div>
-    `;
-    renderStationPagination(0);
-    return;
-  }
-
-  const totalPages = getTotalPages(currentResults.length, STATION_ITEMS_PER_PAGE);
-  if (currentPage > totalPages) {
-    currentPage = totalPages;
-  }
-
-  const startIndex = (currentPage - 1) * STATION_ITEMS_PER_PAGE;
-  const endIndex = startIndex + STATION_ITEMS_PER_PAGE;
-  const pageItems = currentResults.slice(startIndex, endIndex);
-
-  resultInfo.textContent = `${currentLabelBase}（${currentResults.length}件）`;
-
-  resultArea.innerHTML = `
-    <div class="station-list">
-      ${pageItems.map(createStationCard).join("")}
-    </div>
-  `;
-
-  renderStationPagination(currentResults.length);
-}
-
-function renderCurrentLinePage() {
-  const lineResultInfo = document.getElementById("lineResultInfo");
-  const lineResultArea = document.getElementById("lineResultArea");
-
-  if (!currentLineResults.length) {
-    lineResultInfo.textContent = `${currentLineLabelBase}：0件`;
-    lineResultArea.innerHTML = `
-      <div class="no-result">
-        一致する路線が見つかりませんでした。
-      </div>
-    `;
-    renderLinePagination(0);
-    return;
-  }
-
-  const totalPages = getTotalPages(currentLineResults.length, LINE_ITEMS_PER_PAGE);
-  if (currentLinePage > totalPages) {
-    currentLinePage = totalPages;
-  }
-
-  const startIndex = (currentLinePage - 1) * LINE_ITEMS_PER_PAGE;
-  const endIndex = startIndex + LINE_ITEMS_PER_PAGE;
-  const pageItems = currentLineResults.slice(startIndex, endIndex);
-
-  lineResultInfo.textContent = `${currentLineLabelBase}（${currentLineResults.length}件）`;
-
-  lineResultArea.innerHTML = `
-    <div class="line-list">
-      ${pageItems.map(createLineCard).join("")}
-    </div>
-  `;
-
-  renderLinePagination(currentLineResults.length);
-}
-
-function setStationResults(list, labelBase) {
-  currentResults = list;
-  currentLabelBase = labelBase;
-  currentPage = 1;
-  renderCurrentStationPage();
-}
-
-function setLineResults(list, labelBase) {
-  currentLineResults = list;
-  currentLineLabelBase = labelBase;
-  currentLinePage = 1;
-  renderCurrentLinePage();
-}
-
-function searchStations() {
-  const input = document.getElementById("searchInput").value.trim();
-  const normalizedInput = normalizeText(input);
-
-  if (!normalizedInput) {
-    clearStationResults();
-    return;
-  }
-
-  const filtered = stations.filter(station => {
-    const targets = [
-      station.name,
-      station.kana,
-      station.roman,
-      ...(station.lines || [])
-    ];
-
-    return targets.some(target =>
-      normalizeText(target || "").includes(normalizedInput)
-    );
-  });
-
-  setStationResults(filtered, "駅検索結果");
-}
-
-function searchLines() {
-  if (!Array.isArray(lines)) {
-    setLineResults([], "路線検索結果");
-    return;
-  }
-
-  const input = document.getElementById("lineSearchInput").value.trim();
-  const normalizedInput = normalizeText(input);
-
-  if (!normalizedInput) {
-    setLineResults(lines, "全路線一覧");
-    return;
-  }
-
-  const filtered = lines.filter(line => {
-    const targets = [
-      line.name,
-      line.kana,
-      line.roman
-    ];
-
-    return targets.some(target =>
-      normalizeText(target || "").includes(normalizedInput)
-    );
-  });
-
-  setLineResults(filtered, "路線検索結果");
-}
-
-window.addEventListener("DOMContentLoaded", function() {
-  clearStationResults();
-  setLineResults(Array.isArray(lines) ? lines : [], "全路線一覧");
-
-  document.getElementById("searchButton").addEventListener("click", searchStations);
-  document.getElementById("lineSearchButton").addEventListener("click", searchLines);
-
-  document.getElementById("searchInput").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      searchStations();
+    function getLineColor(line) {
+      return line.color || "#999999";
     }
-  });
 
-  document.getElementById("lineSearchInput").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      searchLines();
+    function getStationSearchText(station) {
+      return [
+        station.name,
+        station.kana,
+        station.roman,
+        ...safeArray(station.lines)
+      ].join(" ");
     }
-  });
-});
-</script>
+
+    function getLineSearchText(line) {
+      return [
+        line.name,
+        line.kana,
+        line.roman
+      ].join(" ");
+    }
+
+    function getMelodySearchText(melody) {
+      return [
+        melody.name,
+        melody.kana,
+        melody.roman
+      ].join(" ");
+    }
+
+    function renderEmpty(container, message) {
+      container.innerHTML = `<div class="empty">${escapeHtml(message)}</div>`;
+    }
+
+    function renderStations(items) {
+      stationResultInfoEl.textContent = `${items.length}件`;
+
+      if (!items.length) {
+        renderEmpty(stationResultsEl, "該当する駅は見つかりませんでした。");
+        return;
+      }
+
+      stationResultsEl.innerHTML = items.map(station => {
+        const name = station.name || "名称未設定";
+        const file = station.file || "#";
+        const kana = station.kana || "情報なし";
+        const roman = station.roman || "情報なし";
+        const lines = joinLines(station.lines);
+
+        return `
+          <article class="basic-card">
+            <h3><a href="${escapeHtml(file)}">${escapeHtml(name)}</a></h3>
+            <div class="subtext">${escapeHtml(kana)} / ${escapeHtml(roman)}</div>
+            <div class="meta-line">路線：${escapeHtml(lines)}</div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderLines(items) {
+      lineResultInfoEl.textContent = `${items.length}件`;
+
+      if (!items.length) {
+        renderEmpty(lineResultsEl, "該当する路線は見つかりませんでした。");
+        return;
+      }
+
+      lineResultsEl.innerHTML = items.map(line => {
+        const name = line.name || "名称未設定";
+        const file = line.file || "#";
+        const kana = line.kana || "";
+        const roman = line.roman || "";
+        const color = getLineColor(line);
+
+        return `
+          <article class="line-card">
+            <div class="line-color-bar" style="background:${escapeHtml(color)};"></div>
+            <div class="line-card-body">
+              <div class="jr-icon-box">
+                <div class="jr-icon-text">JR</div>
+              </div>
+              <div class="line-info">
+                <h3><a href="${escapeHtml(file)}">${escapeHtml(name)}</a></h3>
+                <div class="line-reading">${escapeHtml(kana)} / ${escapeHtml(roman)}</div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderMelodies(items) {
+      melodyResultInfoEl.textContent = `${items.length}件`;
+
+      if (!items.length) {
+        renderEmpty(melodyResultsEl, "該当するメロディは見つかりませんでした。");
+        return;
+      }
+
+      melodyResultsEl.innerHTML = items.map(melody => {
+        const name = melody.name || "名称未設定";
+        const file = melody.file || "#";
+        const kana = melody.kana || "情報なし";
+        const roman = melody.roman || "情報なし";
+
+        return `
+          <article class="basic-card">
+            <h3><a href="${escapeHtml(file)}">${escapeHtml(name)}</a></h3>
+            <div class="subtext">${escapeHtml(kana)} / ${escapeHtml(roman)}</div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderAll() {
+      const query = normalizeText(searchInput.value);
+
+      const stationData = Array.isArray(window.stations) ? window.stations : [];
+      const lineData = Array.isArray(window.lines) ? window.lines : [];
+      const melodyData = Array.isArray(window.melodies) ? window.melodies : [];
+
+      const filteredStations = !query
+        ? stationData
+        : stationData.filter(station =>
+            normalizeText(getStationSearchText(station)).includes(query)
+          );
+
+      const filteredLines = !query
+        ? lineData
+        : lineData.filter(line =>
+            normalizeText(getLineSearchText(line)).includes(query)
+          );
+
+      const filteredMelodies = !query
+        ? melodyData
+        : melodyData.filter(melody =>
+            normalizeText(getMelodySearchText(melody)).includes(query)
+          );
+
+      renderStations(filteredStations);
+      renderLines(filteredLines);
+      renderMelodies(filteredMelodies);
+    }
+
+    searchInput.addEventListener("input", renderAll);
+    renderAll();
+  </script>
 </body>
 </html>
