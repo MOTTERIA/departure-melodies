@@ -5,450 +5,174 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>発車メロディDB | 検索</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: "Yu Gothic", "Hiragino Sans", sans-serif;
       background: #f5f5f5;
       color: #222;
-      line-height: 1.6;
     }
 
     header {
       background: #1f2937;
       color: #fff;
-      padding: 24px 16px;
-    }
-
-    .header-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-    }
-
-    header p {
-      margin: 6px 0 0 0;
-      color: #d1d5db;
-      font-size: 0.95rem;
+      padding: 20px;
     }
 
     main {
-      max-width: 1100px;
-      margin: 24px auto 48px;
+      max-width: 1000px;
+      margin: 20px auto;
       padding: 0 16px;
     }
 
-    .search-box {
-      background: #fff;
-      border: 1px solid #d1d5db;
-      padding: 16px;
-      margin-bottom: 28px;
-    }
-
-    .search-box label {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    #searchInput {
+    input {
       width: 100%;
-      padding: 12px 14px;
+      padding: 12px;
       font-size: 16px;
-      border: 1px solid #bdbdbd;
-      background: #fff;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
     }
 
-    #searchInput:focus {
-      outline: none;
-      border-color: #2563eb;
-    }
-
-    .section {
-      margin-bottom: 36px;
-    }
-
-    .section h2 {
-      margin: 0 0 8px 0;
-      font-size: 1.35rem;
-      border-left: 6px solid #2563eb;
+    h2 {
+      margin-top: 30px;
+      border-left: 5px solid #2563eb;
       padding-left: 10px;
-    }
-
-    .result-count {
-      margin: 0 0 12px 0;
-      color: #555;
-      font-size: 0.95rem;
-    }
-
-    .results {
-      display: grid;
-      gap: 12px;
     }
 
     .card {
       background: #fff;
-      border: 1px solid #d1d5db;
-      padding: 14px 16px;
+      border: 1px solid #ccc;
+      padding: 12px;
+      margin-bottom: 10px;
     }
 
-    .card h3 {
-      margin: 0 0 8px 0;
-      font-size: 1.1rem;
-      line-height: 1.4;
-    }
-
-    .card h3 a {
-      color: #111827;
-      text-decoration: none;
-    }
-
-    .card h3 a:hover {
-      text-decoration: underline;
-    }
-
-    .meta {
-      margin: 4px 0;
-      color: #444;
-      font-size: 0.95rem;
-    }
-
+    /* 路線カード */
     .line-card {
       display: flex;
       background: #fff;
-      border: 1px solid #d1d5db;
-      min-height: 88px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
     }
 
     .line-color {
-      width: 14px;
-      flex-shrink: 0;
-      background: #999;
+      width: 10px;
     }
 
-    .line-card-body {
+    .line-body {
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 14px 16px;
-      width: 100%;
-      min-width: 0;
-    }
-
-    .jr-badge {
-      flex-shrink: 0;
-      border: 2px solid #0f766e;
-      color: #111;
-      font-weight: 700;
-      font-size: 0.9rem;
-      padding: 4px 8px;
-      line-height: 1;
-      background: #fff;
-    }
-
-    .line-text {
-      min-width: 0;
+      gap: 10px;
+      padding: 12px;
     }
 
     .line-text h3 {
-      margin: 0 0 6px 0;
-      font-size: 1.1rem;
-      line-height: 1.4;
-    }
-
-    .line-text h3 a {
-      color: #111827;
-      text-decoration: none;
-    }
-
-    .line-text h3 a:hover {
-      text-decoration: underline;
+      margin: 0;
+      font-size: 16px;
     }
 
     .line-sub {
-      color: #444;
-      font-size: 0.95rem;
-      word-break: break-word;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .line-count {
+      font-size: 13px;
+      color: #666;
     }
 
     .empty {
       background: #fff;
-      border: 1px dashed #c7c7c7;
-      padding: 14px 16px;
+      border: 1px dashed #ccc;
+      padding: 10px;
       color: #666;
-    }
-
-    footer {
-      max-width: 1100px;
-      margin: 0 auto 30px;
-      padding: 0 16px;
-      color: #777;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 640px) {
-      header h1 {
-        font-size: 1.5rem;
-      }
-
-      .line-card-body {
-        align-items: flex-start;
-      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="header-inner">
-      <h1>発車メロディDB</h1>
-      <p>駅・路線・メロディを検索できます。</p>
+
+<header>
+  <h1>発車メロディDB</h1>
+</header>
+
+<main>
+
+  <input id="searchInput" placeholder="検索">
+
+  <h2>駅検索</h2>
+  <div id="stationResults"></div>
+
+  <h2>路線検索</h2>
+  <div id="lineResults"></div>
+
+  <h2>メロディ検索</h2>
+  <div id="melodyResults"></div>
+
+</main>
+
+<script src="stations.js"></script>
+<script src="lines.js"></script>
+<script src="melodies.js"></script>
+
+<script>
+function norm(t){
+  return (t||"").toLowerCase().replace(/\s/g,"");
+}
+
+function search(){
+  const q = norm(document.getElementById("searchInput").value);
+
+  const sBox = document.getElementById("stationResults");
+  const lBox = document.getElementById("lineResults");
+  const mBox = document.getElementById("melodyResults");
+
+  /* 駅 */
+  const sList = (typeof stations !== "undefined" ? stations : []).filter(s =>
+    norm(s.name + s.kana + s.roman + (s.lines||[]).join(" ")).includes(q)
+  );
+
+  sBox.innerHTML = sList.length ? sList.map(s => `
+    <div class="card">
+      <b><a href="${s.file}">${s.name}</a></b><br>
+      ${s.kana || ""}<br>
+      ${(s.lines||[]).join(" / ")}
     </div>
-  </header>
+  `).join("") : `<div class="empty">該当なし</div>`;
 
-  <main>
-    <section class="search-box">
-      <label for="searchInput">検索</label>
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="駅名・路線名・メロディ名で検索"
-      >
-    </section>
+  /* 路線 */
+  const lList = (typeof lines !== "undefined" ? lines : []).filter(l =>
+    norm(l.name + l.kana + l.roman).includes(q)
+  );
 
-    <section class="section">
-      <h2>駅検索</h2>
-      <p class="result-count" id="stationCount">0件</p>
-      <div id="stationResults" class="results"></div>
-    </section>
+  lBox.innerHTML = lList.length ? lList.map(l => `
+    <div class="line-card">
+      <div class="line-color" style="background:${l.color};"></div>
+      <div class="line-body">
+        <img src="images/jr.png" style="width:40px;height:40px;">
+        <div class="line-text">
+          <h3><a href="${l.file}">${l.name}</a></h3>
+          <div class="line-sub">${l.kana} / ${l.roman}</div>
+          <div class="line-count">登録駅数：${l.stationOrder ? l.stationOrder.length : 0}駅</div>
+        </div>
+      </div>
+    </div>
+  `).join("") : `<div class="empty">該当なし</div>`;
 
-    <section class="section">
-      <h2>路線検索</h2>
-      <p class="result-count" id="lineCount">0件</p>
-      <div id="lineResults" class="results"></div>
-    </section>
+  /* メロディ */
+  const mList = (typeof melodies !== "undefined" ? melodies : []).filter(m =>
+    norm(m.name + m.kana + m.roman).includes(q)
+  );
 
-    <section class="section">
-      <h2>メロディ検索</h2>
-      <p class="result-count" id="melodyCount">0件</p>
-      <div id="melodyResults" class="results"></div>
-    </section>
-  </main>
+  mBox.innerHTML = mList.length ? mList.map(m => `
+    <div class="card">
+      <b><a href="${m.file}">${m.name}</a></b><br>
+      ${m.kana || ""}<br>
+      ${m.roman || ""}
+    </div>
+  `).join("") : `<div class="empty">該当なし</div>`;
+}
 
-  <footer>
-    発車メロディDB
-  </footer>
+document.getElementById("searchInput").addEventListener("input", search);
+search();
+</script>
 
-  <script src="stations.js"></script>
-  <script src="lines.js"></script>
-  <script src="melodies.js"></script>
-
-  <script>
-    const searchInput = document.getElementById("searchInput");
-
-    const stationResults = document.getElementById("stationResults");
-    const lineResults = document.getElementById("lineResults");
-    const melodyResults = document.getElementById("melodyResults");
-
-    const stationCount = document.getElementById("stationCount");
-    const lineCount = document.getElementById("lineCount");
-    const melodyCount = document.getElementById("melodyCount");
-
-    function normalizeText(text) {
-      return String(text || "")
-        .toLowerCase()
-        .replace(/\s+/g, "")
-        .trim();
-    }
-
-    function safeArray(value) {
-      return Array.isArray(value) ? value : [];
-    }
-
-    function escapeHtml(text) {
-      return String(text || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    function getStationsData() {
-      if (typeof stations !== "undefined" && Array.isArray(stations)) {
-        return stations;
-      }
-      if (Array.isArray(window.stations)) {
-        return window.stations;
-      }
-      return [];
-    }
-
-    function getLinesData() {
-      if (typeof lines !== "undefined" && Array.isArray(lines)) {
-        return lines;
-      }
-      if (Array.isArray(window.lines)) {
-        return window.lines;
-      }
-      return [];
-    }
-
-    function getMelodiesData() {
-      if (typeof melodies !== "undefined" && Array.isArray(melodies)) {
-        return melodies;
-      }
-      if (Array.isArray(window.melodies)) {
-        return window.melodies;
-      }
-      return [];
-    }
-
-    function getStationSearchText(station) {
-      return [
-        station.name,
-        station.kana,
-        station.roman,
-        ...safeArray(station.lines)
-      ].join(" ");
-    }
-
-    function getLineSearchText(line) {
-      return [
-        line.name,
-        line.kana,
-        line.roman
-      ].join(" ");
-    }
-
-    function getMelodySearchText(melody) {
-      return [
-        melody.name,
-        melody.kana,
-        melody.roman
-      ].join(" ");
-    }
-
-    function renderEmpty(container, message) {
-      container.innerHTML = '<div class="empty">' + escapeHtml(message) + '</div>';
-    }
-
-    function renderStations(items) {
-      stationCount.textContent = items.length + "件";
-
-      if (!items.length) {
-        renderEmpty(stationResults, "該当する駅は見つかりませんでした。");
-        return;
-      }
-
-      stationResults.innerHTML = items.map(function (station) {
-        const name = station.name || "名称未設定";
-        const file = station.file || "#";
-        const kana = station.kana || "";
-        const roman = station.roman || "";
-        const linesText = safeArray(station.lines).join(" / ");
-
-        return `
-          <article class="card">
-            <h3><a href="${escapeHtml(file)}">${escapeHtml(name)}</a></h3>
-            ${kana || roman ? `<div class="meta">${escapeHtml(kana)}${kana && roman ? " / " : ""}${escapeHtml(roman)}</div>` : ""}
-            ${linesText ? `<div class="meta">路線：${escapeHtml(linesText)}</div>` : ""}
-          </article>
-        `;
-      }).join("");
-    }
-
-    function renderLines(items) {
-      lineCount.textContent = items.length + "件";
-
-      if (!items.length) {
-        renderEmpty(lineResults, "該当する路線は見つかりませんでした。");
-        return;
-      }
-
-      lineResults.innerHTML = items.map(function (line) {
-        const name = line.name || "名称未設定";
-        const file = line.file || "#";
-        const kana = line.kana || "";
-        const roman = line.roman || "";
-        const color = line.color || "#999999";
-
-        return `
-          <article class="line-card">
-            <div class="line-color" style="background:${escapeHtml(color)};"></div>
-            <div class="line-card-body">
-              <div class="jr-badge">JR</div>
-              <div class="line-text">
-                <h3><a href="${escapeHtml(file)}">${escapeHtml(name)}</a></h3>
-                ${(kana || roman) ? `<div class="line-sub">${escapeHtml(kana)}${kana && roman ? " / " : ""}${escapeHtml(roman)}</div>` : ""}
-              </div>
-            </div>
-          </article>
-        `;
-      }).join("");
-    }
-
-    function renderMelodies(items) {
-      melodyCount.textContent = items.length + "件";
-
-      if (!items.length) {
-        renderEmpty(melodyResults, "該当するメロディは見つかりませんでした。");
-        return;
-      }
-
-      melodyResults.innerHTML = items.map(function (melody) {
-        const name = melody.name || "名称未設定";
-        const file = melody.file || "#";
-        const kana = melody.kana || "";
-        const roman = melody.roman || "";
-
-        return `
-          <article class="card">
-            <h3><a href="${escapeHtml(file)}">${escapeHtml(name)}</a></h3>
-            ${(kana || roman) ? `<div class="meta">${escapeHtml(kana)}${kana && roman ? " / " : ""}${escapeHtml(roman)}</div>` : ""}
-          </article>
-        `;
-      }).join("");
-    }
-
-    function renderAll() {
-      const query = normalizeText(searchInput.value);
-
-      const stationData = getStationsData();
-      const lineData = getLinesData();
-      const melodyData = getMelodiesData();
-
-      const filteredStations = !query
-        ? stationData
-        : stationData.filter(function (station) {
-            return normalizeText(getStationSearchText(station)).includes(query);
-          });
-
-      const filteredLines = !query
-        ? lineData
-        : lineData.filter(function (line) {
-            return normalizeText(getLineSearchText(line)).includes(query);
-          });
-
-      const filteredMelodies = !query
-        ? melodyData
-        : melodyData.filter(function (melody) {
-            return normalizeText(getMelodySearchText(melody)).includes(query);
-          });
-
-      renderStations(filteredStations);
-      renderLines(filteredLines);
-      renderMelodies(filteredMelodies);
-    }
-
-    searchInput.addEventListener("input", renderAll);
-    renderAll();
-  </script>
 </body>
 </html>
