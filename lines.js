@@ -4,7 +4,7 @@ const lines = [
     kana: "あがつません",
     roman: "Agatsuma-Line",
     color: "#008689",
-    icons: ["numbering/Yamanote.png","numbering/Keto_Negishi.png"],
+    icon: "numbering/Agatsuma.png",
     file: "lines/agatsuma-line.html",
     stationOrder: [
       "stations/shibukawa.html",
