@@ -439,11 +439,14 @@ function normalizeText(text) {
     .replace(/[ー－―]/g, "ー");
 }
 
-function resolveLineIcon(line) {
-  if (line.icon) {
-    return line.icon;
+function resolveLineIcons(line) {
+  if (Array.isArray(line.icons) && line.icons.length) {
+    return line.icons;
   }
-  return "numbering/JR.png";
+  if (line.icon) {
+    return [line.icon];
+  }
+  return ["numbering/JR.png"];
 }
 
 function createStationCard(station, matchedMelodies = []) {
@@ -475,13 +478,17 @@ function createStationCard(station, matchedMelodies = []) {
 function createLineCard(line) {
   const stationCount = Array.isArray(line.stationOrder) ? line.stationOrder.length : 0;
   const color = line.color || "#999";
-  const iconSrc = resolveLineIcon(line);
+  const iconList = resolveLineIcons(line);
+
+  const iconsHtml = iconList.map(iconSrc => `
+    <img src="${escapeHtml(iconSrc)}" alt="">
+  `).join("");
 
   return `
     <a class="line-card" href="${line.file}">
       <span class="line-color-bar" style="background:${escapeHtml(color)};"></span>
-      <span class="line-icon-box" style="border-color:${escapeHtml(color)};">
-        <img src="${escapeHtml(iconSrc)}" alt="">
+      <span class="line-icon-box">
+        ${iconsHtml}
       </span>
       <div class="line-content">
         <div class="line-name">${escapeHtml(line.name)}</div>
