@@ -1,178 +1,815 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>発車メロディDB | 検索</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Yu Gothic", "Hiragino Sans", sans-serif;
-      background: #f5f5f5;
-      color: #222;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>発車メロディ全集 | 検索</title>
 
-    header {
-      background: #1f2937;
-      color: #fff;
-      padding: 20px;
-    }
+<style>
+body {
+  font-family: "Yu Gothic", "Hiragino Sans", sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+  color: #222;
+}
 
-    main {
-      max-width: 1000px;
-      margin: 20px auto;
-      padding: 0 16px;
-    }
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
 
-    input {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-    }
+h1 {
+  margin: 0 0 10px 0;
+  font-size: 42px;
+}
 
-    h2 {
-      margin-top: 30px;
-      border-left: 5px solid #2563eb;
-      padding-left: 10px;
-    }
+.subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 30px;
+}
 
-    .card {
-      background: #fff;
-      border: 1px solid #ccc;
-      padding: 12px;
-      margin-bottom: 10px;
-    }
+.section-title {
+  background: #2f2f32;
+  color: #fff;
+  padding: 14px 18px;
+  font-size: 28px;
+  font-weight: bold;
+  border-left: 8px solid #d48a17;
+  margin: 0 0 24px 0;
+}
 
-    /* 路線カード */
-    .line-card {
-      display: flex;
-      background: #fff;
-      border: 1px solid #ccc;
-      margin-bottom: 10px;
-    }
+.search-area {
+  margin-bottom: 32px;
+}
 
-    .line-color {
-      width: 10px;
-    }
+.search-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 
-    .line-body {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px;
-    }
+.search-input {
+  flex: 1;
+  min-width: 260px;
+  padding: 14px 16px;
+  font-size: 18px;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
 
-    .line-text h3 {
-      margin: 0;
-      font-size: 16px;
-    }
+.search-button {
+  padding: 14px 22px;
+  font-size: 18px;
+  border: none;
+  background: #2f2f32;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
 
-    .line-sub {
-      font-size: 14px;
-      color: #555;
-    }
+.search-button:hover {
+  opacity: 0.92;
+}
 
-    .line-count {
-      font-size: 13px;
-      color: #666;
-    }
+.search-note {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #666;
+}
 
-    .empty {
-      background: #fff;
-      border: 1px dashed #ccc;
-      padding: 10px;
-      color: #666;
-    }
-  </style>
+.result-info {
+  margin: 20px 0 14px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.no-result {
+  padding: 18px;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  color: #666;
+  border-radius: 6px;
+}
+
+.station-list,
+.line-list,
+.melody-list {
+  display: grid;
+  gap: 14px;
+}
+
+.station-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #d8d8d8;
+  background: #fff;
+  padding: 18px 20px;
+  transition: 0.15s;
+}
+
+.station-card:hover {
+  background: #fafafa;
+  border-color: #bdbdbd;
+}
+
+.station-name {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.station-kana {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.station-meta {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.7;
+}
+
+.matched-melodies {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.8;
+}
+
+.matched-melodies-title {
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.melody-chip {
+  display: inline-block;
+  margin: 4px 6px 0 0;
+  padding: 4px 8px;
+  background: #f3f3f3;
+  border: 1px solid #dddddd;
+  border-radius: 999px;
+  font-size: 13px;
+  color: #444;
+}
+
+.line-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #d8d8d8;
+  background: #fff;
+  padding: 18px 20px;
+  transition: 0.15s;
+}
+
+.line-card:hover {
+  background: #fafafa;
+  border-color: #bdbdbd;
+}
+
+.line-color-bar {
+  width: 18px;
+  align-self: stretch;
+  border-radius: 6px;
+  flex: 0 0 auto;
+}
+
+.line-icon-box {
+  width: 74px;
+  height: 74px;
+  border: 8px solid #999;
+  border-radius: 12px;
+  background: #fff;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.line-icon-box img {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+  display: block;
+}
+
+.line-content {
+  min-width: 0;
+}
+
+.line-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.line-meta {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.7;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.page-button {
+  padding: 10px 16px;
+  border: 1px solid #cfcfcf;
+  background: #fff;
+  color: #222;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.page-button:hover:not(:disabled) {
+  background: #f3f3f3;
+}
+
+.page-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.page-info {
+  font-size: 15px;
+  color: #555;
+  font-weight: bold;
+}
+
+.section-gap {
+  margin-top: 42px;
+}
+
+.footer-note {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 0;
+    padding: 18px;
+    box-shadow: none;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    padding: 12px 14px;
+  }
+
+  .search-input {
+    font-size: 16px;
+  }
+
+  .search-button {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .station-name {
+    font-size: 22px;
+  }
+
+  .line-name {
+    font-size: 20px;
+  }
+
+  .station-kana,
+  .station-meta,
+  .line-meta,
+  .result-info,
+  .no-result,
+  .footer-note,
+  .page-button,
+  .page-info,
+  .matched-melodies {
+    font-size: 14px;
+  }
+
+  .line-card {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .line-color-bar {
+    width: 14px;
+  }
+
+  .line-icon-box {
+    width: 58px;
+    height: 58px;
+    border-width: 6px;
+    border-radius: 10px;
+  }
+}
+</style>
 </head>
+
 <body>
+<div class="container">
+  <h1>発車メロディ全集</h1>
+  <div class="subtitle">JR東日本の駅ページ・路線ページを検索できます。</div>
 
-<header>
-  <h1>発車メロディDB</h1>
-</header>
+  <div class="section-title">駅検索</div>
 
-<main>
+  <div class="search-area">
+    <div class="search-row">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="駅名・ひらがな・路線名・ローマ字で検索"
+        autocomplete="off"
+      >
+      <button type="button" id="searchButton" class="search-button">検索</button>
+    </div>
+    <div class="search-note">
+      例：海浜幕張 / かいひんまくはり / 京葉線 / kaihinmakuhari
+    </div>
+  </div>
 
-  <input id="searchInput" placeholder="検索">
+  <div id="resultInfo" class="result-info"></div>
+  <div id="resultArea"></div>
+  <div id="paginationArea"></div>
 
-  <h2>駅検索</h2>
-  <div id="stationResults"></div>
+  <div class="section-gap"></div>
 
-  <h2>路線検索</h2>
-  <div id="lineResults"></div>
+  <div class="section-title">メロディ検索</div>
 
-  <h2>メロディ検索</h2>
-  <div id="melodyResults"></div>
+  <div class="search-area">
+    <div class="search-row">
+      <input
+        type="text"
+        id="melodySearchInput"
+        class="search-input"
+        placeholder="メロディ名で検索"
+        autocomplete="off"
+      >
+      <button type="button" id="melodySearchButton" class="search-button">検索</button>
+    </div>
+    <div class="search-note">
+      例：小川のせせらぎ / 春 / JRE-IKST / Verde Rayo V2
+    </div>
+  </div>
 
-</main>
+  <div id="melodyResultInfo" class="result-info"></div>
+  <div id="melodyResultArea"></div>
+
+  <div class="section-gap"></div>
+
+  <div class="section-title">路線検索</div>
+
+  <div class="search-area">
+    <div class="search-row">
+      <input
+        type="text"
+        id="lineSearchInput"
+        class="search-input"
+        placeholder="路線名・ひらがな・ローマ字で検索"
+        autocomplete="off"
+      >
+      <button type="button" id="lineSearchButton" class="search-button">検索</button>
+    </div>
+    <div class="search-note">
+      例：京葉線 / けいようせん / keiyo / 只見線 / ただみせん / tadami
+    </div>
+  </div>
+
+  <div id="lineResultInfo" class="result-info"></div>
+  <div id="lineResultArea"></div>
+  <div id="linePaginationArea"></div>
+
+  <div class="footer-note">
+    駅をクリックすると各駅の詳細ページへ、路線をクリックすると各路線の一覧ページへ移動します。<br>
+    駅一覧は5件ごと、路線一覧は5件ごとにページ分けされています。
+  </div>
+</div>
 
 <script src="stations.js"></script>
 <script src="lines.js"></script>
-<script src="melodies.js"></script>
-
 <script>
-function norm(t){
-  return (t||"").toLowerCase().replace(/\s/g,"");
+const STATION_ITEMS_PER_PAGE = 5;
+const LINE_ITEMS_PER_PAGE = 5;
+
+let currentResults = [];
+let currentPage = 1;
+let currentLabelBase = "";
+
+let currentLineResults = [];
+let currentLinePage = 1;
+let currentLineLabelBase = "";
+
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
-function search(){
-  const q = norm(document.getElementById("searchInput").value);
+function normalizeText(text) {
+  return String(text)
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[ー－―]/g, "ー");
+}
 
-  const sBox = document.getElementById("stationResults");
-  const lBox = document.getElementById("lineResults");
-  const mBox = document.getElementById("melodyResults");
+function resolveLineIcon(line) {
+  if (line.icon) {
+    return line.icon;
+  }
+  return "numbering/JR.png";
+}
 
-  /* 駅 */
-  const sList = (typeof stations !== "undefined" ? stations : []).filter(s =>
-    norm(s.name + s.kana + s.roman + (s.lines||[]).join(" ")).includes(q)
-  );
+function createStationCard(station, matchedMelodies = []) {
+  const linesText = station.lines && station.lines.length
+    ? station.lines.join(" / ")
+    : "路線情報なし";
 
-  sBox.innerHTML = sList.length ? sList.map(s => `
-    <div class="card">
-      <b><a href="${s.file}">${s.name}</a></b><br>
-      ${s.kana || ""}<br>
-      ${(s.lines||[]).join(" / ")}
-    </div>
-  `).join("") : `<div class="empty">該当なし</div>`;
-
-  /* 路線 */
-  const lList = (typeof lines !== "undefined" ? lines : []).filter(l =>
-    norm(l.name + l.kana + l.roman).includes(q)
-  );
-
-  lBox.innerHTML = lList.length ? lList.map(l => `
-    <div class="line-card">
-      <div class="line-color" style="background:${l.color};"></div>
-      <div class="line-body">
-        <img src="images/jr.png" style="width:40px;height:40px;">
-        <div class="line-text">
-          <h3><a href="${l.file}">${l.name}</a></h3>
-          <div class="line-sub">${l.kana} / ${l.roman}</div>
-          <div class="line-count">登録駅数：${l.stationOrder ? l.stationOrder.length : 0}駅</div>
-        </div>
+  const melodiesHtml = matchedMelodies.length
+    ? `
+      <div class="matched-melodies">
+        <span class="matched-melodies-title">一致したメロディ：</span>
+        ${matchedMelodies.map(name => `<span class="melody-chip">${escapeHtml(name)}</span>`).join("")}
       </div>
-    </div>
-  `).join("") : `<div class="empty">該当なし</div>`;
+    `
+    : "";
 
-  /* メロディ */
-  const mList = (typeof melodies !== "undefined" ? melodies : []).filter(m =>
-    norm(m.name + m.kana + m.roman).includes(q)
-  );
-
-  mBox.innerHTML = mList.length ? mList.map(m => `
-    <div class="card">
-      <b><a href="${m.file}">${m.name}</a></b><br>
-      ${m.kana || ""}<br>
-      ${m.roman || ""}
-    </div>
-  `).join("") : `<div class="empty">該当なし</div>`;
+  return `
+    <a class="station-card" href="${station.file}">
+      <div class="station-name">${escapeHtml(station.name)}</div>
+      <div class="station-kana">${escapeHtml(station.kana)} / ${escapeHtml(station.roman)}</div>
+      <div class="station-meta">
+        路線：${escapeHtml(linesText)}
+      </div>
+      ${melodiesHtml}
+    </a>
+  `;
 }
 
-document.getElementById("searchInput").addEventListener("input", search);
-search();
-</script>
+function createLineCard(line) {
+  const stationCount = Array.isArray(line.stationOrder) ? line.stationOrder.length : 0;
+  const color = line.color || "#999";
+  const iconSrc = resolveLineIcon(line);
 
+  return `
+    <a class="line-card" href="${line.file}">
+      <span class="line-color-bar" style="background:${escapeHtml(color)};"></span>
+      <span class="line-icon-box" style="border-color:${escapeHtml(color)};">
+        <img src="${escapeHtml(iconSrc)}" alt="">
+      </span>
+      <div class="line-content">
+        <div class="line-name">${escapeHtml(line.name)}</div>
+        <div class="line-meta">${escapeHtml(line.kana || "")} / ${escapeHtml(line.roman || "")}</div>
+        <div class="line-meta">登録駅数：${stationCount}駅</div>
+      </div>
+    </a>
+  `;
+}
+
+function getTotalPages(listLength, itemsPerPage) {
+  return Math.max(1, Math.ceil(listLength / itemsPerPage));
+}
+
+function clearStationResults() {
+  document.getElementById("resultInfo").textContent = "";
+  document.getElementById("resultArea").innerHTML = "";
+  document.getElementById("paginationArea").innerHTML = "";
+}
+
+function clearMelodyResults() {
+  document.getElementById("melodyResultInfo").textContent = "";
+  document.getElementById("melodyResultArea").innerHTML = "";
+}
+
+function renderStationPagination(totalItems) {
+  const paginationArea = document.getElementById("paginationArea");
+  const totalPages = getTotalPages(totalItems, STATION_ITEMS_PER_PAGE);
+
+  if (totalItems === 0 || totalPages === 1) {
+    paginationArea.innerHTML = "";
+    return;
+  }
+
+  paginationArea.innerHTML = `
+    <div class="pagination">
+      <button class="page-button" id="prevPageButton" ${currentPage === 1 ? "disabled" : ""}>前へ</button>
+      <div class="page-info">${currentPage} / ${totalPages}ページ</div>
+      <button class="page-button" id="nextPageButton" ${currentPage === totalPages ? "disabled" : ""}>次へ</button>
+    </div>
+  `;
+
+  document.getElementById("prevPageButton").addEventListener("click", function() {
+    if (currentPage > 1) {
+      currentPage--;
+      renderCurrentStationPage();
+    }
+  });
+
+  document.getElementById("nextPageButton").addEventListener("click", function() {
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderCurrentStationPage();
+    }
+  });
+}
+
+function renderLinePagination(totalItems) {
+  const paginationArea = document.getElementById("linePaginationArea");
+  const totalPages = getTotalPages(totalItems, LINE_ITEMS_PER_PAGE);
+
+  if (totalItems === 0 || totalPages === 1) {
+    paginationArea.innerHTML = "";
+    return;
+  }
+
+  paginationArea.innerHTML = `
+    <div class="pagination">
+      <button class="page-button" id="prevLinePageButton" ${currentLinePage === 1 ? "disabled" : ""}>前へ</button>
+      <div class="page-info">${currentLinePage} / ${totalPages}ページ</div>
+      <button class="page-button" id="nextLinePageButton" ${currentLinePage === totalPages ? "disabled" : ""}>次へ</button>
+    </div>
+  `;
+
+  document.getElementById("prevLinePageButton").addEventListener("click", function() {
+    if (currentLinePage > 1) {
+      currentLinePage--;
+      renderCurrentLinePage();
+    }
+  });
+
+  document.getElementById("nextLinePageButton").addEventListener("click", function() {
+    if (currentLinePage < totalPages) {
+      currentLinePage++;
+      renderCurrentLinePage();
+    }
+  });
+}
+
+function renderCurrentStationPage() {
+  const resultInfo = document.getElementById("resultInfo");
+  const resultArea = document.getElementById("resultArea");
+
+  if (!currentResults.length) {
+    resultInfo.textContent = `${currentLabelBase}：0件`;
+    resultArea.innerHTML = `
+      <div class="no-result">
+        一致する駅が見つかりませんでした。
+      </div>
+    `;
+    renderStationPagination(0);
+    return;
+  }
+
+  const totalPages = getTotalPages(currentResults.length, STATION_ITEMS_PER_PAGE);
+  if (currentPage > totalPages) {
+    currentPage = totalPages;
+  }
+
+  const startIndex = (currentPage - 1) * STATION_ITEMS_PER_PAGE;
+  const endIndex = startIndex + STATION_ITEMS_PER_PAGE;
+  const pageItems = currentResults.slice(startIndex, endIndex);
+
+  resultInfo.textContent = `${currentLabelBase}（${currentResults.length}件）`;
+
+  resultArea.innerHTML = `
+    <div class="station-list">
+      ${pageItems.map(station => createStationCard(station)).join("")}
+    </div>
+  `;
+
+  renderStationPagination(currentResults.length);
+}
+
+function renderCurrentLinePage() {
+  const lineResultInfo = document.getElementById("lineResultInfo");
+  const lineResultArea = document.getElementById("lineResultArea");
+
+  if (!currentLineResults.length) {
+    lineResultInfo.textContent = `${currentLineLabelBase}：0件`;
+    lineResultArea.innerHTML = `
+      <div class="no-result">
+        一致する路線が見つかりませんでした。
+      </div>
+    `;
+    renderLinePagination(0);
+    return;
+  }
+
+  const totalPages = getTotalPages(currentLineResults.length, LINE_ITEMS_PER_PAGE);
+  if (currentLinePage > totalPages) {
+    currentLinePage = totalPages;
+  }
+
+  const startIndex = (currentLinePage - 1) * LINE_ITEMS_PER_PAGE;
+  const endIndex = startIndex + LINE_ITEMS_PER_PAGE;
+  const pageItems = currentLineResults.slice(startIndex, endIndex);
+
+  lineResultInfo.textContent = `${currentLineLabelBase}（${currentLineResults.length}件）`;
+
+  lineResultArea.innerHTML = `
+    <div class="line-list">
+      ${pageItems.map(createLineCard).join("")}
+    </div>
+  `;
+
+  renderLinePagination(currentLineResults.length);
+}
+
+function setStationResults(list, labelBase) {
+  currentResults = list;
+  currentLabelBase = labelBase;
+  currentPage = 1;
+  renderCurrentStationPage();
+}
+
+function setLineResults(list, labelBase) {
+  currentLineResults = list;
+  currentLineLabelBase = labelBase;
+  currentLinePage = 1;
+  renderCurrentLinePage();
+}
+
+function collectMelodyTexts(station) {
+  const results = new Set();
+
+  if (Array.isArray(station.melodies)) {
+    station.melodies.forEach(item => {
+      if (typeof item === "string") {
+        if (item.trim()) results.add(item.trim());
+      } else if (item && typeof item === "object") {
+        if (item.name && String(item.name).trim()) {
+          results.add(String(item.name).trim());
+        }
+      }
+    });
+  }
+
+  if (Array.isArray(station.melodyKeywords)) {
+    station.melodyKeywords.forEach(item => {
+      if (item && String(item).trim()) {
+        results.add(String(item).trim());
+      }
+    });
+  }
+
+  if (typeof station.allMelodiesText === "string" && station.allMelodiesText.trim()) {
+    station.allMelodiesText.split(/[/、,\n]/).forEach(item => {
+      if (item.trim()) results.add(item.trim());
+    });
+  }
+
+  return [...results];
+}
+
+function searchStations() {
+  const input = document.getElementById("searchInput").value.trim();
+  const normalizedInput = normalizeText(input);
+
+  if (!normalizedInput) {
+    clearStationResults();
+    return;
+  }
+
+  const filtered = stations.filter(station => {
+    const targets = [
+      station.name,
+      station.kana,
+      station.roman,
+      ...(station.lines || [])
+    ];
+
+    return targets.some(target =>
+      normalizeText(target || "").includes(normalizedInput)
+    );
+  });
+
+  setStationResults(filtered, "駅検索結果");
+}
+
+function searchMelodies() {
+  const input = document.getElementById("melodySearchInput").value.trim();
+  const normalizedInput = normalizeText(input);
+  const resultInfo = document.getElementById("melodyResultInfo");
+  const resultArea = document.getElementById("melodyResultArea");
+
+  if (!normalizedInput) {
+    clearMelodyResults();
+    return;
+  }
+
+  const matchedStations = stations.map(station => {
+    const melodies = collectMelodyTexts(station);
+    const matchedMelodies = melodies.filter(name =>
+      normalizeText(name).includes(normalizedInput)
+    );
+
+    return matchedMelodies.length ? { station, matchedMelodies } : null;
+  }).filter(Boolean);
+
+  if (!matchedStations.length) {
+    resultInfo.textContent = "メロディ検索結果：0件";
+    resultArea.innerHTML = `
+      <div class="no-result">
+        一致するメロディ名が見つかりませんでした。
+      </div>
+    `;
+    return;
+  }
+
+  resultInfo.textContent = `メロディ検索結果（${matchedStations.length}駅）`;
+
+  resultArea.innerHTML = `
+    <div class="melody-list">
+      ${matchedStations.map(item => createStationCard(item.station, item.matchedMelodies)).join("")}
+    </div>
+  `;
+}
+
+function searchLines() {
+  if (!Array.isArray(lines)) {
+    setLineResults([], "路線検索結果");
+    return;
+  }
+
+  const input = document.getElementById("lineSearchInput").value.trim();
+  const normalizedInput = normalizeText(input);
+
+  if (!normalizedInput) {
+    setLineResults(lines, "全路線一覧");
+    return;
+  }
+
+  const filtered = lines.filter(line => {
+    const targets = [
+      line.name,
+      line.kana,
+      line.roman
+    ];
+
+    return targets.some(target =>
+      normalizeText(target || "").includes(normalizedInput)
+    );
+  });
+
+  setLineResults(filtered, "路線検索結果");
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+  clearStationResults();
+  clearMelodyResults();
+  setLineResults(Array.isArray(lines) ? lines : [], "全路線一覧");
+
+  document.getElementById("searchButton").addEventListener("click", searchStations);
+  document.getElementById("lineSearchButton").addEventListener("click", searchLines);
+  document.getElementById("melodySearchButton").addEventListener("click", searchMelodies);
+
+  document.getElementById("searchInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      searchStations();
+    }
+  });
+
+  document.getElementById("lineSearchInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      searchLines();
+    }
+  });
+
+  document.getElementById("melodySearchInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      searchMelodies();
+    }
+  });
+});
+</script>
 </body>
 </html>
