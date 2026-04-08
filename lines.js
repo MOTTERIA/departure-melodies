@@ -32,6 +32,7 @@ const lines = [
     kana: "あてらざわせん",
     roman: "Aterazawa-Line",
     color: "#0072BA",
+    icon: "numbering/Aterazawa.png",
     file: "lines/aterazawa-line.html",
     stationOrder: [
       "stations/yamagata.html",
@@ -53,6 +54,7 @@ const lines = [
     kana: "いいやません",
     roman: "Iiyama-Line",
     color: "#5BBB24",
+    icon: "numbering/Iiyama.png",
     file: "lines/iiyama-line.html",
     stationOrder: [
       "stations/nagano.html",
@@ -96,6 +98,7 @@ const lines = [
     kana: "いしのまきせん",
     roman: "Ishinomaki-Line",
     color: "#F76F99",
+    icon: "numbering/Ishinomaki.png",
     file: "lines/ishinomaki-line.html",
     stationOrder: [
       "stations/kogota.html",
@@ -150,6 +153,7 @@ const lines = [
     kana: "うえつほんせん",
     roman: "Uetsu-Line",
     color: "#00B9DB",
+    icon: "numbering/Uetsu.png",
     file: "lines/uetsu-line.html",
     stationOrder: [
       "stations/nitsu.html",
@@ -219,6 +223,7 @@ const lines = [
     kana: "うちぼうせん",
     roman: "Uchibo-Line",
     color: "#0071C5",
+    icon: "numbering/Uchibo.png",
     file: "lines/uchibo-line.html",
     stationOrder: [
       "stations/chiba.html",
@@ -256,7 +261,7 @@ const lines = [
     ]
    },
    {
-    name: "宇都宮線（東北本線）",
+    name: "宇都宮線",
     kana: "うつのみやせん",
     roman: "Utsunomiya-Line",
     color: "#FF9845",
@@ -303,6 +308,7 @@ const lines = [
     kana: "えちごせん",
     roman: "Echigo-Line",
     color: "#378640",
+    icon: "numbering/Echigo.png",
     file: "lines/echigo-line.html",
     stationOrder: [
       "stations/kashiwazaki.html",
@@ -345,6 +351,7 @@ const lines = [
     kana: "おううほんせん",
     roman: "Ōu-Line",
     color: "#FF7E1C",
+    icon: "numbering/Ou.png",
     file: "lines/ou-line.html",
     stationOrder: [
       "stations/fukushima.html",
@@ -489,6 +496,7 @@ const lines = [
     kana: "おおいとせん",
     roman: "Ōito-Line",
     color: "#957490",
+    icon: "numbering/Oito.png",
     file: "lines/oito-line.html",
     stationOrder: [
       "stations/matsumoto.html",
