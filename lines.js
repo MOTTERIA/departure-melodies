@@ -1,7 +1,6 @@
 const lines = [
    {
     name: "吾妻線",
-    displayName: "吾妻線：（渋川～大前）"
     kana: "あがつません",
     roman: "Agatsuma-Line",
     color: "#008689",
