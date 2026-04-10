@@ -140,7 +140,7 @@ const lines = [
     color: "#378640",
     file: "lines/ito-line.html",
     stationOrder: [
-      "stations/ito/atami.html",
+      "stations/tokaido/atami.html",
       "stations/ito/kinomiya.html",
       "stations/ito/izutaga.html",
       "stations/ito/ajiro.html",
