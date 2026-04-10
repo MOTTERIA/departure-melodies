@@ -126,6 +126,13 @@ const stations = [
     file: "stations/aizuwakamatsu.html"
   },
   {
+    name: "左沢",
+    kana: "あてらざわ",
+    roman: "Aterazawa",
+    lines: ["左沢線"],
+    file: "stations/aterazawa/aterazawa.html"
+  },
+  {
     name: "市城",
     kana: "いちしろ",
     roman: "Ichishiro",
@@ -152,6 +159,34 @@ const stations = [
     roman: "Uonuma-Tanaka",
     lines: ["只見線"],
     file: "stations/uonumatanaka.html"
+  },
+  {
+    name: "羽前金沢",
+    kana: "うぜんかねざわ",
+    roman: "Uzen-Kanezawa",
+    lines: ["左沢線"],
+    file: "stations/aterazawa/uzenkanezawa.html"
+  },
+  {
+    name: "羽前高松",
+    kana: "うぜんたかまつ",
+    roman: "Uzen-Takamatsu",
+    lines: ["左沢線"],
+    file: "stations/aterazawa/uzentakamatsu.html"
+  },
+  {
+    name: "羽前長崎",
+    kana: "うぜんながさき",
+    roman: "Uzen-Nagasaki",
+    lines: ["左沢線"],
+    file: "stations/aterazawa/uzennagasaki.html"
+  },
+  {
+    name: "羽前山辺",
+    kana: "うぜんやまべ",
+    roman: "Uzen-Yamabe",
+    lines: ["左沢線"],
+    file: "stations/aterazawa/uzenyamabe.html"
   },
   {
     name: "祖母島",
@@ -224,6 +259,13 @@ const stations = [
     file: "stations/agatsuma/kawarayuonsen.html"
   },
   {
+    name: "北山形",
+    kana: "きたやまがた",
+    roman: "Kita-Yamagata",
+    lines: ["奥羽本線","左沢線","仙山線"],
+    file: "stations/aterazawa/kitayamagata.html"
+  },
+  {
     name: "群馬大津",
     kana: "ぐんまおおつ",
     roman: "Gumma-Ōtsu",
@@ -257,6 +299,20 @@ const stations = [
     roman: "Gōbara",
     lines: ["吾妻線"],
     file: "stations/agatsuma/gobara.html"
+  },
+  {
+    name: "寒河江",
+    kana: "さがえ",
+    roman: "Sagae",
+    lines: ["左沢線"],
+    file: "stations/aterazawa/sagae.html"
+  },
+  {
+    name: "柴橋",
+    kana: "しばはし",
+    roman: "Shibahashi",
+    lines: ["左沢線"],
+    file: "stations/aterazawa/shibahashi.html"
   },
   {
     name: "渋川（伊香保温泉・榛名湖口）",
@@ -315,6 +371,13 @@ const stations = [
     file: "stations/nitsuru.html"
   },
   {
+    name: "西寒河江",
+    kana: "にしさがえ",
+    roman: "Nishi-Sagae",
+    lines: ["左沢線"],
+    file: "stations/aterazawa/nishisagae.html"
+  },
+  {
     name: "西若松",
     kana: "にしわかまつ",
     roman: "Nishi-Wakamatsu",
@@ -343,6 +406,13 @@ const stations = [
     file: "stations/hayato.html"
   },
   {
+    name: "東金井",
+    kana: "ひがしかない",
+    roman: "Higashi-Kanai",
+    lines: ["左沢線"],
+    file: "stations/aterazawa/higashikanai.html"
+  },
+  {
     name: "袋倉",
     kana: "ふくろぐら",
     roman: "Fukurogura",
@@ -364,6 +434,13 @@ const stations = [
     file: "stations/agatsuma/manzakazawaguchi.html"
   },
   {
+    name: "南寒河江",
+    kana: "みなみさがえ",
+    roman: "Minami-Sagae",
+    lines: ["左沢線"],
+    file: "stations/aterazawa/minamisagae.html"
+  },
+  {
     name: "矢倉",
     kana: "やぐら",
     roman: "Yagura",
@@ -376,6 +453,13 @@ const stations = [
     roman: "Yabukami",
     lines: ["只見線"],
     file: "stations/yabukami.html"
+  },
+  {
+    name: "山形",
+    kana: "やまがた",
+    roman: "Yamagata",
+    lines: ["山形新幹線","奥羽本線","左沢線","仙山線"],
+    file: "stations/aterazawa/yamagata.html"
   },
   {
     name: "若宮",
