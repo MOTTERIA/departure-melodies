@@ -1,0 +1,2665 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>長野駅 | 発車メロディ全集</title>
+<style>
+body {
+  font-family: "Yu Gothic", "Hiragino Sans", sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+  color: #222;
+}
+.container {
+  max-width: 1100px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+}
+h1 {
+  margin: 0 0 6px 0;
+  font-size: 42px;
+}
+.station-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+.station-info {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #444;
+  margin-bottom: 16px;
+}
+.station-note {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #666;
+  margin-bottom: 28px;
+}
+.section-title {
+  background: #2f2f32;
+  color: #fff;
+  padding: 14px 18px;
+  font-size: 30px;
+  font-weight: bold;
+  border-left: 8px solid #d48a17;
+  margin: 38px 0 16px;
+}
+
+.station-lines {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #444;
+}
+
+.inline-line-icon {
+  height: 1.1em;
+  width: auto;
+  vertical-align: -0.20em;
+  margin: 0 0.18em 0 0.1em;
+}
+
+.station-line-group {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.station-line-group:last-child {
+  margin-bottom: 0;
+}
+
+.line-link,
+.line-link:link,
+.line-link:visited,
+.line-link:hover,
+.line-link:active {
+  color: #444 !important;
+  text-decoration: none !important;
+}
+
+.line-link:hover {
+  text-decoration: underline !important;
+}
+
+.station-numbering-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.station-numbering-label {
+  white-space: nowrap;
+  font-size: 16px;
+  color: #444;
+}
+
+.station-numbering-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.station-numbering-badge {
+  height: 30px;
+  width: auto;
+  display: inline-block;
+}
+
+.period {
+  font-size: 24px;
+  color: #666;
+  margin: 6px 0 4px;
+  font-weight: 500;
+}
+
+.subhead-row th {
+  background: #efefef;
+  text-align: center;
+  padding: 12px 10px;
+  font-size: 24px;
+  font-weight: bold;
+  border: 1px solid #d8d8d8;
+}
+
+.group-row td {
+  background: #eeeeee;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+ 
+
+.table-wrap {
+  margin-bottom: 35px;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.data-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #d8d8d8;
+}
+
+.data-table th {
+  background: #efefef;
+  text-align: center;
+  padding: 12px 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.data-table td {
+  padding: 18px 16px;
+  vertical-align: middle;
+  font-size: 16px;
+}
+
+.status-table col.col-track-num { width: 40px; }
+.status-table col.col-linecolor { width: 17px; }
+.status-table col.col-route { width: 38%; }
+.status-table col.col-melody { width: 33%; }
+.status-table col.col-note { width: 22%; }
+
+.track-num-cell {
+  padding: 0 !important;
+  background: #616364;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.track-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.status-table col.col-linecolor { width: 17px; }
+
+.linecolor-cell {
+  position: relative;
+  padding: 0 !important;
+}
+
+.linecolor {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.linecolor-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.linecolor-seg {
+  width: 100%;
+}
+
+.route-main {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.route-main:hover {
+  overflow: visible;
+  white-space: normal;
+  background: #fff;
+  position: relative;
+  z-index: 10;
+}
+
+.route-sub {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.route-sub:hover {
+  overflow: visible;
+  white-space: normal;
+  background: #fff;
+  position: relative;
+  z-index: 10;
+}
+
+.no-melody {
+  font-size: 18px;
+  font-weight: bold;
+  color: #444;
+} 
+
+.melody-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #444;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.melody-name:hover {
+  overflow: visible;
+  white-space: normal;
+  background: #fff;
+  position: relative;
+  z-index: 10;
+}
+
+.melody-link {
+  color: #000;
+  text-decoration: underline;
+}
+
+.melody-block {
+  margin-bottom: 10px;
+}
+
+.melody-block:last-child {
+  margin-bottom: 0;
+}
+
+.note-small {
+  white-space: pre-line;
+  color: #000;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+audio {
+  width: 100%;
+  max-width: 230px;
+  height: 25px;
+  display: block;
+  margin-top: 5px;
+}
+
+.inactive-row td:nth-child(3),
+.inactive-row td:nth-child(4),
+.inactive-row td:nth-child(5) {
+  background: #CCC;
+  color: #000;
+}
+
+.inactive-row .route-main,
+.inactive-row .melody-name,
+.inactive-row .melody-link,
+.inactive-row .note-small {
+  color: #000;
+}
+
+.inactive-row .route-sub {
+  color: #666;
+}
+
+.inactive-row .melody-link {
+  text-decoration-color: #000;
+}
+
+.inactive-row .route-main:hover,
+.inactive-row .melody-name:hover {
+  background: transparent;
+  color: #000;
+}
+
+.inactive-row .route-sub:hover {
+  background: transparent;
+  color: #666;
+}
+
+.history-details {
+  border: 1px solid #d8d8d8;
+  background: #fff;
+  margin: 0 0 18px 0;
+}
+
+.history-details summary {
+  cursor: pointer;
+  font-size: 28px;
+  padding: 20px 24px;
+  font-weight: 500;
+  list-style: none;
+  position: relative;
+}
+
+.history-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.history-details summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right:14px;
+  font-size: 0.9em;
+  transition: transform 0.15s ease;
+}
+
+.history-details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.history-content {
+  padding: 0 24px 24px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.neighbor-note {
+  margin: 6px 0 12px;
+  font-size: 14px;
+  color: #000;
+  line-height: 1.5;
+}
+
+.neighbor-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.neighbor-table th,
+.neighbor-table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px 8px;
+  font-size: 20px;
+  border: 1px solid #cfcfcf;
+}
+
+.neighbor-table th {
+  background: #efefef;
+  font-weight: bold;
+}
+
+.neighbor-line-cell {
+  padding: 0 !important;
+}
+
+.neighbor-line,
+.neighbor-line.multi {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 56px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+}
+
+.neighbor-line-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.neighbor-line-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.neighbor-line-seg {
+  flex: 1;
+  width: 100%;
+}
+
+.neighbor-line-text {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.neighbor-link,
+.neighbor-link:link,
+.neighbor-link:visited,
+.neighbor-link:hover,
+.neighbor-link:active {
+  display: inline-block;
+  background: linear-gradient(0deg, #DB588A, #559CE3);
+  -webkit-background-clip: text;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .status-table col.col-track-num {
+    width: 40px;
+  }
+
+  .status-table col.col-linecolor {
+    width: 16px;
+  }
+
+  .container {
+    margin: 0;
+    padding: 18px;
+    box-shadow: none;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .station-subtitle {
+    font-size: 16px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    padding: 12px 14px;
+  }
+
+  .period {
+    font-size: 20px;
+  }
+
+  .data-table th,
+  .neighbor-table th {
+    font-size: 18px;
+  }
+
+  .route-main {
+    font-size: 18px;
+  }
+
+  .route-sub,
+  .note-small,
+  .melody-name { 
+    font-size: 16px;
+  }
+
+  .route-sub,
+  .note-small {
+    font-weight: normal;
+  }
+
+  .melody-name {
+    font-weight: 600;
+  }
+
+  .neighbor-table th,
+  .neighbor-table td {
+    font-size: 16px;
+  }
+
+  .history-details summary {
+    font-size: 20px;
+  }
+
+  .station-numbering-badge {
+    height: 46px;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="../../index.html" class="back-link">← 検索ページに戻る</a>
+  <h1>長野駅</h1>
+  <div class="station-subtitle">ながの / Nagano</div>
+  <div class="station-info">
+    <div>長野県長野市大字栗田</div>
+    <div class="station-lines"><div class="station-line-group"><img src="../../numbering/JRE.png" class="inline-line-icon">東日本旅客鉄道[<a href="../../lines/hokurikushinkansen.html" class="line-link"><img src="../../numbering/Hokuriku_shinkansen.png" class="inline-line-icon">北陸新幹線</a>・<a href="../../lines/shinetsu-line.html" class="line-link"><img src="../../numbering/Shinetsu.png" class="inline-line-icon">信越本線</a>・<a href="../../lines/shinonoi-line.html" class="line-link"><img src="../../numbering/Shinonoi.png" class="inline-line-icon">篠ノ井線</a>・<a href="../../lines/iiyama-line.html" class="line-link"><img src="../../numbering/Iiyama.png" class="inline-line-icon">飯山線</a>]</div><div class="station-line-group"><img src="../../numbering/Shinanorailway.png" class="inline-line-icon">しなの鉄道[<a href="../../lines/shinanotetsudo-line.html" class="line-link">しなの鉄道線</a>・<a href="../../lines/kitashinano-line.html" class="line-link">北しなの線</a>]</div><div class="station-line-group"><img src="../../numbering/Nagaden.png" class="inline-line-icon">長野電鉄[長野線]</div></div>
+    <div class="station-numbering-row">
+      <span class="station-numbering-label">駅番号:</span>
+      <div class="station-numbering-group"><img src="../../numbering/SE-13.png" class="station-numbering-badge"><img src="../../numbering/Nagaden1.png" class="station-numbering-badge"></div>
+    </div>
+    <div>開業日：1888年5月1日</div>
+  </div>
+
+  <div class="station-note">※ホームの解消や廃止があった。（詳細は過去の使用状況より）</div>
+
+  
+    <div class="section-title">現在の使用状況</div>
+    
+    <div class="period">2015/02/01~</div>
+    <div class="period-note">長野～妙高高原間のしなの鉄道移管は2015年3月14日</div>
+    <div class="table-wrap">
+      <table class="data-table status-table">
+        <colgroup>
+          <col class="col-track-num">
+          <col class="col-linecolor">
+          <col class="col-route">
+          <col class="col-melody">
+          <col class="col-note">
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="3">番線</th>
+            <th>発車メロディ</th>
+            <th>備考</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">2</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線・しなの鉄道線 上り/北しなの線 下り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面/妙高高原方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/kosumosu.html" class="melody-link">秋桜V1</a></div>
+          <audio controls>
+            <source src="../../audio/kosumosu_V1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">3</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線 上り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/huruiorugo-ru.html" class="melody-link">古いオルゴール</a></div>
+          <audio controls>
+            <source src="../../audio/huruiorugo-ru.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">4</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#5BBB24; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">飯山線 下り</div>
+            <div class="route-sub">戸狩野沢温泉・十日町方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/supuringubokkusu.html" class="melody-link">スプリングボックス</a></div>
+          <audio controls>
+            <source src="../../audio/supuringubokkusu.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">5</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線・しなの鉄道線上り/北しなの線 下り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面/妙高高原方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/ogawanoseseragi.html" class="melody-link">小川のせせらぎV1</a></div>
+          <audio controls>
+            <source src="../../audio/ogawanoseseragi_V1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">6</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線上り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/hikaritokazeto.html" class="melody-link">光と風と</a></div>
+          <audio controls>
+            <source src="../../audio/hikaritokazeto.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">7</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線・しなの鉄道線上り/北しなの線 下り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面/妙高高原方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/Twilight.html" class="melody-link">Twilight V1</a></div>
+          <audio controls>
+            <source src="../../audio/Twilight_V1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+            <tr class="group-row">
+              <td colspan="5">新幹線ホーム</td>
+            </tr>
+            
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">11</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">北陸新幹線 上下</div>
+            <div class="route-sub">金沢・敦賀方面/大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/shinanonokuni.html" class="melody-link">信濃の国</a></div>
+          <audio controls>
+            <source src="../../audio/shinanonokuni_30.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small">当駅始発一部上り方面</div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">12</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">北陸新幹線 上下</div>
+            <div class="route-sub">金沢・敦賀方面/大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/shinanonokuni.html" class="melody-link">信濃の国</a></div>
+          <audio controls>
+            <source src="../../audio/shinanonokuni_30.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small">当駅始発一部上り方面</div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">13</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">北陸新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/shinanonokuni.html" class="melody-link">信濃の国</a></div>
+          <audio controls>
+            <source src="../../audio/shinanonokuni_30.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">14</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">北陸新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/shinanonokuni.html" class="melody-link">信濃の国</a></div>
+          <audio controls>
+            <source src="../../audio/shinanonokuni_30.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+
+            <tr class="group-row">
+              <td colspan="5">長野電鉄</td>
+            </tr>
+
+            <tr>
+          <td class="track-num-cell">
+            <div class="track-number">1</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">電子ベル（長野電鉄）</a></div>
+          <audio controls>
+            <source src="../../audio/denshi_nagano.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">2</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">電子ベル（長野電鉄）</a></div>
+          <audio controls>
+            <source src="../../audio/denshi_nagano.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+
+<tr>
+          <td class="track-num-cell">
+            <div class="track-number">3</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">電子ベル（長野電鉄）</a></div>
+          <audio controls>
+            <source src="../../audio/denshi_nagano.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    
+
+  
+    <div class="section-title">過去の使用状況</div>
+    
+        <details class="history-details">
+          <summary>2006/03/01~2015/01/30</summary>
+          <div class="history-content">
+            <div class="period-note">2011~2014にかけて、長野電鉄にて期間限定のメロディが採用された。</div>
+            <div class="table-wrap">
+              <table class="data-table status-table">
+                <colgroup>
+                  <col class="col-track-num">
+                  <col class="col-linecolor">
+                  <col class="col-route">
+                  <col class="col-melody">
+                  <col class="col-note">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th colspan="3">番線</th>
+                    <th>発車メロディ</th>
+                    <th>備考</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">2</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/kosumosu.html" class="melody-link">秋桜V1</a></div>
+          <audio controls>
+            <source src="../../audio/kosumosu_V1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">3</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線 上り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/huruiorugo-ru.html" class="melody-link">古いオルゴール</a></div>
+          <audio controls>
+            <source src="../../audio/huruiorugo-ru.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">4</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#5BBB24; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">飯山線 下り</div>
+            <div class="route-sub">戸狩野沢温泉・十日町方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/supuringubokkusu.html" class="melody-link">スプリングボックス</a></div>
+          <audio controls>
+            <source src="../../audio/supuringubokkusu.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">5</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/ogawanoseseragi.html" class="melody-link">小川のせせらぎV1</a></div>
+          <audio controls>
+            <source src="../../audio/ogawanoseseragi_V1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">6</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線上り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/hikaritokazeto.html" class="melody-link">光と風と</a></div>
+          <audio controls>
+            <source src="../../audio/hikaritokazeto.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">7</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/Twilight.html" class="melody-link">Twilight V1</a></div>
+          <audio controls>
+            <source src="../../audio/Twilight_V1.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+            <tr class="group-row">
+              <td colspan="5">新幹線ホーム</td>
+            </tr>
+            
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">11</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/JR-SH1.html" class="melody-link">JR-SH1-3（未更新Ver）</a></div>
+          <audio controls>
+            <source src="../../audio/JR-SH1-3_old.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">12</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/JR-SH1.html" class="melody-link">JR-SH1-1（未更新Ver）</a></div>
+          <audio controls>
+            <source src="../../audio/JR-SH1-1_old.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">13</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/JR-SH1.html" class="melody-link">JR-SH1-3（未更新Ver）</a></div>
+          <audio controls>
+            <source src="../../audio/JR-SH1-3_old.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">14</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/JR-SH1.html" class="melody-link">JR-SH1-1（未更新Ver）</a></div>
+          <audio controls>
+            <source src="../../audio/JR-SH1-1_old.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+
+        <tr class="group-row">
+              <td colspan="5">長野電鉄</td>
+        </tr>
+
+            <tr>
+          <td class="track-num-cell">
+            <div class="track-number">1</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">英雄の証</a></div>
+          <audio controls>
+            <source src="../../audio/eiyu.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">2</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">英雄の証</a></div>
+          <audio controls>
+            <source src="../../audio/eiyu.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+
+<tr>
+          <td class="track-num-cell">
+            <div class="track-number">3</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">英雄の証</a></div>
+          <audio controls>
+            <source src="../../audio/eiyu.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+
+        <tr class="subhead-row">
+          <th colspan="3">番線</th>
+          <th>入線メロディ</th>
+          <th>備考</th>
+        </tr>
+
+            <tr class="group-row">
+              <td colspan="5">長野電鉄</td>
+            </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">1</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+                <div class="melody-block">
+                  <div class="melody-name">成功！！！</a></div>
+                  <audio controls>
+                    <source src="../../audio/seiko.mp3" type="audio/mpeg">
+                  </audio>
+                </div>
+                
+                <div class="melody-block">
+                  <div class="melody-name">英傑を讃えて</a></div>
+                  <audio controls>
+                    <source src="../../audio/eiketsu.mp3" type="audio/mpeg">
+                  </audio>
+                </div>
+        
+          </td>
+          <td>
+            <div class="note-small">2011~2013は前者・2013~2014は後者を採用</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">2</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+                <div class="melody-block">
+                  <div class="melody-name">成功！！！</a></div>
+                  <audio controls>
+                    <source src="../../audio/seiko.mp3" type="audio/mpeg">
+                  </audio>
+                </div>
+                
+                <div class="melody-block">
+                  <div class="melody-name">英傑を讃えて</a></div>
+                  <audio controls>
+                    <source src="../../audio/eiketsu.mp3" type="audio/mpeg">
+                  </audio>
+                </div>
+        
+          </td>
+          <td>
+            <div class="note-small">2011~2013は前者・2013~2014は後者を採用</div>
+          </td>
+        </tr>
+         
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">3</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+                <div class="melody-block">
+                  <div class="melody-name">成功！！！</a></div>
+                  <audio controls>
+                    <source src="../../audio/seiko.mp3" type="audio/mpeg">
+                  </audio>
+                </div>
+                
+                <div class="melody-block">
+                  <div class="melody-name">英傑を讃えて</a></div>
+                  <audio controls>
+                    <source src="../../audio/eiketsu.mp3" type="audio/mpeg">
+                  </audio>
+                </div>
+        
+          </td>
+          <td>
+            <div class="note-small">2011~2013は前者・2013~2014は後者を採用</div>
+          </td>
+        </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+        
+        <details class="history-details">
+          <summary>2000/12/01~2006/02/28</summary>
+          <div class="history-content">
+            
+            <div class="table-wrap">
+              <table class="data-table status-table">
+                <colgroup>
+                  <col class="col-track-num">
+                  <col class="col-linecolor">
+                  <col class="col-route">
+                  <col class="col-melody">
+                  <col class="col-note">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th colspan="3">番線</th>
+                    <th>発車メロディ</th>
+                    <th>備考</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">2</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">3</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線 上り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">4</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#5BBB24; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">飯山線 下り</div>
+            <div class="route-sub">戸狩野沢温泉・十日町方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">5</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">6</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線上り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">7</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+            <tr class="group-row">
+              <td colspan="5">新幹線ホーム</td>
+            </tr>
+            
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">11</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/JR-SH1.html" class="melody-link">JR-SH1-3（未更新Ver）</a></div>
+          <audio controls>
+            <source src="../../audio/JR-SH1-3_old.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">12</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/JR-SH1.html" class="melody-link">JR-SH1-1（未更新Ver）</a></div>
+          <audio controls>
+            <source src="../../audio/JR-SH1-1_old.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">13</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/JR-SH1.html" class="melody-link">JR-SH1-3（未更新Ver）</a></div>
+          <audio controls>
+            <source src="../../audio/JR-SH1-3_old.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">14</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/JR-SH1.html" class="melody-link">JR-SH1-1（未更新Ver）</a></div>
+          <audio controls>
+            <source src="../../audio/JR-SH1-31_old.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+
+        <tr class="group-row">
+              <td colspan="5">長野電鉄</td>
+        </tr>
+
+            <tr>
+          <td class="track-num-cell">
+            <div class="track-number">1</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">電子ベル（長野電鉄）</a></div>
+          <audio controls>
+            <source src="../../audio/denshi_nagano.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">2</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">電子ベル（長野電鉄）</a></div>
+          <audio controls>
+            <source src="../../audio/denshi_nagano.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+
+<tr>
+          <td class="track-num-cell">
+            <div class="track-number">3</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">電子ベル（長野電鉄）</a></div>
+          <audio controls>
+            <source src="../../audio/denshi_nagano.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+        
+        <details class="history-details">
+          <summary>1997/10/01~2000/11/30</summary>
+          <div class="history-content">
+            <div class="period-note">2000年12月1日のダイヤ改正をもってホームの廃止・改称が発生</div>
+            <div class="table-wrap">
+              <table class="data-table status-table">
+                <colgroup>
+                  <col class="col-track-num">
+                  <col class="col-linecolor">
+                  <col class="col-route">
+                  <col class="col-melody">
+                  <col class="col-note">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th colspan="3">番線</th>
+                    <th>発車メロディ</th>
+                    <th>備考</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">1</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small">ダイヤ改正により廃止</div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">旧2</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small">ダイヤ改正により廃止</div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">旧3</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#5BBB24; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">飯山線 下り</div>
+            <div class="route-sub">戸狩野沢温泉・十日町方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small">ダイヤ改正で2番線へ改称</div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">旧4</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線上り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small">ダイヤ改正で「南半分を3番線」、「北半分を4番線」へ改称</div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">5</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">6</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線上り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">7</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+            <tr class="group-row">
+              <td colspan="5">新幹線ホーム</td>
+            </tr>
+            
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">11</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/JR-SH1.html" class="melody-link">JR-SH1-3（未更新Ver）</a></div>
+          <audio controls>
+            <source src="../../audio/JR-SH1-3_old.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">12</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/JR-SH1.html" class="melody-link">JR-SH1-1（未更新Ver）</a></div>
+          <audio controls>
+            <source src="../../audio/JR-SH1-1_old.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">13</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/JR-SH1.html" class="melody-link">JR-SH1-3（未更新Ver）</a></div>
+          <audio controls>
+            <source src="../../audio/JR-SH1-3_old.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">14</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野新幹線 上り</div>
+            <div class="route-sub">大宮・東京方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/JR-SH1.html" class="melody-link">JR-SH1-1（未更新Ver）</a></div>
+          <audio controls>
+            <source src="../../audio/JR-SH1-31_old.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+
+        <tr class="group-row">
+              <td colspan="5">長野電鉄</td>
+        </tr>
+
+            <tr>
+          <td class="track-num-cell">
+            <div class="track-number">1</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">電子ベル（長野電鉄）</a></div>
+          <audio controls>
+            <source src="../../audio/denshi_nagano.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">2</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">電子ベル（長野電鉄）</a></div>
+          <audio controls>
+            <source src="../../audio/denshi_nagano.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+
+<tr>
+          <td class="track-num-cell">
+            <div class="track-number">3</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">電子ベル（長野電鉄）</a></div>
+          <audio controls>
+            <source src="../../audio/denshi_nagano.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+        
+        <details class="history-details">
+          <summary>1992/03/14~1997/09/30</summary>
+          <div class="history-content">
+            
+            <div class="table-wrap">
+              <table class="data-table status-table">
+                <colgroup>
+                  <col class="col-track-num">
+                  <col class="col-linecolor">
+                  <col class="col-route">
+                  <col class="col-melody">
+                  <col class="col-note">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th colspan="3">番線</th>
+                    <th>発車メロディ</th>
+                    <th>備考</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">1</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">旧2</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">旧3</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#5BBB24; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">飯山線 下り</div>
+            <div class="route-sub">戸狩野沢温泉・十日町方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">旧4</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線上り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">5</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">6</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">信越本線・篠ノ井線上り</div>
+            <div class="route-sub">篠ノ井・上田・小諸・軽井沢方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">7</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#378640; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">篠ノ井線上り/信越本線上下</div>
+            <div class="route-sub">篠ノ井・軽井沢方面/篠ノ井方面/妙高高原・長岡方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name"><a href="../../melodies/naganomelo.html" class="melody-link">曲名不明（長野3番）</a></div>
+          <audio controls>
+            <source src="../../audio/nagano_3.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+
+        <tr class="group-row">
+              <td colspan="5">長野電鉄</td>
+        </tr>
+
+            <tr>
+          <td class="track-num-cell">
+            <div class="track-number">1</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">電子ベル（長野電鉄）</a></div>
+          <audio controls>
+            <source src="../../audio/denshi_nagano.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="track-num-cell">
+            <div class="track-number">2</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">電子ベル（長野電鉄）</a></div>
+          <audio controls>
+            <source src="../../audio/denshi_nagano.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+
+<tr>
+          <td class="track-num-cell">
+            <div class="track-number">3</div>
+          </td>
+          <td class="linecolor-cell">
+            <div class="linecolor">
+              <span class="linecolor-col"><span class="linecolor-seg" style="background:#D50D0B; flex:1;"></span></span>
+            </div>
+          </td>
+          <td>
+            <div class="route-main">長野電鉄長野線 下り</div>
+            <div class="route-sub">須坂・信州中野・湯田中方面</div>
+          </td>
+          <td>
+            
+        <div class="melody-block">
+          <div class="melody-name">電子ベル（長野電鉄）</a></div>
+          <audio controls>
+            <source src="../../audio/denshi_nagano.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        
+          </td>
+          <td>
+            <div class="note-small"></div>
+          </td>
+        </tr>
+        
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+        
+    
+
+  
+    <div class="section-title">隣の駅</div>
+    
+        <div class="neighbor-note">
+            篠ノ井線・しなの鉄道線は「当駅から篠ノ井駅」まで信越本線の線路を走行する。<br>飯山線は「当駅から豊野駅」まで北しなの線の線路を走行する。
+        </div>
+        
+    <div class="table-wrap">
+      <table class="neighbor-table">
+        <tr>
+          <th>上り</th>
+          <th>路線</th>
+          <th>下り</th>
+        </tr>
+        <tr><td rowspan="1"><a class="neighbor-link" href="ueda.html">上田</a></td><td class="neighbor-line-cell">
+        <div class="neighbor-line" style="background:#378640;">
+          <div class="neighbor-line-text">北陸新幹線</div>
+        </div>
+        </td><td rowspan="1"><a class="neighbor-link" href="iiyama.html">飯山</a></td></tr><tr><td rowspan="2"><a class="neighbor-link" href="amori.html">安茂里</a></td><td class="neighbor-line-cell">
+        <div class="neighbor-line" style="background:#00ACD1;">
+          <div class="neighbor-line-text">信越本線</div>
+        </div>
+        </td><td rowspan="1"><a class="neighbor-link" href="jrkitanagano.html">北長野(JR)</a></td></tr><tr><td class="neighbor-line-cell">
+        <div class="neighbor-line" style="background:#CB5F12;">
+          <div class="neighbor-line-text">篠ノ井線</div>
+        </div>
+        </td><td rowspan="1">-</td></tr><tr><td rowspan="1">-</td><td class="neighbor-line-cell">
+        <div class="neighbor-line" style="background:#5BBB24;">
+          <div class="neighbor-line-text">飯山線</div>
+        </div>
+        </td><td rowspan="1"><a class="neighbor-link" href="kitanagano.html">北長野</a></td></tr><tr><td rowspan="1"><a class="neighbor-link" href="amori.html">安茂里</a></td><td class="neighbor-line-cell">
+        <div class="neighbor-line" style="background:#E4A73A;">
+          <div class="neighbor-line-text">しなの鉄道線</div>
+        </div>
+        </td><td rowspan="1">-</td></tr><tr><td rowspan="2">-</td><td class="neighbor-line-cell">
+        <div class="neighbor-line" style="background:#99996B;">
+          <div class="neighbor-line-text">北しなの線</div>
+        </div>
+        </td><td rowspan="1"><a class="neighbor-link" href="kitanagano.html">北長野</a></td></tr><tr><td class="neighbor-line-cell">
+        <div class="neighbor-line" style="background:#D50D0B;">
+          <div class="neighbor-line-text">長野線</div>
+        </div>
+        </td><td rowspan="1">市役所前</a></td></tr>
+      </table>
+    </div>
+      
+
+</div>
+</body>
+</html>
