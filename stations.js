@@ -4,35 +4,35 @@ const stations = [
     kana: "あいづおおしお",
     roman: "Aizu-Ōshio",
     lines: ["只見線"],
-    file: "stations/aizuoshio.html"
+    file: "stations/tadami/aizuoshio.html"
   },
   {
     name: "会津蒲生",
     kana: "あいづがもう",
     roman: "Aizu-Gamō",
     lines: ["只見線"],
-    file: "stations/aizugamo.html"
+    file: "stations/tadami/aizugamo.html"
   },
   {
     name: "会津川口",
     kana: "あいづかわぐち",
     roman: "Aizu-Kawaguchi",
     lines: ["只見線"],
-    file: "stations/aizukawaguchi.html"
+    file: "stations/tadami/aizukawaguchi.html"
   },
   {
     name: "会津越川",
     kana: "あいづこすがわ",
     roman: "Aizu-Kosugawa",
     lines: ["只見線"],
-    file: "stations/aizukosugawa.html"
+    file: "stations/tadami/aizukosugawa.html"
   },
   {
     name: "会津坂本",
     kana: "あいづさかもと",
     roman: "Aizu-Sakamoto",
     lines: ["只見線"],
-    file: "stations/aizusakamoto.html"
+    file: "stations/tadami/aizusakamoto.html"
   },
   {
     name: "会津塩沢",
@@ -130,7 +130,7 @@ const stations = [
     kana: "いちしろ",
     roman: "Ichishiro",
     lines: ["吾妻線"],
-    file: "stations/ichishiro.html"
+    file: "stations/agatsuma/ichishiro.html"
   },
   {
     name: "入広瀬",
@@ -144,7 +144,7 @@ const stations = [
     kana: "いわしま",
     roman: "Iwashima",
     lines: ["吾妻線"],
-    file: "stations/iwashima.html"
+    file: "stations/agatsuma/iwashima.html"
   },
   {
     name: "魚沼田中",
@@ -158,7 +158,7 @@ const stations = [
     kana: "うばしま",
     roman: "Ubashima",
     lines: ["吾妻線"],
-    file: "stations/ubashima.html"
+    file: "stations/agatsuma/ubashima.html"
   },
   {
     name: "越後須原",
@@ -186,28 +186,28 @@ const stations = [
     kana: "おおまえ",
     roman: "Ōmae",
     lines: ["吾妻線"],
-    file: "stations/omae.html"
+    file: "stations/agatsuma/omae.html"
   },
   {
     name: "小野上",
     kana: "おのがみ",
     roman: "Onogami",
     lines: ["吾妻線"],
-    file: "stations/onogami.html"
+    file: "stations/agatsuma/onogami.html"
   },
   {
     name: "小野上温泉",
     kana: "おのがみおんせん",
     roman: "Onogami-Onsen",
     lines: ["吾妻線"],
-    file: "stations/onogamionsen.html"
+    file: "stations/agatsuma/onogamionsen.html"
   },
   {
     name: "金島",
     kana: "かなしま",
     roman: "Kanashima",
     lines: ["吾妻線"],
-    file: "stations/kanashima.html"
+    file: "stations/agatsuma/kanashima.html"
   },
   {
     name: "上条",
@@ -221,21 +221,21 @@ const stations = [
     kana: "かわらゆおんせん",
     roman: "Kawarayu-Onsen",
     lines: ["吾妻線"],
-    file: "stations/kawarayuonsen.html"
+    file: "stations/agatsuma/kawarayuonsen.html"
   },
   {
     name: "群馬大津",
     kana: "ぐんまおおつ",
     roman: "Gumma-Ōtsu",
     lines: ["吾妻線"],
-    file: "stations/gummaotsu.html"
+    file: "stations/agatsuma/gummaotsu.html"
   },
   {
     name: "群馬原町",
     kana: "ぐんまはらまち",
     roman: "Gumma-Haramachi",
     lines: ["吾妻線"],
-    file: "stations/gummaharamachi.html"
+    file: "stations/agatsuma/gummaharamachi.html"
   },
   {
     name: "小出",
@@ -256,14 +256,14 @@ const stations = [
     kana: "ごうばら",
     roman: "Gōbara",
     lines: ["吾妻線"],
-    file: "stations/gobara.html"
+    file: "stations/agatsuma/gobara.html"
   },
   {
     name: "渋川（伊香保温泉・榛名湖口）",
     kana: "しぶかわ",
     roman: "Shibukawa",
     lines: ["上越線","吾妻線"],
-    file: "stations/shibukawa.html"
+    file: "stations/agatsuma/shibukawa.html"
   },
   {
     name: "滝谷",
@@ -291,14 +291,14 @@ const stations = [
     kana: "なかのじょう",
     roman: "Nakanojō",
     lines: ["吾妻線"],
-    file: "stations/nakanojo.html"
+    file: "stations/agatsuma/nakanojo.html"
   },
   {
     name: "長野原草津口",
     kana: "ながのはらくさつぐち",
     roman: "Naganoharakusatsuguchi",
     lines: ["吾妻線"],
-    file: "stations/naganoharakusatsuguchi.html"
+    file: "stations/agatsuma/naganoharakusatsuguchi.html"
   },
   {
     name: "七日町",
@@ -333,7 +333,7 @@ const stations = [
     kana: "はねお",
     roman: "Haneo",
     lines: ["吾妻線"],
-    file: "stations/haneo.html"
+    file: "stations/agatsuma/haneo.html"
   },
   {
     name: "早戸",
@@ -347,7 +347,7 @@ const stations = [
     kana: "ふくろぐら",
     roman: "Fukurogura",
     lines: ["吾妻線"],
-    file: "stations/fukurogura.html"
+    file: "stations/agatsuma/fukurogura.html"
   },
   {
     name: "本名",
@@ -361,14 +361,14 @@ const stations = [
     kana: "まんざかざわぐち",
     roman: "Manza-Kazawaguchi",
     lines: ["吾妻線"],
-    file: "stations/manzakazawaguchi.html"
+    file: "stations/agatsuma/manzakazawaguchi.html"
   },
   {
     name: "矢倉",
     kana: "やぐら",
     roman: "Yagura",
     lines: ["吾妻線"],
-    file: "stations/yagura.html"
+    file: "stations/agatsuma/yagura.html"
   },
   {
     name: "藪神",
