@@ -35,18 +35,18 @@ const lines = [
     icon: "numbering/Aterazawa.png",
     file: "lines/aterazawa-line.html",
     stationOrder: [
-      "stations/yamagata.html",
-      "stations/kitayamagata.html",
-      "stations/higashikanai.html",
-      "stations/uzenyamabe.html",
-      "stations/uzenkanezawa.html",
-      "stations/uzennagasaki.html",
-      "stations/minamisagae.html",
-      "stations/sagae.html",
-      "stations/nishisagae.html",
-      "stations/uzentakamatsu.html",
-      "stations/shibahashi.html",
-      "stations/aterazawa.html"
+      "stations/aterazawa/yamagata.html",
+      "stations/aterazawa/kitayamagata.html",
+      "stations/aterazawa/higashikanai.html",
+      "stations/aterazawa/uzenyamabe.html",
+      "stations/aterazawa/uzenkanezawa.html",
+      "stations/aterazawa/uzennagasaki.html",
+      "stations/aterazawa/minamisagae.html",
+      "stations/aterazawa/sagae.html",
+      "stations/aterazawa/nishisagae.html",
+      "stations/aterazawa/uzentakamatsu.html",
+      "stations/aterazawa/shibahashi.html",
+      "stations/aterazawa/aterazawa.html"
     ]
    },
    {
