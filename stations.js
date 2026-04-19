@@ -529,7 +529,7 @@ const stations = [
     kana: "こごた",
     roman: "Kogota",
     lines: ["東北本線","陸羽東線","石巻線","気仙沼線"],
-    file: "stations/ishinomaki/tategahana.html"
+    file: "stations/ishinomaki/kogota.html"
   },
   {
     name: "寒河江",
