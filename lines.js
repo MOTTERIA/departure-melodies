@@ -122,7 +122,7 @@ const lines = [
     kana: "いつかいちせん",
     roman: "Itsukaichi-Line",
     color: "#EB5C01",
-    icon: "numbering/JC.png",
+    icon: "numbering/Chuo.png",
     file: "lines/itsukaichi-line.html",
     stationOrder: [
       "stations/itsukaichi/haijima.html",
