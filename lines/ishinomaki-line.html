@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>五日市線 | 発車メロディ全集</title>
+<title>石巻線 | 発車メロディ全集</title>
 
 <style>
 body {
@@ -37,7 +37,7 @@ h1 {
 .line-bar {
   width: 100%;
   height: 8px;
-  background: #EB5C01;
+  background: #F76F99;
   margin-bottom: 25px;
 }
 
@@ -91,9 +91,9 @@ h1 {
 <div class="container">
   <a href="../index.html" class="back-link">← トップに戻る</a>
 
-  <h1>五日市線</h1>
+  <h1>石巻線</h1>
   <div class="line-bar"></div>
-  <div class="line-desc">五日市線の駅一覧です。</div>
+  <div class="line-desc">石巻線の駅一覧です。</div>
 
   <div id="stationList" class="station-list"></div>
 </div>
@@ -127,10 +127,10 @@ function renderLineStations() {
     return;
   }
 
-  const lineData = lines.find(line => line.name === "五日市線");
+  const lineData = lines.find(line => line.name === "石巻線");
 
   if (!lineData) {
-    stationList.innerHTML = `<div class="empty-message">五日市線データがありません。</div>`;
+    stationList.innerHTML = `<div class="empty-message">石巻線データがありません。</div>`;
     return;
   }
 
@@ -145,7 +145,7 @@ function renderLineStations() {
     .filter(Boolean);
 
   if (!orderedStations.length) {
-    stationList.innerHTML = `<div class="empty-message">五日市線の駅データが見つかりませんでした。</div>`;
+    stationList.innerHTML = `<div class="empty-message">石巻線の駅データが見つかりませんでした。</div>`;
     return;
   }
 
